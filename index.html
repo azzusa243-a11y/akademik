@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Akademik Mahasiswa - Enhanced V7</title>
+    <title>Sistem Akademik Bisnis Digital - Enhanced V8</title>
     <style>
         * {
             margin: 0;
@@ -204,12 +204,6 @@
             font-size: 12px;
         }
 
-        .auto-backup-status.warning {
-            background: #fff3cd;
-            border-color: #ffc107;
-            color: #856404;
-        }
-
         .backup-btn {
             background: linear-gradient(45deg, #2196F3, #1976D2);
             color: white;
@@ -376,10 +370,6 @@
             font-weight: bold;
         }
 
-        .role-badge.admin {
-            background: #dc3545;
-        }
-
         .role-badge.admin-prodi {
             background: #6f42c1;
         }
@@ -452,12 +442,27 @@
             color: #1976d2;
             text-align: center;
         }
+
+        .student-notice {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #856404;
+        }
+
+        .student-notice h4 {
+            margin-bottom: 5px;
+            color: #d39e00;
+        }
     </style>
 </head>
 <body>
     <!-- Credit Text -->
     <div class="credit-text">
-        by Firman Arby Mokoagow - Auto Backup Enabled
+        by Firman Arby Mokoagow - Bisnis Digital System V8
     </div>
 
     <!-- Auto Save Indicator -->
@@ -468,9 +473,9 @@
     <!-- Login Form -->
     <div id="loginContainer" class="login-container">
         <div class="login-form">
-            <h1>📚 Sistem Akademik</h1>
+            <h1>📚 Sistem Akademik Bisnis Digital</h1>
             <div class="data-sync-info">
-                ✅ Sistem auto-backup aktif - Data Anda akan tersimpan secara otomatis
+                ✅ Sistem khusus Program Studi Bisnis Digital dengan auto-backup
             </div>
             <form id="loginForm">
                 <div class="form-group">
@@ -485,9 +490,8 @@
                     <label for="loginRole">Login Sebagai:</label>
                     <select id="loginRole" required>
                         <option value="">Pilih Role</option>
-                        <option value="admin">Admin System</option>
-                        <option value="admin-prodi">Admin Prodi</option>
-                        <option value="mahasiswa">Mahasiswa</option>
+                        <option value="admin-prodi">Admin Prodi Bisnis Digital</option>
+                        <option value="mahasiswa">Mahasiswa Bisnis Digital</option>
                     </select>
                 </div>
                 <button type="submit" class="btn">🔐 Login</button>
@@ -500,8 +504,8 @@
     <div id="mainContainer" class="container">
         <div class="header">
             <div class="header-left">
-                <h1>📚 Sistem Akademik Mahasiswa</h1>
-                <p>Sistem Manajemen Akademik Terpadu dengan Auto Backup</p>
+                <h1>📚 Sistem Akademik Bisnis Digital</h1>
+                <p>Program Studi Bisnis Digital - Auto Backup System</p>
             </div>
             <div class="header-right">
                 <div class="user-info">
@@ -511,19 +515,25 @@
             </div>
         </div>
 
-        <!-- Prodi Filter - Admin Prodi Only -->
-        <div id="prodiFilter" class="prodi-filter hidden">
-            <h4>📚 Filter Program Studi</h4>
-            <p id="prodiFilterText">Anda hanya dapat mengelola data untuk program studi: <strong id="currentProdi"></strong></p>
+        <!-- Student Notice -->
+        <div id="studentNotice" class="student-notice hidden">
+            <h4>📋 Area Mahasiswa</h4>
+            <p>Anda dapat melihat KHS dan Transkrip Nilai Anda di menu di bawah ini.</p>
         </div>
 
-        <!-- Backup Controls - Admin System and Admin Prodi -->
+        <!-- Prodi Filter - Admin Prodi Only -->
+        <div id="prodiFilter" class="prodi-filter hidden">
+            <h4>📚 Program Studi Bisnis Digital</h4>
+            <p>Sistem manajemen akademik khusus untuk Program Studi <strong>Bisnis Digital</strong></p>
+        </div>
+
+        <!-- Backup Controls - Admin Prodi Only -->
         <div id="backupControls" class="backup-controls hidden">
             <h3>💾 Manajemen Data Backup</h3>
             <div class="auto-backup-status" id="autoBackupStatus">
-                ✅ Auto-backup aktif - Data disimpan setiap ada perubahan
+                ✅ Auto-backup aktif - Data Program Studi Bisnis Digital tersimpan otomatis
             </div>
-            <p id="backupInfo" style="margin-bottom: 15px; color: #666; font-size: 14px;"></p>
+            <p id="backupInfo" style="margin-bottom: 15px; color: #666; font-size: 14px;">Backup mencakup data lengkap Program Studi Bisnis Digital</p>
             <button class="backup-btn" onclick="downloadManualBackup()">📥 Download Backup Manual</button>
             <label for="fileInput" class="file-label">📤 Upload Backup</label>
             <input type="file" id="fileInput" accept=".json" onchange="uploadBackup(event)">
@@ -543,7 +553,7 @@
 
         <!-- Dashboard Panel -->
         <div id="dashboard" class="content-panel active">
-            <h2>📊 Dashboard Akademik</h2>
+            <h2>📊 Dashboard Akademik Bisnis Digital</h2>
             <div class="data-sync-info">
                 <strong>Status Backup:</strong> <span id="dashboardBackupStatus">Data tersinkronisasi</span> | 
                 <strong>Terakhir disimpan:</strong> <span id="lastSaveTime">-</span>
@@ -551,11 +561,11 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3 id="totalMahasiswa">0</h3>
-                    <p>Total Mahasiswa</p>
+                    <p>Total Mahasiswa BD</p>
                 </div>
                 <div class="stat-card">
                     <h3 id="totalMatkul">0</h3>
-                    <p>Mata Kuliah</p>
+                    <p>Mata Kuliah BD</p>
                 </div>
                 <div class="stat-card">
                     <h3 id="totalKRS">0</h3>
@@ -563,14 +573,14 @@
                 </div>
                 <div class="stat-card">
                     <h3 id="rataIPK">0.00</h3>
-                    <p>Rata-rata IPK</p>
+                    <p>Rata-rata IPK BD</p>
                 </div>
             </div>
         </div>
 
         <!-- Data Mahasiswa Panel -->
         <div id="mahasiswa" class="content-panel">
-            <h2>👥 Manajemen Data Mahasiswa</h2>
+            <h2>👥 Manajemen Data Mahasiswa Bisnis Digital</h2>
             
             <div id="editIndicatorMahasiswa" class="edit-indicator hidden">
                 ✏️ Mode Edit - Sedang mengedit data mahasiswa
@@ -591,12 +601,7 @@
                     <div class="form-group">
                         <label for="jurusan">Jurusan:</label>
                         <select id="jurusan" required>
-                            <option value="">Pilih Jurusan</option>
-                            <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
                             <option value="Bisnis Digital">Bisnis Digital</option>
-                            <option value="Agronomi">Agronomi</option>
-                            <option value="D3 Keperawatan">D3 Keperawatan</option>
-                            <option value="D3 Kebidanan">D3 Kebidanan</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -606,7 +611,6 @@
                 </div>
                 <button type="submit" class="btn" id="mahasiswaSubmitBtn">💾 Simpan Mahasiswa</button>
                 <button type="button" class="btn btn-danger" onclick="clearMahasiswaForm()">🗑️ Bersihkan</button>
-                <button type="button" class="btn btn-warning hidden" id="mahasiswaCancelBtn" onclick="cancelEditMahasiswa()">❌ Batal Edit</button>
             </form>
 
             <div id="mahasiswaAlert"></div>
@@ -629,12 +633,8 @@
 
         <!-- Mata Kuliah Panel -->
         <div id="matakuliah" class="content-panel">
-            <h2>📚 Manajemen Mata Kuliah</h2>
+            <h2>📚 Manajemen Mata Kuliah Bisnis Digital</h2>
             
-            <div id="editIndicatorMatkul" class="edit-indicator hidden">
-                ✏️ Mode Edit - Sedang mengedit mata kuliah
-            </div>
-
             <form id="matkulForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -661,27 +661,11 @@
                             <option value="4">Semester 4</option>
                             <option value="5">Semester 5</option>
                             <option value="6">Semester 6</option>
-                            <option value="7">Semester 7</option>
-                            <option value="8">Semester 8</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="matkulProdi">Program Studi:</label>
-                        <select id="matkulProdi" required>
-                            <option value="">Pilih Program Studi</option>
-                            <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
-                            <option value="Bisnis Digital">Bisnis Digital</option>
-                            <option value="Agronomi">Agronomi</option>
-                            <option value="D3 Keperawatan">D3 Keperawatan</option>
-                            <option value="D3 Kebidanan">D3 Kebidanan</option>
                         </select>
                     </div>
                 </div>
                 <button type="submit" class="btn" id="matkulSubmitBtn">💾 Simpan Mata Kuliah</button>
                 <button type="button" class="btn btn-danger" onclick="clearMatkulForm()">🗑️ Bersihkan</button>
-                <button type="button" class="btn btn-warning hidden" id="matkulCancelBtn" onclick="cancelEditMatkul()">❌ Batal Edit</button>
             </form>
 
             <div id="matkulAlert"></div>
@@ -693,7 +677,6 @@
                         <th>Nama Mata Kuliah</th>
                         <th>SKS</th>
                         <th>Semester</th>
-                        <th>Program Studi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -706,10 +689,6 @@
         <div id="krs" class="content-panel">
             <h2>📝 Kartu Rencana Studi (KRS)</h2>
             
-            <div id="editIndicatorKrs" class="edit-indicator hidden">
-                ✏️ Mode Edit - Sedang mengedit KRS
-            </div>
-
             <form id="krsForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -741,7 +720,6 @@
                 </div>
                 <button type="submit" class="btn" id="krsSubmitBtn">💾 Tambah ke KRS</button>
                 <button type="button" class="btn btn-danger" onclick="clearKrsForm()">🗑️ Bersihkan</button>
-                <button type="button" class="btn btn-warning hidden" id="krsCancelBtn" onclick="cancelEditKrs()">❌ Batal Edit</button>
             </form>
 
             <div id="krsAlert"></div>
@@ -768,10 +746,6 @@
         <div id="nilai" class="content-panel">
             <h2>📋 Input Nilai</h2>
             
-            <div id="editIndicatorNilai" class="edit-indicator hidden">
-                ✏️ Mode Edit - Sedang mengedit nilai
-            </div>
-
             <form id="nilaiForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -799,7 +773,6 @@
                 </div>
                 <button type="submit" class="btn" id="nilaiSubmitBtn">💾 Simpan Nilai</button>
                 <button type="button" class="btn btn-danger" onclick="clearNilaiForm()">🗑️ Bersihkan</button>
-                <button type="button" class="btn btn-warning hidden" id="nilaiCancelBtn" onclick="cancelEditNilai()">❌ Batal Edit</button>
             </form>
 
             <div id="nilaiAlert"></div>
@@ -841,8 +814,6 @@
                         <option value="4">Semester 4</option>
                         <option value="5">Semester 5</option>
                         <option value="6">Semester 6</option>
-                        <option value="7">Semester 7</option>
-                        <option value="8">Semester 8</option>
                     </select>
                 </div>
             </div>
@@ -864,9 +835,9 @@
             <div id="transkripResult"></div>
         </div>
 
-        <!-- User Management Panel - Admin System Only -->
+        <!-- User Management Panel - Admin Prodi Only -->
         <div id="userManagement" class="content-panel">
-            <h2>👤 Kelola User</h2>
+            <h2>👤 Kelola User Bisnis Digital</h2>
             
             <form id="userForm">
                 <div class="form-row">
@@ -884,24 +855,10 @@
                         <label for="newRole">Role:</label>
                         <select id="newRole" onchange="handleRoleChange()" required>
                             <option value="">Pilih Role</option>
-                            <option value="admin">Admin System</option>
-                            <option value="admin-prodi">Admin Prodi</option>
-                            <option value="mahasiswa">Mahasiswa</option>
+                            <option value="admin-prodi">Admin Prodi Bisnis Digital</option>
+                            <option value="mahasiswa">Mahasiswa Bisnis Digital</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="userProdi">Program Studi:</label>
-                        <select id="userProdi">
-                            <option value="">Pilih Program Studi</option>
-                            <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
-                            <option value="Bisnis Digital">Bisnis Digital</option>
-                            <option value="Agronomi">Agronomi</option>
-                            <option value="D3 Keperawatan">D3 Keperawatan</option>
-                            <option value="D3 Kebidanan">D3 Kebidanan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
                         <label for="linkedNim">NIM (untuk mahasiswa):</label>
                         <select id="linkedNim">
@@ -920,7 +877,6 @@
                     <tr>
                         <th>Username</th>
                         <th>Role</th>
-                        <th>Program Studi</th>
                         <th>NIM Terkait</th>
                         <th>Aksi</th>
                     </tr>
@@ -944,7 +900,7 @@
                             <input type="password" id="newPasswordChange" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn">🔒 Ubah Password</button>
+                    <button type="submit" class="btn">🔑 Ubah Password</button>
                 </form>
 
                 <div id="passwordAlert"></div>
@@ -956,7 +912,7 @@
         // Auto-backup system variables
         let autoBackupEnabled = true;
         let lastSaveTime = null;
-        const BACKUP_KEY_PREFIX = 'akademik_system_';
+        const BACKUP_KEY_PREFIX = 'bd_system_';
         const BACKUP_KEYS = {
             mahasiswa: BACKUP_KEY_PREFIX + 'mahasiswa',
             matkul: BACKUP_KEY_PREFIX + 'matkul',
@@ -966,7 +922,7 @@
             metadata: BACKUP_KEY_PREFIX + 'metadata'
         };
 
-        // Data Storage with real data from backup
+        // Data Storage - Only Bisnis Digital data
         let mahasiswaData = [
             { nim: '23010901', nama: 'ADITYA ANUGRAH MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
             { nim: '23010902', nama: 'DIVA WOANG PAPUTUNGAN', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
@@ -978,91 +934,40 @@
         ];
 
         let matkulData = [
-            { kode: 'IJSU 1101', nama: 'Pancasila', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSU 1102', nama: 'Agama', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSU 1103', nama: 'Kewarganegaraan', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSU 1104', nama: 'Bahasa Indonesia', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSU 1105', nama: 'Bahasa Inggris 1 (16 Tenses)', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSM 1406', nama: 'Pengantar Manajemen', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSS 1207', nama: 'Pengantar Ekonomi', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSS 1208', nama: 'Matematika Bisnis', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 1709', nama: 'Aplikasi Komputer', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSA 2310', nama: 'Pengantar Akuntansi', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
-            { kode: 'IJSU 2111', nama: 'Bahasa Inggris 2 (Karya tulis)', sks: 2, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJSM 2412', nama: 'Sistem Informasi Manajemen', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJSS 2213', nama: 'Statistik Bisns', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJSS 2214', nama: 'Teori Ekonomi', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 2715', nama: 'Dasar Pemograman', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 2716', nama: 'Dasar Infrastruktur Teknologi', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 2717', nama: ' Digital Marketing', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJSM 3418', nama: 'Manajemen Pemasaran', sks: 3, semester: '2', prodi: 'Bisnis Digital' },
-            { kode: 'IJSU 3119', nama: 'Riset Operasi', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJSM 3420', nama: 'Desain dan Manajemen Proses Bisnis', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 3721', nama: 'Database', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 3722', nama: 'Jaringan Komputer', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 4723', nama: 'Perancangan Sistem', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJSM 4425', nama: 'Manajemen Keuangan', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 4726', nama: 'Technopreneur', sks: 3, semester: '3', prodi: 'Bisnis Digital' },
-            { kode: 'IJBD 4724', nama: 'Web Technology Dasar', sks: 3, semester: '3', prodi: 'Bisnis Digital' }
+            { kode: 'IJSU 1101', nama: 'Pancasila', sks: 2, semester: '1' },
+            { kode: 'IJSU 1102', nama: 'Agama', sks: 2, semester: '1' },
+            { kode: 'IJSU 1103', nama: 'Kewarganegaraan', sks: 2, semester: '1' },
+            { kode: 'IJSU 1104', nama: 'Bahasa Indonesia', sks: 2, semester: '1' },
+            { kode: 'IJSU 1105', nama: 'Bahasa Inggris 1 (16 Tenses)', sks: 2, semester: '1' },
+            { kode: 'IJSM 1406', nama: 'Pengantar Manajemen', sks: 2, semester: '1' },
+            { kode: 'IJSS 1207', nama: 'Pengantar Ekonomi', sks: 2, semester: '1' },
+            { kode: 'IJSS 1208', nama: 'Matematika Bisnis', sks: 2, semester: '1' },
+            { kode: 'IJBD 1709', nama: 'Aplikasi Komputer', sks: 2, semester: '1' },
+            { kode: 'IJSA 2310', nama: 'Pengantar Akuntansi', sks: 2, semester: '1' },
+            { kode: 'IJSU 2111', nama: 'Bahasa Inggris 2 (Karya tulis)', sks: 2, semester: '2' },
+            { kode: 'IJSM 2412', nama: 'Sistem Informasi Manajemen', sks: 3, semester: '2' },
+            { kode: 'IJSS 2213', nama: 'Statistik Bisnis', sks: 3, semester: '2' },
+            { kode: 'IJSS 2214', nama: 'Teori Ekonomi', sks: 3, semester: '2' },
+            { kode: 'IJBD 2715', nama: 'Dasar Pemrograman', sks: 3, semester: '2' },
+            { kode: 'IJBD 2716', nama: 'Dasar Infrastruktur Teknologi', sks: 3, semester: '2' },
+            { kode: 'IJBD 2717', nama: 'Digital Marketing', sks: 3, semester: '2' },
+            { kode: 'IJSM 3418', nama: 'Manajemen Pemasaran', sks: 3, semester: '2' },
+            { kode: 'IJSU 3119', nama: 'Riset Operasi', sks: 3, semester: '3' },
+            { kode: 'IJSM 3420', nama: 'Desain dan Manajemen Proses Bisnis', sks: 3, semester: '3' },
+            { kode: 'IJBD 3721', nama: 'Database', sks: 3, semester: '3' },
+            { kode: 'IJBD 3722', nama: 'Jaringan Komputer', sks: 3, semester: '3' },
+            { kode: 'IJBD 4723', nama: 'Perancangan Sistem', sks: 3, semester: '3' },
+            { kode: 'IJSM 4425', nama: 'Manajemen Keuangan', sks: 3, semester: '3' },
+            { kode: 'IJBD 4726', nama: 'Technopreneur', sks: 3, semester: '3' },
+            { kode: 'IJBD 4724', nama: 'Web Technology Dasar', sks: 3, semester: '3' }
         ];
 
-        let krsData = [
-            // Semester 1 KRS for all students (2023/2024 Ganjil)
-            { nim: '23010901', kodeMatkul: 'IJSU 1101', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSU 1102', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSU 1103', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSU 1104', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSU 1105', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSM 1406', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSS 1207', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSS 1208', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJBD 1709', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSA 2310', semester: 'Ganjil', tahun: '2023/2024' },
-            
-            { nim: '23010902', kodeMatkul: 'IJSU 1101', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSU 1102', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSU 1103', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSU 1104', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSU 1105', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSM 1406', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSS 1207', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSS 1208', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJBD 1709', semester: 'Ganjil', tahun: '2023/2024' },
-            { nim: '23010902', kodeMatkul: 'IJSA 2310', semester: 'Ganjil', tahun: '2023/2024' },
-            
-            // Similar pattern for all other students (abbreviated for space)
-            // Semester 2 KRS (2023/2024 Genap)
-            { nim: '23010901', kodeMatkul: 'IJSU 2111', semester: 'Genap', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSM 2412', semester: 'Genap', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSS 2213', semester: 'Genap', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSS 2214', semester: 'Genap', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJBD 2715', semester: 'Genap', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJBD 2716', semester: 'Genap', tahun: '2023/2024' },
-            { nim: '23010901', kodeMatkul: 'IJSM 3418', semester: 'Genap', tahun: '2023/2024' },
-            
-            // Semester 3 KRS (2024/2025 Ganjil)
-            { nim: '23010901', kodeMatkul: 'IJSU 3119', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJSM 3420', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJBD 3721', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJBD 3722', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJBD 4723', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJSM 4425', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJBD 4726', semester: 'Ganjil', tahun: '2024/2025' },
-            { nim: '23010901', kodeMatkul: 'IJBD 4724', semester: 'Ganjil', tahun: '2024/2025' }
-        ];
-
+        let krsData = [];
         let nilaiData = [];
 
         let userData = [
-            // Default admin system user
-            { username: 'admin', password: 'admin123', role: 'admin', nim: null, prodi: null },
-            // Admin prodi for Digital Business
-            { username: 'admin-bd', password: 'bd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
-            // Other admin prodi
-            { username: 'admin-ars', password: 'ars123', role: 'admin-prodi', nim: null, prodi: 'Administrasi Rumah Sakit' },
-            { username: 'admin-agro', password: 'agro123', role: 'admin-prodi', nim: null, prodi: 'Agronomi' },
-            { username: 'admin-kep', password: 'kep123', role: 'admin-prodi', nim: null, prodi: 'D3 Keperawatan' },
-            { username: 'admin-bid', password: 'bid123', role: 'admin-prodi', nim: null, prodi: 'D3 Kebidanan' },
+            // Admin Prodi Bisnis Digital
+            { username: 'admin-bd', password: 'adminbd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
             // Student users (using NIM as username/password)
             { username: '23010901', password: '23010901', role: 'mahasiswa', nim: '23010901', prodi: 'Bisnis Digital' },
             { username: '23010902', password: '23010902', role: 'mahasiswa', nim: '23010902', prodi: 'Bisnis Digital' },
@@ -1075,18 +980,6 @@
 
         // Current user session
         let currentUser = null;
-
-        // Edit mode variables
-        let editingMahasiswa = false;
-        let editingMahasiswaIndex = -1;
-        let editingMatkul = false;
-        let editingMatkulIndex = -1;
-        let editingKrs = false;
-        let editingKrsIndex = -1;
-        let editingNilai = false;
-        let editingNilaiIndex = -1;
-        let editingUser = false;
-        let editingUserIndex = -1;
 
         // Initialize complete KRS data for all students
         function initializeCompleteKrsData() {
@@ -1122,7 +1015,7 @@
             });
         }
 
-        // Auto-backup functions
+        // Auto-backup functions using in-memory storage
         function saveToMemory(key, data) {
             try {
                 const dataStr = JSON.stringify(data);
@@ -1159,7 +1052,8 @@
                 
                 const metadata = {
                     lastSave: new Date().toISOString(),
-                    version: '7.0',
+                    version: '8.0',
+                    prodi: 'Bisnis Digital',
                     totalRecords: {
                         mahasiswa: mahasiswaData.length,
                         matkul: matkulData.length,
@@ -1196,7 +1090,7 @@
                     const loadedUsers = loadFromMemory(BACKUP_KEYS.users, []);
                     
                     if (loadedMahasiswa.length > 0 || loadedMatkul.length > 0 || 
-                        loadedKrs.length > 0 || loadedNilai.length > 0 || loadedUsers.length > 7) {
+                        loadedKrs.length > 0 || loadedNilai.length > 0 || loadedUsers.length > 1) {
                         
                         mahasiswaData = loadedMahasiswa;
                         matkulData = loadedMatkul;
@@ -1323,84 +1217,62 @@
 
         function updateUserInterface() {
             const userInfo = document.getElementById('currentUser');
-            const roleClass = currentUser.role === 'admin' ? 'admin' : 
-                           currentUser.role === 'admin-prodi' ? 'admin-prodi' : 'mahasiswa';
             
             if (currentUser.role === 'mahasiswa') {
                 const mahasiswa = mahasiswaData.find(m => m.nim === currentUser.nim);
                 userInfo.innerHTML = `
                     <div><strong>${mahasiswa ? mahasiswa.nama : currentUser.username}</strong></div>
                     <div>NIM: ${currentUser.nim}</div>
-                    <div><span class="role-badge ${roleClass}">${currentUser.role.toUpperCase()}</span></div>
+                    <div><span class="role-badge mahasiswa">MAHASISWA BD</span></div>
                 `;
-            } else if (currentUser.role === 'admin-prodi') {
-                userInfo.innerHTML = `
-                    <div><strong>${currentUser.username}</strong></div>
-                    <div>Program Studi: ${currentUser.prodi}</div>
-                    <div><span class="role-badge ${roleClass}">ADMIN PRODI</span></div>
-                `;
-            } else {
-                userInfo.innerHTML = `
-                    <div><strong>${currentUser.username}</strong></div>
-                    <div><span class="role-badge ${roleClass}">ADMIN SYSTEM</span></div>
-                `;
-            }
-
-            if (currentUser.role === 'mahasiswa') {
                 setupMahasiswaInterface();
             } else if (currentUser.role === 'admin-prodi') {
+                userInfo.innerHTML = `
+                    <div><strong>${currentUser.username}</strong></div>
+                    <div>Admin Prodi: Bisnis Digital</div>
+                    <div><span class="role-badge admin-prodi">ADMIN PRODI BD</span></div>
+                `;
                 setupAdminProdiInterface();
-            } else {
-                setupAdminSystemInterface();
             }
         }
 
         function setupMahasiswaInterface() {
+            // Hide admin controls
             document.getElementById('backupControls').classList.add('hidden');
             document.getElementById('prodiFilter').classList.add('hidden');
+            document.getElementById('studentNotice').classList.remove('hidden');
             
-            const adminOnlyNavs = ['navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navUserManagement', 'navDashboard'];
-            adminOnlyNavs.forEach(navId => {
+            // Hide all admin navigation buttons
+            const adminNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navUserManagement'];
+            adminNavs.forEach(navId => {
                 const nav = document.getElementById(navId);
-                nav.disabled = true;
                 nav.style.display = 'none';
+                nav.disabled = true;
             });
 
-            document.getElementById('navKhs').disabled = false;
-            document.getElementById('navTranskrip').disabled = false;
-
-            populateStudentDropdowns();
-            showPanel('khs');
-            document.getElementById('navKhs').classList.add('active');
-        }
-
-        function setupAdminProdiInterface() {
-            document.getElementById('backupControls').classList.remove('hidden');
-            document.getElementById('backupInfo').textContent = `Backup mencakup data program studi: ${currentUser.prodi}`;
-            
-            document.getElementById('navUserManagement').style.display = 'none';
-            document.getElementById('navUserManagement').disabled = true;
-            
-            document.getElementById('prodiFilter').classList.remove('hidden');
-            document.getElementById('currentProdi').textContent = currentUser.prodi;
-            
-            const allowedNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navKhs', 'navTranskrip'];
-            allowedNavs.forEach(navId => {
+            // Show only student accessible menus
+            const studentNavs = ['navKhs', 'navTranskrip'];
+            studentNavs.forEach(navId => {
                 const nav = document.getElementById(navId);
                 nav.disabled = false;
                 nav.style.display = 'inline-block';
             });
 
-            showPanel('dashboard');
-            document.getElementById('navDashboard').classList.add('active');
+            // Set student-specific dropdowns
+            populateStudentDropdowns();
+            
+            // Default to KHS panel
+            showPanel('khs');
+            document.getElementById('navKhs').classList.add('active');
         }
 
-        function setupAdminSystemInterface() {
+        function setupAdminProdiInterface() {
+            // Show admin controls
             document.getElementById('backupControls').classList.remove('hidden');
-            document.getElementById('prodiFilter').classList.add('hidden');
+            document.getElementById('prodiFilter').classList.remove('hidden');
+            document.getElementById('studentNotice').classList.add('hidden');
             
-            document.getElementById('backupInfo').textContent = 'Backup mencakup semua data sistem akademik dengan auto-save aktif.';
-            
+            // Show all navigation menus
             const allNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navKhs', 'navTranskrip', 'navUserManagement'];
             allNavs.forEach(navId => {
                 const nav = document.getElementById(navId);
@@ -1408,6 +1280,7 @@
                 nav.style.display = 'inline-block';
             });
 
+            // Default to dashboard
             showPanel('dashboard');
             document.getElementById('navDashboard').classList.add('active');
         }
@@ -1417,8 +1290,11 @@
                 const khsSelect = document.getElementById('khsNim');
                 const transkripSelect = document.getElementById('transkripNim');
                 
-                khsSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${getMahasiswaName(currentUser.nim)}</option>`;
-                transkripSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${getMahasiswaName(currentUser.nim)}</option>`;
+                const mahasiswa = mahasiswaData.find(m => m.nim === currentUser.nim);
+                const displayName = mahasiswa ? mahasiswa.nama : 'Unknown';
+                
+                khsSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${displayName}</option>`;
+                transkripSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${displayName}</option>`;
                 
                 khsSelect.disabled = true;
                 transkripSelect.disabled = true;
@@ -1426,11 +1302,6 @@
                 generateKHS();
                 generateTranskrip();
             }
-        }
-
-        function getMahasiswaName(nim) {
-            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
-            return mahasiswa ? mahasiswa.nama : 'Unknown';
         }
 
         function showLoginAlert(message, type) {
@@ -1465,53 +1336,6 @@
             if (panelName === 'userManagement') {
                 populateUserManagementDropdowns();
                 renderUserTable();
-            }
-        }
-
-        // Filter data based on current user's permissions
-        function getFilteredMahasiswaData() {
-            if (currentUser.role === 'admin') {
-                return mahasiswaData;
-            } else if (currentUser.role === 'admin-prodi') {
-                return mahasiswaData.filter(m => m.jurusan === currentUser.prodi);
-            } else {
-                return mahasiswaData.filter(m => m.nim === currentUser.nim);
-            }
-        }
-
-        function getFilteredMatkulData() {
-            if (currentUser.role === 'admin') {
-                return matkulData;
-            } else if (currentUser.role === 'admin-prodi') {
-                return matkulData.filter(m => m.prodi === currentUser.prodi);
-            } else {
-                return matkulData;
-            }
-        }
-
-        function getFilteredKrsData() {
-            if (currentUser.role === 'admin') {
-                return krsData;
-            } else if (currentUser.role === 'admin-prodi') {
-                return krsData.filter(k => {
-                    const mahasiswa = mahasiswaData.find(m => m.nim === k.nim);
-                    return mahasiswa && mahasiswa.jurusan === currentUser.prodi;
-                });
-            } else {
-                return krsData.filter(k => k.nim === currentUser.nim);
-            }
-        }
-
-        function getFilteredNilaiData() {
-            if (currentUser.role === 'admin') {
-                return nilaiData;
-            } else if (currentUser.role === 'admin-prodi') {
-                return nilaiData.filter(n => {
-                    const mahasiswa = mahasiswaData.find(m => m.nim === n.nim);
-                    return mahasiswa && mahasiswa.jurusan === currentUser.prodi;
-                });
-            } else {
-                return nilaiData.filter(n => n.nim === currentUser.nim);
             }
         }
 
@@ -1559,18 +1383,14 @@
 
         // Dashboard Update
         function updateDashboard() {
-            const filteredMahasiswa = getFilteredMahasiswaData();
-            const filteredMatkul = getFilteredMatkulData();
-            const filteredKrs = getFilteredKrsData();
-            
-            document.getElementById('totalMahasiswa').textContent = filteredMahasiswa.length;
-            document.getElementById('totalMatkul').textContent = filteredMatkul.length;
-            document.getElementById('totalKRS').textContent = filteredKrs.length;
+            document.getElementById('totalMahasiswa').textContent = mahasiswaData.length;
+            document.getElementById('totalMatkul').textContent = matkulData.length;
+            document.getElementById('totalKRS').textContent = krsData.length;
             
             let totalIPK = 0;
             let mahasiswaWithGrades = 0;
             
-            filteredMahasiswa.forEach(mahasiswa => {
+            mahasiswaData.forEach(mahasiswa => {
                 const ipk = calculateIPK(mahasiswa.nim);
                 if (ipk > 0) {
                     totalIPK += ipk;
@@ -1584,17 +1404,16 @@
 
         // Dropdown Population
         function populateDropdowns() {
+            if (currentUser && currentUser.role === 'mahasiswa') {
+                return; // Student dropdowns are handled separately
+            }
+
             const mahasiswaSelects = ['krsNim', 'nilaiNim', 'khsNim', 'transkripNim'];
             mahasiswaSelects.forEach(selectId => {
                 const select = document.getElementById(selectId);
-                
-                if (currentUser && currentUser.role === 'mahasiswa' && (selectId === 'khsNim' || selectId === 'transkripNim')) {
-                    return;
-                }
-                
                 select.innerHTML = '<option value="">Pilih Mahasiswa</option>';
-                const filteredMahasiswa = getFilteredMahasiswaData();
-                filteredMahasiswa.forEach(mahasiswa => {
+                
+                mahasiswaData.forEach(mahasiswa => {
                     select.innerHTML += `<option value="${mahasiswa.nim}">${mahasiswa.nim} - ${mahasiswa.nama}</option>`;
                 });
             });
@@ -1603,8 +1422,8 @@
             matkulSelects.forEach(selectId => {
                 const select = document.getElementById(selectId);
                 select.innerHTML = '<option value="">Pilih Mata Kuliah</option>';
-                const filteredMatkul = getFilteredMatkulData();
-                filteredMatkul.forEach(matkul => {
+                
+                matkulData.forEach(matkul => {
                     select.innerHTML += `<option value="${matkul.kode}">${matkul.kode} - ${matkul.nama}</option>`;
                 });
             });
@@ -1623,20 +1442,20 @@
 
         // Render all tables
         function renderAllTables() {
-            renderMahasiswaTable();
-            renderMatkulTable();
-            renderKrsTable();
-            renderNilaiTable();
+            if (currentUser.role === 'admin-prodi') {
+                renderMahasiswaTable();
+                renderMatkulTable();
+                renderKrsTable();
+                renderNilaiTable();
+            }
         }
 
-        // Table rendering functions (abbreviated - key functions only)
+        // Table rendering functions
         function renderMahasiswaTable() {
             const tbody = document.getElementById('mahasiswaTableBody');
             tbody.innerHTML = '';
 
-            const filteredData = getFilteredMahasiswaData();
-
-            filteredData.forEach((mahasiswa, index) => {
+            mahasiswaData.forEach((mahasiswa, index) => {
                 const row = `
                     <tr>
                         <td>${mahasiswa.nim}</td>
@@ -1658,16 +1477,13 @@
             const tbody = document.getElementById('matkulTableBody');
             tbody.innerHTML = '';
 
-            const filteredData = getFilteredMatkulData();
-
-            filteredData.forEach((matkul, index) => {
+            matkulData.forEach((matkul, index) => {
                 const row = `
                     <tr>
                         <td>${matkul.kode}</td>
                         <td>${matkul.nama}</td>
                         <td>${matkul.sks}</td>
                         <td>${matkul.semester}</td>
-                        <td>${matkul.prodi}</td>
                         <td>
                             <button class="btn btn-warning" onclick="editMatkul(${index})">Edit</button>
                             <button class="btn btn-danger" onclick="deleteMatkul(${index})">Hapus</button>
@@ -1682,9 +1498,7 @@
             const tbody = document.getElementById('krsTableBody');
             tbody.innerHTML = '';
 
-            const filteredData = getFilteredKrsData();
-
-            filteredData.forEach((krs, index) => {
+            krsData.forEach((krs, index) => {
                 const mahasiswa = mahasiswaData.find(m => m.nim === krs.nim);
                 const matkul = matkulData.find(m => m.kode === krs.kodeMatkul);
                 
@@ -1713,9 +1527,7 @@
             const tbody = document.getElementById('nilaiTableBody');
             tbody.innerHTML = '';
 
-            const filteredData = getFilteredNilaiData();
-
-            filteredData.forEach((nilai, index) => {
+            nilaiData.forEach((nilai, index) => {
                 const mahasiswa = mahasiswaData.find(m => m.nim === nilai.nim);
                 const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
                 
@@ -1789,11 +1601,11 @@
 
             const khsHTML = `
                 <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <h3>Kartu Hasil Studi</h3>
+                    <h3>Kartu Hasil Studi - Bisnis Digital</h3>
                     <div style="margin-bottom: 20px;">
                         <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
                         <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
-                        <p><strong>Jurusan:</strong> ${mahasiswa.jurusan}</p>
+                        <p><strong>Program Studi:</strong> ${mahasiswa.jurusan}</p>
                         <p><strong>Semester:</strong> ${semesterFilter || 'Semua'}</p>
                     </div>
                     
@@ -1869,11 +1681,11 @@
 
             let transkripHTML = `
                 <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <h3>Transkrip Nilai</h3>
+                    <h3>Transkrip Nilai - Program Studi Bisnis Digital</h3>
                     <div style="margin-bottom: 20px;">
                         <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
                         <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
-                        <p><strong>Jurusan:</strong> ${mahasiswa.jurusan}</p>
+                        <p><strong>Program Studi:</strong> ${mahasiswa.jurusan}</p>
                         <p><strong>Angkatan:</strong> ${mahasiswa.angkatan}</p>
                     </div>
             `;
@@ -1931,222 +1743,14 @@
             document.getElementById('transkripResult').innerHTML = transkripHTML;
         }
 
-        // Backup Functions
-        function downloadManualBackup() {
-            let filteredData;
-            
-            if (currentUser.role === 'admin') {
-                filteredData = {
-                    mahasiswa: mahasiswaData,
-                    matkul: matkulData,
-                    krs: krsData,
-                    nilai: nilaiData,
-                    users: userData,
-                    timestamp: new Date().toISOString(),
-                    backupType: 'full_system_manual'
-                };
-            } else if (currentUser.role === 'admin-prodi') {
-                const prodiMahasiswa = getFilteredMahasiswaData();
-                const prodiMatkul = getFilteredMatkulData();
-                const prodiKrs = getFilteredKrsData();
-                const prodiNilai = getFilteredNilaiData();
-                const prodiUsers = userData.filter(u => u.prodi === currentUser.prodi || (u.nim && prodiMahasiswa.find(m => m.nim === u.nim)));
-                
-                filteredData = {
-                    mahasiswa: prodiMahasiswa,
-                    matkul: prodiMatkul,
-                    krs: prodiKrs,
-                    nilai: prodiNilai,
-                    users: prodiUsers,
-                    prodi: currentUser.prodi,
-                    timestamp: new Date().toISOString(),
-                    backupType: 'prodi_only_manual'
-                };
-            }
-            
-            const dataStr = JSON.stringify(filteredData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            const filename = currentUser.role === 'admin' ? 
-                `backup_sistem_akademik_${new Date().toISOString().split('T')[0]}.json` :
-                `backup_${currentUser.prodi.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
-            link.download = filename;
-            link.click();
-        }
-
-        function uploadBackup(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    
-                    if (!data.mahasiswa || !data.matkul || !data.krs || !data.nilai) {
-                        alert('Format file backup tidak valid!');
-                        return;
-                    }
-
-                    if (currentUser.role === 'admin-prodi') {
-                        if (data.backupType && data.backupType.includes('full_system')) {
-                            alert('File backup sistem penuh tidak dapat digunakan oleh admin prodi. Gunakan file backup khusus program studi.');
-                            return;
-                        }
-                        
-                        if (data.prodi && data.prodi !== currentUser.prodi) {
-                            if (!confirm(`File backup dari program studi "${data.prodi}". Apakah Anda yakin ingin mengimpor data ini ke program studi "${currentUser.prodi}"?`)) {
-                                return;
-                            }
-                        }
-                        
-                        restoreProdiData(data);
-                    } else if (currentUser.role === 'admin') {
-                        if (data.backupType && data.backupType.includes('prodi_only')) {
-                            if (!confirm(`File backup khusus program studi "${data.prodi || 'Unknown'}". Apakah Anda yakin ingin mengimpor data ini ke sistem?`)) {
-                                return;
-                            }
-                        }
-                        
-                        mahasiswaData = data.mahasiswa;
-                        matkulData = data.matkul;
-                        krsData = data.krs;
-                        nilaiData = data.nilai;
-                        
-                        if (data.users) {
-                            userData = data.users;
-                        }
-                    }
-                    
-                    renderAllTables();
-                    updateDashboard();
-                    populateDropdowns();
-                    triggerAutoSave();
-                    
-                    alert('Data backup berhasil dipulihkan!');
-                } catch (error) {
-                    alert('Terjadi kesalahan saat memuat backup: ' + error.message);
-                }
-            };
-            reader.readAsText(file);
-            
-            event.target.value = '';
-        }
-
-        function restoreProdiData(backupData) {
-            const currentProdi = currentUser.prodi;
-            
-            mahasiswaData = mahasiswaData.filter(m => m.jurusan !== currentProdi);
-            matkulData = matkulData.filter(m => m.prodi !== currentProdi);
-            krsData = krsData.filter(k => {
-                const mahasiswa = mahasiswaData.find(m => m.nim === k.nim);
-                return !mahasiswa || mahasiswa.jurusan !== currentProdi;
-            });
-            nilaiData = nilaiData.filter(n => {
-                const mahasiswa = mahasiswaData.find(m => m.nim === n.nim);
-                return !mahasiswa || mahasiswa.jurusan !== currentProdi;
-            });
-            userData = userData.filter(u => {
-                if (u.role === 'admin-prodi' && u.prodi === currentProdi) return false;
-                if (u.role === 'mahasiswa') {
-                    const mahasiswa = mahasiswaData.find(m => m.nim === u.nim);
-                    return !mahasiswa || mahasiswa.jurusan !== currentProdi;
-                }
-                return true;
-            });
-            
-            mahasiswaData.push(...backupData.mahasiswa);
-            matkulData.push(...backupData.matkul);
-            krsData.push(...backupData.krs);
-            nilaiData.push(...backupData.nilai);
-            
-            if (backupData.users) {
-                backupData.users.forEach(user => {
-                    if (!userData.find(u => u.username === user.username)) {
-                        userData.push(user);
-                    }
-                });
-            }
-        }
-
-        function resetAllData() {
-            if (!confirm('PERINGATAN: Tindakan ini akan menghapus SEMUA data dan mengembalikan ke data awal. Data yang ada akan hilang permanen!\n\nApakah Anda benar-benar yakin?')) {
-                return;
-            }
-            
-            if (!confirm('KONFIRMASI TERAKHIR: Semua data mahasiswa, mata kuliah, KRS, nilai, dan user akan dihapus!\n\nKlik OK untuk melanjutkan atau Cancel untuk membatalkan.')) {
-                return;
-            }
-
-            Object.values(BACKUP_KEYS).forEach(key => {
-                try {
-                    delete window[key];
-                } catch (error) {
-                    console.log('Error clearing backup key:', key);
-                }
-            });
-
-            // Reset to default data with complete KRS
-            mahasiswaData = [
-                { nim: '23010901', nama: 'ADITYA ANUGRAH MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010902', nama: 'DIVA WOANG PAPUTUNGAN', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010903', nama: 'ERDI ERLANGGA PUTRA SUSILO', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010904', nama: 'FITRIAH DARWIS', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010905', nama: 'MUH. AKBAR ANUGRAH GAIB', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010907', nama: 'MUH. FADHIL C. MOKOAGOW', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010908', nama: 'RIZKY MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 }
-            ];
-
-            // Keep the same matkul data
-            nilaiData = [];
-            
-            // Recreate user accounts
-            userData = [
-                { username: 'admin', password: 'admin123', role: 'admin', nim: null, prodi: null },
-                { username: 'admin-bd', password: 'bd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
-                { username: 'admin-ars', password: 'ars123', role: 'admin-prodi', nim: null, prodi: 'Administrasi Rumah Sakit' },
-                { username: 'admin-agro', password: 'agro123', role: 'admin-prodi', nim: null, prodi: 'Agronomi' },
-                { username: 'admin-kep', password: 'kep123', role: 'admin-prodi', nim: null, prodi: 'D3 Keperawatan' },
-                { username: 'admin-bid', password: 'bid123', role: 'admin-prodi', nim: null, prodi: 'D3 Kebidanan' },
-                { username: '23010901', password: '23010901', role: 'mahasiswa', nim: '23010901', prodi: 'Bisnis Digital' },
-                { username: '23010902', password: '23010902', role: 'mahasiswa', nim: '23010902', prodi: 'Bisnis Digital' },
-                { username: '23010903', password: '23010903', role: 'mahasiswa', nim: '23010903', prodi: 'Bisnis Digital' },
-                { username: '23010904', password: '23010904', role: 'mahasiswa', nim: '23010904', prodi: 'Bisnis Digital' },
-                { username: '23010905', password: '23010905', role: 'mahasiswa', nim: '23010905', prodi: 'Bisnis Digital' },
-                { username: '23010907', password: '23010907', role: 'mahasiswa', nim: '23010907', prodi: 'Bisnis Digital' },
-                { username: '23010908', password: '23010908', role: 'mahasiswa', nim: '23010908', prodi: 'Bisnis Digital' }
-            ];
-
-            initializeCompleteKrsData();
-            autoSaveData();
-            
-            renderAllTables();
-            updateDashboard();
-            populateDropdowns();
-            
-            if (currentUser.role === 'admin') {
-                populateUserManagementDropdowns();
-                renderUserTable();
-            }
-            
-            alert('Semua data berhasil direset ke kondisi awal!');
-        }
-
-        // Form Management Functions (abbreviated for key ones)
+        // Form Management Functions
         document.getElementById('mahasiswaForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const nim = document.getElementById('nim').value;
             const nama = document.getElementById('nama').value;
-            const jurusan = document.getElementById('jurusan').value;
-            const angkatan = document.getElementById('angkatan').value;
-
-            if (currentUser.role === 'admin-prodi' && jurusan !== currentUser.prodi) {
-                showAlert('mahasiswaAlert', 'Anda hanya dapat mengelola mahasiswa dari program studi Anda!', 'error');
-                return;
-            }
+            const jurusan = 'Bisnis Digital'; // Fixed to Bisnis Digital
+            const angkatan = parseInt(document.getElementById('angkatan').value);
 
             if (mahasiswaData.find(m => m.nim === nim)) {
                 showAlert('mahasiswaAlert', 'NIM sudah terdaftar!', 'error');
@@ -2156,6 +1760,7 @@
             const mahasiswa = { nim, nama, jurusan, angkatan, ipk: 0 };
             mahasiswaData.push(mahasiswa);
             
+            // Create user account for new student
             if (!userData.find(u => u.nim === nim)) {
                 userData.push({
                     username: nim,
@@ -2174,6 +1779,53 @@
             triggerAutoSave();
         });
 
+        document.getElementById('matkulForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const kode = document.getElementById('kodeMatkul').value;
+            const nama = document.getElementById('namaMatkul').value;
+            const sks = parseInt(document.getElementById('sks').value);
+            const semester = document.getElementById('semester').value;
+
+            if (matkulData.find(m => m.kode === kode)) {
+                showAlert('matkulAlert', 'Kode mata kuliah sudah terdaftar!', 'error');
+                return;
+            }
+
+            const matkul = { kode, nama, sks, semester };
+            matkulData.push(matkul);
+            
+            showAlert('matkulAlert', 'Mata kuliah berhasil disimpan!', 'success');
+            renderMatkulTable();
+            clearMatkulForm();
+            updateDashboard();
+            populateDropdowns();
+            triggerAutoSave();
+        });
+
+        document.getElementById('krsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nim = document.getElementById('krsNim').value;
+            const kodeMatkul = document.getElementById('krsMatkul').value;
+            const semester = document.getElementById('krsSemester').value;
+            const tahun = document.getElementById('krsTahun').value;
+
+            if (krsData.find(k => k.nim === nim && k.kodeMatkul === kodeMatkul && k.semester === semester && k.tahun === tahun)) {
+                showAlert('krsAlert', 'KRS untuk mata kuliah ini sudah ada!', 'error');
+                return;
+            }
+
+            const krs = { nim, kodeMatkul, semester, tahun };
+            krsData.push(krs);
+            
+            showAlert('krsAlert', 'KRS berhasil ditambahkan!', 'success');
+            renderKrsTable();
+            clearKrsForm();
+            updateDashboard();
+            triggerAutoSave();
+        });
+
         document.getElementById('nilaiAngka').addEventListener('input', function() {
             const nilai = parseInt(this.value);
             const gradeInput = document.getElementById('nilaiHuruf');
@@ -2187,14 +1839,6 @@
             const kodeMatkul = document.getElementById('nilaiMatkul').value;
             const nilaiAngka = parseInt(document.getElementById('nilaiAngka').value);
             const nilaiHuruf = document.getElementById('nilaiHuruf').value;
-
-            if (currentUser.role === 'admin-prodi') {
-                const mahasiswa = mahasiswaData.find(m => m.nim === nim);
-                if (!mahasiswa || mahasiswa.jurusan !== currentUser.prodi) {
-                    showAlert('nilaiAlert', 'Anda hanya dapat mengelola nilai mahasiswa dari program studi Anda!', 'error');
-                    return;
-                }
-            }
 
             if (!krsData.find(k => k.nim === nim && k.kodeMatkul === kodeMatkul)) {
                 showAlert('nilaiAlert', 'Mahasiswa belum mengambil mata kuliah ini di KRS!', 'error');
@@ -2218,73 +1862,58 @@
             triggerAutoSave();
         });
 
-        // Utility functions for form clearing
-        function clearMahasiswaForm() {
-            document.getElementById('mahasiswaForm').reset();
-        }
-
-        function clearNilaiForm() {
-            document.getElementById('nilaiForm').reset();
-        }
-
-        function clearKrsForm() {
-            document.getElementById('krsForm').reset();
-        }
-
-        function clearMatkulForm() {
-            document.getElementById('matkulForm').reset();
-        }
-
-        // Placeholder functions for edit/delete operations
-        function editMahasiswa(index) {
-            // Implementation would go here
-        }
-
-        function deleteMahasiswa(index) {
-            const filteredData = getFilteredMahasiswaData();
-            const mahasiswa = filteredData[index];
-            const realIndex = mahasiswaData.findIndex(m => m.nim === mahasiswa.nim);
-            
-            if (confirm('Apakah Anda yakin ingin menghapus data mahasiswa ini?')) {
-                mahasiswaData.splice(realIndex, 1);
-                
-                const userIndex = userData.findIndex(u => u.nim === mahasiswa.nim);
-                if (userIndex >= 0) {
-                    userData.splice(userIndex, 1);
-                }
-                
-                renderMahasiswaTable();
-                updateDashboard();
-                populateDropdowns();
-                triggerAutoSave();
-            }
-        }
-
-        function editMatkul(index) {
-            // Implementation would go here
-        }
-
-        function deleteMatkul(index) {
-            // Implementation would go here
-        }
-
-        function editKrs(index) {
-            // Implementation would go here
-        }
-
-        function deleteKrs(index) {
-            // Implementation would go here
-        }
-
-        function editNilai(index) {
-            // Implementation would go here
-        }
-
-        function deleteNilai(index) {
-            // Implementation would go here
-        }
-
         // User Management Functions
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newPassword').value;
+            const role = document.getElementById('newRole').value;
+            const linkedNim = document.getElementById('linkedNim').value;
+
+            if (userData.find(u => u.username === username)) {
+                showAlert('userAlert', 'Username sudah terdaftar!', 'error');
+                return;
+            }
+
+            let user = {
+                username,
+                password,
+                role,
+                nim: null,
+                prodi: 'Bisnis Digital'
+            };
+
+            if (role === 'mahasiswa' && linkedNim) {
+                user.nim = linkedNim;
+            }
+
+            userData.push(user);
+            
+            showAlert('userAlert', 'User berhasil ditambahkan!', 'success');
+            renderUserTable();
+            populateUserManagementDropdowns();
+            clearUserForm();
+            triggerAutoSave();
+        });
+
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('changeUser').value;
+            const newPassword = document.getElementById('newPasswordChange').value;
+
+            const userIndex = userData.findIndex(u => u.username === username);
+            if (userIndex >= 0) {
+                userData[userIndex].password = newPassword;
+                showAlert('passwordAlert', 'Password berhasil diubah!', 'success');
+                document.getElementById('changePasswordForm').reset();
+                triggerAutoSave();
+            } else {
+                showAlert('passwordAlert', 'User tidak ditemukan!', 'error');
+            }
+        });
+
         function populateUserManagementDropdowns() {
             const linkedNimSelect = document.getElementById('linkedNim');
             linkedNimSelect.innerHTML = '<option value="">Pilih NIM</option>';
@@ -2303,9 +1932,10 @@
             changeUserSelect.innerHTML = '<option value="">Pilih User</option>';
             
             userData.forEach(user => {
-                const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi' : 
-                                   user.role === 'admin' ? 'Admin System' : 'Mahasiswa';
-                changeUserSelect.innerHTML += `<option value="${user.username}">${user.username} (${roleDisplay})</option>`;
+                if (user.username !== currentUser.username) {
+                    const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi' : 'Mahasiswa';
+                    changeUserSelect.innerHTML += `<option value="${user.username}">${user.username} (${roleDisplay})</option>`;
+                }
             });
         }
 
@@ -2317,15 +1947,12 @@
                 if (user.username === currentUser.username) return;
                 
                 const linkedNimDisplay = user.nim ? `${user.nim} - ${getMahasiswaName(user.nim)}` : '-';
-                const prodiDisplay = user.prodi || '-';
-                const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi' : 
-                                   user.role === 'admin' ? 'Admin System' : 'Mahasiswa';
+                const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi BD' : 'Mahasiswa BD';
                 
                 const row = `
                     <tr>
                         <td>${user.username}</td>
                         <td><span class="role-badge ${user.role}">${roleDisplay}</span></td>
-                        <td>${prodiDisplay}</td>
                         <td>${linkedNimDisplay}</td>
                         <td>
                             <button class="btn btn-danger" onclick="deleteUser(${index})">Hapus</button>
@@ -2336,33 +1963,236 @@
             });
         }
 
+        function getMahasiswaName(nim) {
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            return mahasiswa ? mahasiswa.nama : 'Unknown';
+        }
+
         function handleRoleChange() {
             const role = document.getElementById('newRole').value;
-            const prodiField = document.getElementById('userProdi');
             const nimField = document.getElementById('linkedNim');
             
-            if (role === 'admin-prodi') {
-                prodiField.parentElement.style.display = 'block';
-                prodiField.required = true;
-                nimField.parentElement.style.display = 'none';
-                nimField.required = false;
-            } else if (role === 'mahasiswa') {
-                prodiField.parentElement.style.display = 'none';
-                prodiField.required = false;
+            if (role === 'mahasiswa') {
                 nimField.parentElement.style.display = 'block';
                 nimField.required = true;
             } else {
-                prodiField.parentElement.style.display = 'none';
-                prodiField.required = false;
                 nimField.parentElement.style.display = 'none';
                 nimField.required = false;
             }
         }
 
+        // Backup Functions
+        function downloadManualBackup() {
+            const filteredData = {
+                mahasiswa: mahasiswaData,
+                matkul: matkulData,
+                krs: krsData,
+                nilai: nilaiData,
+                users: userData,
+                prodi: 'Bisnis Digital',
+                timestamp: new Date().toISOString(),
+                backupType: 'bisnis_digital_manual'
+            };
+            
+            const dataStr = JSON.stringify(filteredData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            const filename = `backup_Bisnis_Digital_${new Date().toISOString().split('T')[0]}.json`;
+            link.download = filename;
+            link.click();
+        }
+
+        function uploadBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (!data.mahasiswa || !data.matkul || !data.krs || !data.nilai) {
+                        alert('Format file backup tidak valid!');
+                        return;
+                    }
+
+                    if (data.prodi && data.prodi !== 'Bisnis Digital') {
+                        if (!confirm(`File backup dari program studi "${data.prodi}". Apakah Anda yakin ingin mengimpor data ini?`)) {
+                            return;
+                        }
+                    }
+
+                    mahasiswaData = data.mahasiswa;
+                    matkulData = data.matkul;
+                    krsData = data.krs;
+                    nilaiData = data.nilai;
+                    
+                    if (data.users) {
+                        userData = data.users;
+                    }
+                    
+                    renderAllTables();
+                    updateDashboard();
+                    populateDropdowns();
+                    populateUserManagementDropdowns();
+                    renderUserTable();
+                    triggerAutoSave();
+                    
+                    alert('Data backup berhasil dipulihkan!');
+                } catch (error) {
+                    alert('Terjadi kesalahan saat memuat backup: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            
+            event.target.value = '';
+        }
+
+        function resetAllData() {
+            if (!confirm('PERINGATAN: Tindakan ini akan menghapus SEMUA data dan mengembalikan ke data awal. Data yang ada akan hilang permanen!\n\nApakah Anda benar-benar yakin?')) {
+                return;
+            }
+            
+            if (!confirm('KONFIRMASI TERAKHIR: Semua data mahasiswa, mata kuliah, KRS, nilai, dan user akan dihapus!\n\nKlik OK untuk melanjutkan atau Cancel untuk membatalkan.')) {
+                return;
+            }
+
+            Object.values(BACKUP_KEYS).forEach(key => {
+                try {
+                    delete window[key];
+                } catch (error) {
+                    console.log('Error clearing backup key:', key);
+                }
+            });
+
+            // Reset to default data
+            mahasiswaData = [
+                { nim: '23010901', nama: 'ADITYA ANUGRAH MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
+                { nim: '23010902', nama: 'DIVA WOANG PAPUTUNGAN', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
+                { nim: '23010903', nama: 'ERDI ERLANGGA PUTRA SUSILO', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
+                { nim: '23010904', nama: 'FITRIAH DARWIS', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
+                { nim: '23010905', nama: 'MUH. AKBAR ANUGRAH GAIB', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
+                { nim: '23010907', nama: 'MUH. FADHIL C. MOKOAGOW', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
+                { nim: '23010908', nama: 'RIZKY MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 }
+            ];
+
+            nilaiData = [];
+            
+            userData = [
+                { username: 'admin-bd', password: 'adminbd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
+                { username: '23010901', password: '23010901', role: 'mahasiswa', nim: '23010901', prodi: 'Bisnis Digital' },
+                { username: '23010902', password: '23010902', role: 'mahasiswa', nim: '23010902', prodi: 'Bisnis Digital' },
+                { username: '23010903', password: '23010903', role: 'mahasiswa', nim: '23010903', prodi: 'Bisnis Digital' },
+                { username: '23010904', password: '23010904', role: 'mahasiswa', nim: '23010904', prodi: 'Bisnis Digital' },
+                { username: '23010905', password: '23010905', role: 'mahasiswa', nim: '23010905', prodi: 'Bisnis Digital' },
+                { username: '23010907', password: '23010907', role: 'mahasiswa', nim: '23010907', prodi: 'Bisnis Digital' },
+                { username: '23010908', password: '23010908', role: 'mahasiswa', nim: '23010908', prodi: 'Bisnis Digital' }
+            ];
+
+            initializeCompleteKrsData();
+            autoSaveData();
+            
+            renderAllTables();
+            updateDashboard();
+            populateDropdowns();
+            populateUserManagementDropdowns();
+            renderUserTable();
+            
+            alert('Semua data berhasil direset ke kondisi awal!');
+        }
+
+        // Utility functions for form clearing
+        function clearMahasiswaForm() {
+            document.getElementById('mahasiswaForm').reset();
+        }
+
+        function clearMatkulForm() {
+            document.getElementById('matkulForm').reset();
+        }
+
+        function clearKrsForm() {
+            document.getElementById('krsForm').reset();
+        }
+
+        function clearNilaiForm() {
+            document.getElementById('nilaiForm').reset();
+        }
+
         function clearUserForm() {
             document.getElementById('userForm').reset();
-            document.getElementById('userProdi').parentElement.style.display = 'none';
             document.getElementById('linkedNim').parentElement.style.display = 'none';
+        }
+
+        // Edit and Delete Functions (simplified implementations)
+        function editMahasiswa(index) {
+            alert('Fitur edit akan dikembangkan lebih lanjut');
+        }
+
+        function deleteMahasiswa(index) {
+            const mahasiswa = mahasiswaData[index];
+            
+            if (confirm(`Apakah Anda yakin ingin menghapus data mahasiswa ${mahasiswa.nama}?`)) {
+                mahasiswaData.splice(index, 1);
+                
+                const userIndex = userData.findIndex(u => u.nim === mahasiswa.nim);
+                if (userIndex >= 0) {
+                    userData.splice(userIndex, 1);
+                }
+                
+                renderMahasiswaTable();
+                updateDashboard();
+                populateDropdowns();
+                populateUserManagementDropdowns();
+                renderUserTable();
+                triggerAutoSave();
+            }
+        }
+
+        function editMatkul(index) {
+            alert('Fitur edit akan dikembangkan lebih lanjut');
+        }
+
+        function deleteMatkul(index) {
+            const matkul = matkulData[index];
+            
+            if (confirm(`Apakah Anda yakin ingin menghapus mata kuliah ${matkul.nama}?`)) {
+                matkulData.splice(index, 1);
+                
+                renderMatkulTable();
+                updateDashboard();
+                populateDropdowns();
+                triggerAutoSave();
+            }
+        }
+
+        function editKrs(index) {
+            alert('Fitur edit akan dikembangkan lebih lanjut');
+        }
+
+        function deleteKrs(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus data KRS ini?')) {
+                krsData.splice(index, 1);
+                
+                renderKrsTable();
+                updateDashboard();
+                triggerAutoSave();
+            }
+        }
+
+        function editNilai(index) {
+            alert('Fitur edit akan dikembangkan lebih lanjut');
+        }
+
+        function deleteNilai(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus data nilai ini?')) {
+                nilaiData.splice(index, 1);
+                
+                renderNilaiTable();
+                updateDashboard();
+                triggerAutoSave();
+            }
         }
 
         function deleteUser(index) {
@@ -2406,7 +2236,8 @@
             }
         }, 30000);
 
-        console.log('Sistem Akademik v7.0 dengan data real mahasiswa Bisnis Digital dimuat successfully!');
+        console.log('Sistem Akademik Bisnis Digital v8.0 loaded successfully!');
     </script>
 </body>
 </html>
+        
