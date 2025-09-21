@@ -1,0 +1,2757 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Akademik Mahasiswa - Enhanced V6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-form h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #F44336, #D32F2F);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: none;
+            position: relative;
+        }
+
+        .container.active {
+            display: block;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header-left p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logout-btn {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #FF6B6B, #FF5252);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .backup-controls {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .auto-backup-status {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: #2e7d32;
+            font-size: 12px;
+        }
+
+        .auto-backup-status.warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .backup-btn {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .backup-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .content-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+
+        .data-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .file-input {
+            margin: 10px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-label {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .file-label:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+        }
+
+        .edit-mode {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+
+        .edit-indicator {
+            background: #ffc107;
+            color: #856404;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .role-badge {
+            background: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .role-badge.admin {
+            background: #dc3545;
+        }
+
+        .role-badge.admin-prodi {
+            background: #6f42c1;
+        }
+
+        .role-badge.mahasiswa {
+            background: #28a745;
+        }
+
+        .credit-text {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .prodi-filter {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .prodi-filter h4 {
+            color: #1976d2;
+            margin-bottom: 5px;
+        }
+
+        .prodi-filter p {
+            color: #666;
+            margin: 0;
+        }
+
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+
+        .auto-save-indicator.error {
+            background: #f44336;
+        }
+
+        .data-sync-info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #1976d2;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Credit Text -->
+    <div class="credit-text">
+        by Firman Arby Mokoagow - Auto Backup Enabled
+    </div>
+
+    <!-- Auto Save Indicator -->
+    <div id="autoSaveIndicator" class="auto-save-indicator">
+        Data tersimpan otomatis
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-form">
+            <h1>🎓 Sistem Akademik</h1>
+            <div class="data-sync-info">
+                ✅ Sistem auto-backup aktif - Data Anda akan tersimpan secara otomatis
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUser">Username:</label>
+                    <input type="text" id="loginUser" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginRole">Login Sebagai:</label>
+                    <select id="loginRole" required>
+                        <option value="">Pilih Role</option>
+                        <option value="admin">Admin System</option>
+                        <option value="admin-prodi">Admin Prodi</option>
+                        <option value="mahasiswa">Mahasiswa</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">🔐 Login</button>
+            </form>
+            <div id="loginAlert"></div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainContainer" class="container">
+        <div class="header">
+            <div class="header-left">
+                <h1>🎓 Sistem Akademik Mahasiswa</h1>
+                <p>Sistem Manajemen Akademik Terpadu dengan Auto Backup</p>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div id="currentUser"></div>
+                </div>
+                <button class="btn logout-btn" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <!-- Prodi Filter - Admin Prodi Only -->
+        <div id="prodiFilter" class="prodi-filter hidden">
+            <h4>📚 Filter Program Studi</h4>
+            <p id="prodiFilterText">Anda hanya dapat mengelola data untuk program studi: <strong id="currentProdi"></strong></p>
+        </div>
+
+        <!-- Backup Controls - Admin System and Admin Prodi -->
+        <div id="backupControls" class="backup-controls hidden">
+            <h3>💾 Manajemen Data Backup</h3>
+            <div class="auto-backup-status" id="autoBackupStatus">
+                ✅ Auto-backup aktif - Data disimpan setiap ada perubahan
+            </div>
+            <p id="backupInfo" style="margin-bottom: 15px; color: #666; font-size: 14px;"></p>
+            <button class="backup-btn" onclick="downloadManualBackup()">📥 Download Backup Manual</button>
+            <label for="fileInput" class="file-label">📤 Upload Backup</label>
+            <input type="file" id="fileInput" accept=".json" onchange="uploadBackup(event)">
+            <button class="backup-btn" onclick="resetAllData()" style="background: linear-gradient(45deg, #f44336, #d32f2f);">🗑️ Reset Semua Data</button>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showPanel('dashboard')" id="navDashboard">📊 Dashboard</button>
+            <button class="nav-btn" onclick="showPanel('mahasiswa')" id="navMahasiswa">👥 Data Mahasiswa</button>
+            <button class="nav-btn" onclick="showPanel('matakuliah')" id="navMatakuliah">📚 Mata Kuliah</button>
+            <button class="nav-btn" onclick="showPanel('krs')" id="navKrs">📝 KRS</button>
+            <button class="nav-btn" onclick="showPanel('nilai')" id="navNilai">📋 Input Nilai</button>
+            <button class="nav-btn" onclick="showPanel('khs')" id="navKhs">📊 KHS</button>
+            <button class="nav-btn" onclick="showPanel('transkrip')" id="navTranskrip">🎓 Transkrip</button>
+            <button class="nav-btn" onclick="showPanel('userManagement')" id="navUserManagement">👤 Kelola User</button>
+        </div>
+
+        <!-- Dashboard Panel -->
+        <div id="dashboard" class="content-panel active">
+            <h2>📊 Dashboard Akademik</h2>
+            <div class="data-sync-info">
+                <strong>Status Backup:</strong> <span id="dashboardBackupStatus">Data tersinkronisasi</span> | 
+                <strong>Terakhir disimpan:</strong> <span id="lastSaveTime">-</span>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalMahasiswa">0</h3>
+                    <p>Total Mahasiswa</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalMatkul">0</h3>
+                    <p>Mata Kuliah</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalKRS">0</h3>
+                    <p>KRS Aktif</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="rataIPK">0.00</h3>
+                    <p>Rata-rata IPK</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Mahasiswa Panel -->
+        <div id="mahasiswa" class="content-panel">
+            <h2>👥 Manajemen Data Mahasiswa</h2>
+            
+            <div id="editIndicatorMahasiswa" class="edit-indicator hidden">
+                ✏️ Mode Edit - Sedang mengedit data mahasiswa
+            </div>
+
+            <form id="mahasiswaForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nim">NIM:</label>
+                        <input type="text" id="nim" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap:</label>
+                        <input type="text" id="nama" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jurusan">Jurusan:</label>
+                        <select id="jurusan" required>
+                            <option value="">Pilih Jurusan</option>
+                            <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
+                            <option value="Bisnis Digital">Bisnis Digital</option>
+                            <option value="Agronomi">Agronomi</option>
+                            <option value="D3 Keperawatan">D3 Keperawatan</option>
+                            <option value="D3 Kebidanan">D3 Kebidanan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="angkatan">Angkatan:</label>
+                        <input type="number" id="angkatan" min="2020" max="2025" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="mahasiswaSubmitBtn">💾 Simpan Mahasiswa</button>
+                <button type="button" class="btn btn-danger" onclick="clearMahasiswaForm()">🗑️ Bersihkan</button>
+                <button type="button" class="btn btn-warning hidden" id="mahasiswaCancelBtn" onclick="cancelEditMahasiswa()">❌ Batal Edit</button>
+            </form>
+
+            <div id="mahasiswaAlert"></div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>NIM</th>
+                        <th>Nama</th>
+                        <th>Jurusan</th>
+                        <th>Angkatan</th>
+                        <th>IPK</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="mahasiswaTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mata Kuliah Panel -->
+        <div id="matakuliah" class="content-panel">
+            <h2>📚 Manajemen Mata Kuliah</h2>
+            
+            <div id="editIndicatorMatkul" class="edit-indicator hidden">
+                ✏️ Mode Edit - Sedang mengedit mata kuliah
+            </div>
+
+            <form id="matkulForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="kodeMatkul">Kode Mata Kuliah:</label>
+                        <input type="text" id="kodeMatkul" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="namaMatkul">Nama Mata Kuliah:</label>
+                        <input type="text" id="namaMatkul" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sks">SKS:</label>
+                        <input type="number" id="sks" min="1" max="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">Semester:</label>
+                        <select id="semester" required>
+                            <option value="">Pilih Semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="matkulProdi">Program Studi:</label>
+                        <select id="matkulProdi" required>
+                            <option value="">Pilih Program Studi</option>
+                            <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
+                            <option value="Bisnis Digital">Bisnis Digital</option>
+                            <option value="Agronomi">Agronomi</option>
+                            <option value="D3 Keperawatan">D3 Keperawatan</option>
+                            <option value="D3 Kebidanan">D3 Kebidanan</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="matkulSubmitBtn">💾 Simpan Mata Kuliah</button>
+                <button type="button" class="btn btn-danger" onclick="clearMatkulForm()">🗑️ Bersihkan</button>
+                <button type="button" class="btn btn-warning hidden" id="matkulCancelBtn" onclick="cancelEditMatkul()">❌ Batal Edit</button>
+            </form>
+
+            <div id="matkulAlert"></div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Nama Mata Kuliah</th>
+                        <th>SKS</th>
+                        <th>Semester</th>
+                        <th>Program Studi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="matkulTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- KRS Panel -->
+        <div id="krs" class="content-panel">
+            <h2>📝 Kartu Rencana Studi (KRS)</h2>
+            
+            <div id="editIndicatorKrs" class="edit-indicator hidden">
+                ✏️ Mode Edit - Sedang mengedit KRS
+            </div>
+
+            <form id="krsForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="krsNim">Pilih Mahasiswa:</label>
+                        <select id="krsNim" required>
+                            <option value="">Pilih Mahasiswa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="krsMatkul">Pilih Mata Kuliah:</label>
+                        <select id="krsMatkul" required>
+                            <option value="">Pilih Mata Kuliah</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="krsSemester">Semester:</label>
+                        <select id="krsSemester" required>
+                            <option value="">Pilih Semester</option>
+                            <option value="Ganjil">Ganjil</option>
+                            <option value="Genap">Genap</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="krsTahun">Tahun Akademik:</label>
+                        <input type="text" id="krsTahun" placeholder="2024/2025" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="krsSubmitBtn">💾 Tambah ke KRS</button>
+                <button type="button" class="btn btn-danger" onclick="clearKrsForm()">🗑️ Bersihkan</button>
+                <button type="button" class="btn btn-warning hidden" id="krsCancelBtn" onclick="cancelEditKrs()">❌ Batal Edit</button>
+            </form>
+
+            <div id="krsAlert"></div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>NIM</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Kode Matkul</th>
+                        <th>Nama Mata Kuliah</th>
+                        <th>SKS</th>
+                        <th>Semester</th>
+                        <th>Tahun</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="krsTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Input Nilai Panel -->
+        <div id="nilai" class="content-panel">
+            <h2>📋 Input Nilai</h2>
+            
+            <div id="editIndicatorNilai" class="edit-indicator hidden">
+                ✏️ Mode Edit - Sedang mengedit nilai
+            </div>
+
+            <form id="nilaiForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nilaiNim">Pilih Mahasiswa:</label>
+                        <select id="nilaiNim" required>
+                            <option value="">Pilih Mahasiswa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nilaiMatkul">Pilih Mata Kuliah:</label>
+                        <select id="nilaiMatkul" required>
+                            <option value="">Pilih Mata Kuliah</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nilaiAngka">Nilai (0-100):</label>
+                        <input type="number" id="nilaiAngka" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nilaiHuruf">Grade:</label>
+                        <input type="text" id="nilaiHuruf" readonly>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="nilaiSubmitBtn">💾 Simpan Nilai</button>
+                <button type="button" class="btn btn-danger" onclick="clearNilaiForm()">🗑️ Bersihkan</button>
+                <button type="button" class="btn btn-warning hidden" id="nilaiCancelBtn" onclick="cancelEditNilai()">❌ Batal Edit</button>
+            </form>
+
+            <div id="nilaiAlert"></div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>NIM</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Mata Kuliah</th>
+                        <th>Nilai</th>
+                        <th>Grade</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="nilaiTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- KHS Panel -->
+        <div id="khs" class="content-panel">
+            <h2>📊 Kartu Hasil Studi (KHS)</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="khsNim">Pilih Mahasiswa:</label>
+                    <select id="khsNim" onchange="generateKHS()">
+                        <option value="">Pilih Mahasiswa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="khsSemester">Semester:</label>
+                    <select id="khsSemester" onchange="generateKHS()">
+                        <option value="">Semua Semester</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                        <option value="7">Semester 7</option>
+                        <option value="8">Semester 8</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="khsResult"></div>
+        </div>
+
+        <!-- Transkrip Panel -->
+        <div id="transkrip" class="content-panel">
+            <h2>🎓 Transkrip Nilai</h2>
+            
+            <div class="form-group">
+                <label for="transkripNim">Pilih Mahasiswa:</label>
+                <select id="transkripNim" onchange="generateTranskrip()">
+                    <option value="">Pilih Mahasiswa</option>
+                </select>
+            </div>
+
+            <div id="transkripResult"></div>
+        </div>
+
+        <!-- User Management Panel - Admin System Only -->
+        <div id="userManagement" class="content-panel">
+            <h2>👤 Kelola User</h2>
+            
+            <form id="userForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newUsername">Username:</label>
+                        <input type="text" id="newUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Password:</label>
+                        <input type="password" id="newPassword" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newRole">Role:</label>
+                        <select id="newRole" onchange="handleRoleChange()" required>
+                            <option value="">Pilih Role</option>
+                            <option value="admin">Admin System</option>
+                            <option value="admin-prodi">Admin Prodi</option>
+                            <option value="mahasiswa">Mahasiswa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userProdi">Program Studi:</label>
+                        <select id="userProdi">
+                            <option value="">Pilih Program Studi</option>
+                            <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
+                            <option value="Bisnis Digital">Bisnis Digital</option>
+                            <option value="Agronomi">Agronomi</option>
+                            <option value="D3 Keperawatan">D3 Keperawatan</option>
+                            <option value="D3 Kebidanan">D3 Kebidanan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="linkedNim">NIM (untuk mahasiswa):</label>
+                        <select id="linkedNim">
+                            <option value="">Pilih NIM</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="userSubmitBtn">💾 Tambah User</button>
+                <button type="button" class="btn btn-danger" onclick="clearUserForm()">🗑️ Bersihkan</button>
+            </form>
+
+            <div id="userAlert"></div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Program Studi</th>
+                        <th>NIM Terkait</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                </tbody>
+            </table>
+
+            <div style="margin-top: 30px;">
+                <h3>🔐 Ubah Password</h3>
+                <form id="changePasswordForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="changeUser">Pilih User:</label>
+                            <select id="changeUser" required>
+                                <option value="">Pilih User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPasswordChange">Password Baru:</label>
+                            <input type="password" id="newPasswordChange" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">🔑 Ubah Password</button>
+                </form>
+
+                <div id="passwordAlert"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-backup system variables
+        let autoBackupEnabled = true;
+        let lastSaveTime = null;
+        const BACKUP_KEY_PREFIX = 'akademik_system_';
+        const BACKUP_KEYS = {
+            mahasiswa: BACKUP_KEY_PREFIX + 'mahasiswa',
+            matkul: BACKUP_KEY_PREFIX + 'matkul',
+            krs: BACKUP_KEY_PREFIX + 'krs',
+            nilai: BACKUP_KEY_PREFIX + 'nilai',
+            users: BACKUP_KEY_PREFIX + 'users',
+            metadata: BACKUP_KEY_PREFIX + 'metadata'
+        };
+
+        // Data Storage with memory fallback
+        let mahasiswaData = [];
+        let matkulData = [];
+        let krsData = [];
+        let nilaiData = [];
+        let userData = [
+            // Default admin system user
+            { username: 'admin', password: 'admin123', role: 'admin', nim: null, prodi: null },
+            // Default admin prodi users
+            { username: 'admin-ars', password: 'ars123', role: 'admin-prodi', nim: null, prodi: 'Administrasi Rumah Sakit' },
+            { username: 'admin-bd', password: 'bd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
+            { username: 'admin-agro', password: 'agro123', role: 'admin-prodi', nim: null, prodi: 'Agronomi' },
+            { username: 'admin-kep', password: 'kep123', role: 'admin-prodi', nim: null, prodi: 'D3 Keperawatan' },
+            { username: 'admin-bid', password: 'bid123', role: 'admin-prodi', nim: null, prodi: 'D3 Kebidanan' },
+        ];
+
+        // Current user session
+        let currentUser = null;
+
+        // Edit mode variables
+        let editingMahasiswa = false;
+        let editingMahasiswaIndex = -1;
+        let editingMatkul = false;
+        let editingMatkulIndex = -1;
+        let editingKrs = false;
+        let editingKrsIndex = -1;
+        let editingNilai = false;
+        let editingNilaiIndex = -1;
+        let editingUser = false;
+        let editingUserIndex = -1;
+
+        // Auto-backup functions
+        function saveToMemory(key, data) {
+            try {
+                const dataStr = JSON.stringify(data);
+                // Store in memory with key
+                window[key] = dataStr;
+                return true;
+            } catch (error) {
+                console.error('Error saving to memory:', error);
+                return false;
+            }
+        }
+
+        function loadFromMemory(key, defaultValue = null) {
+            try {
+                const dataStr = window[key];
+                if (dataStr) {
+                    return JSON.parse(dataStr);
+                }
+                return defaultValue;
+            } catch (error) {
+                console.error('Error loading from memory:', error);
+                return defaultValue;
+            }
+        }
+
+        function autoSaveData() {
+            if (!autoBackupEnabled) return;
+
+            try {
+                // Save all data arrays
+                saveToMemory(BACKUP_KEYS.mahasiswa, mahasiswaData);
+                saveToMemory(BACKUP_KEYS.matkul, matkulData);
+                saveToMemory(BACKUP_KEYS.krs, krsData);
+                saveToMemory(BACKUP_KEYS.nilai, nilaiData);
+                saveToMemory(BACKUP_KEYS.users, userData);
+                
+                // Save metadata
+                const metadata = {
+                    lastSave: new Date().toISOString(),
+                    version: '6.0',
+                    totalRecords: {
+                        mahasiswa: mahasiswaData.length,
+                        matkul: matkulData.length,
+                        krs: krsData.length,
+                        nilai: nilaiData.length,
+                        users: userData.length
+                    }
+                };
+                saveToMemory(BACKUP_KEYS.metadata, metadata);
+                
+                lastSaveTime = new Date();
+                updateBackupStatus();
+                showAutoSaveIndicator();
+                
+                console.log('Auto-backup completed successfully');
+                
+            } catch (error) {
+                console.error('Auto-backup failed:', error);
+                showAutoSaveIndicator('Error menyimpan data', true);
+            }
+        }
+
+        function loadAutoBackupData() {
+            try {
+                // Load metadata first
+                const metadata = loadFromMemory(BACKUP_KEYS.metadata);
+                
+                if (metadata) {
+                    console.log('Loading auto-backup data from:', metadata.lastSave);
+                    
+                    // Load all data arrays
+                    const loadedMahasiswa = loadFromMemory(BACKUP_KEYS.mahasiswa, []);
+                    const loadedMatkul = loadFromMemory(BACKUP_KEYS.matkul, []);
+                    const loadedKrs = loadFromMemory(BACKUP_KEYS.krs, []);
+                    const loadedNilai = loadFromMemory(BACKUP_KEYS.nilai, []);
+                    const loadedUsers = loadFromMemory(BACKUP_KEYS.users, []);
+                    
+                    // Only load if data exists
+                    if (loadedMahasiswa.length > 0 || loadedMatkul.length > 0 || 
+                        loadedKrs.length > 0 || loadedNilai.length > 0 || loadedUsers.length > 7) {
+                        
+                        mahasiswaData = loadedMahasiswa;
+                        matkulData = loadedMatkul;
+                        krsData = loadedKrs;
+                        nilaiData = loadedNilai;
+                        
+                        // Merge users to preserve defaults
+                        if (loadedUsers.length > 0) {
+                            userData = loadedUsers;
+                        }
+                        
+                        lastSaveTime = new Date(metadata.lastSave);
+                        
+                        console.log('Auto-backup data loaded successfully');
+                        return true;
+                    }
+                }
+                
+                console.log('No auto-backup data found, using sample data');
+                return false;
+                
+            } catch (error) {
+                console.error('Error loading auto-backup:', error);
+                return false;
+            }
+        }
+
+        function showAutoSaveIndicator(message = 'Data tersimpan otomatis', isError = false) {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.textContent = message;
+            indicator.classList.toggle('error', isError);
+            indicator.classList.add('show');
+            
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2000);
+        }
+
+        function updateBackupStatus() {
+            const statusElement = document.getElementById('dashboardBackupStatus');
+            const lastSaveElement = document.getElementById('lastSaveTime');
+            
+            if (statusElement) {
+                statusElement.textContent = autoBackupEnabled ? 'Aktif' : 'Tidak Aktif';
+            }
+            
+            if (lastSaveElement && lastSaveTime) {
+                lastSaveElement.textContent = lastSaveTime.toLocaleString('id-ID');
+            }
+        }
+
+        // Override all data modification functions to trigger auto-save
+        function triggerAutoSave() {
+            setTimeout(autoSaveData, 100); // Small delay to ensure data is updated
+        }
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            // Try to load auto-backup data first
+            const backupLoaded = loadAutoBackupData();
+            
+            // If no backup data found, initialize with sample data
+            if (!backupLoaded) {
+                initializeSampleData();
+                // Save the sample data as initial backup
+                autoSaveData();
+            }
+            
+            // Check if user is already logged in (this would be in localStorage in real app)
+            const savedUser = getCurrentUser();
+            if (savedUser) {
+                currentUser = savedUser;
+                showMainApp();
+            } else {
+                showLogin();
+            }
+        }
+
+        function initializeSampleData() {
+            // Sample mahasiswa data
+            mahasiswaData = [
+                { nim: '2024001', nama: 'John Doe', jurusan: 'Bisnis Digital', angkatan: 2024, ipk: 0 },
+                { nim: '2024002', nama: 'Jane Smith', jurusan: 'D3 Keperawatan', angkatan: 2024, ipk: 0 },
+                { nim: '2024003', nama: 'Ahmad Rizky', jurusan: 'Administrasi Rumah Sakit', angkatan: 2024, ipk: 0 },
+                { nim: '2024004', nama: 'Sari Dewi', jurusan: 'Agronomi', angkatan: 2024, ipk: 0 }
+            ];
+
+            // Sample mata kuliah data with program studi
+            matkulData = [
+                { kode: 'BD101', nama: 'Pengantar Bisnis Digital', sks: 3, semester: '1', prodi: 'Bisnis Digital' },
+                { kode: 'BD102', nama: 'Matematika Bisnis', sks: 2, semester: '1', prodi: 'Bisnis Digital' },
+                { kode: 'KP101', nama: 'Anatomi Dasar', sks: 3, semester: '1', prodi: 'D3 Keperawatan' },
+                { kode: 'KP102', nama: 'Fisiologi Manusia', sks: 3, semester: '1', prodi: 'D3 Keperawatan' },
+                { kode: 'ARS101', nama: 'Pengantar Administrasi RS', sks: 3, semester: '1', prodi: 'Administrasi Rumah Sakit' },
+                { kode: 'AGR101', nama: 'Dasar-dasar Agronomi', sks: 3, semester: '1', prodi: 'Agronomi' }
+            ];
+
+            // Add default mahasiswa users
+            mahasiswaData.forEach(m => {
+                if (!userData.find(u => u.nim === m.nim)) {
+                    userData.push({
+                        username: m.nim,
+                        password: m.nim, // Default password same as NIM
+                        role: 'mahasiswa',
+                        nim: m.nim,
+                        prodi: m.jurusan
+                    });
+                }
+            });
+        }
+
+        function getCurrentUser() {
+            // In a real app, this would check session storage or cookies
+            return currentUser;
+        }
+
+        // Authentication Functions
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUser').value;
+            const password = document.getElementById('loginPassword').value;
+            const role = document.getElementById('loginRole').value;
+
+            const user = userData.find(u => 
+                u.username === username && 
+                u.password === password && 
+                u.role === role
+            );
+
+            if (user) {
+                currentUser = user;
+                showMainApp();
+            } else {
+                showLoginAlert('Username, password, atau role tidak valid!', 'error');
+            }
+        });
+
+        function showLogin() {
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('mainContainer').classList.remove('active');
+        }
+
+        function showMainApp() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('mainContainer').classList.add('active');
+            
+            updateUserInterface();
+            updateDashboard();
+            populateDropdowns();
+            renderAllTables();
+            updateBackupStatus();
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginForm').reset();
+            showLogin();
+        }
+
+        function updateUserInterface() {
+            const userInfo = document.getElementById('currentUser');
+            const roleClass = currentUser.role === 'admin' ? 'admin' : 
+                           currentUser.role === 'admin-prodi' ? 'admin-prodi' : 'mahasiswa';
+            
+            if (currentUser.role === 'mahasiswa') {
+                const mahasiswa = mahasiswaData.find(m => m.nim === currentUser.nim);
+                userInfo.innerHTML = `
+                    <div><strong>${mahasiswa ? mahasiswa.nama : currentUser.username}</strong></div>
+                    <div>NIM: ${currentUser.nim}</div>
+                    <div><span class="role-badge ${roleClass}">${currentUser.role.toUpperCase()}</span></div>
+                `;
+            } else if (currentUser.role === 'admin-prodi') {
+                userInfo.innerHTML = `
+                    <div><strong>${currentUser.username}</strong></div>
+                    <div>Program Studi: ${currentUser.prodi}</div>
+                    <div><span class="role-badge ${roleClass}">ADMIN PRODI</span></div>
+                `;
+            } else {
+                userInfo.innerHTML = `
+                    <div><strong>${currentUser.username}</strong></div>
+                    <div><span class="role-badge ${roleClass}">ADMIN SYSTEM</span></div>
+                `;
+            }
+
+            // Configure interface based on role
+            if (currentUser.role === 'mahasiswa') {
+                setupMahasiswaInterface();
+            } else if (currentUser.role === 'admin-prodi') {
+                setupAdminProdiInterface();
+            } else {
+                setupAdminSystemInterface();
+            }
+        }
+
+        function setupMahasiswaInterface() {
+            // Hide admin-only elements
+            document.getElementById('backupControls').classList.add('hidden');
+            document.getElementById('prodiFilter').classList.add('hidden');
+            
+            // Disable/hide admin-only navigation buttons
+            const adminOnlyNavs = ['navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navUserManagement', 'navDashboard'];
+            adminOnlyNavs.forEach(navId => {
+                const nav = document.getElementById(navId);
+                nav.disabled = true;
+                nav.style.display = 'none';
+            });
+
+            // Only show KHS and Transkrip
+            document.getElementById('navKhs').disabled = false;
+            document.getElementById('navTranskrip').disabled = false;
+
+            // Auto-populate dropdowns with current student's data
+            populateStudentDropdowns();
+
+            // Switch to KHS panel by default
+            showPanel('khs');
+            document.getElementById('navKhs').classList.add('active');
+        }
+
+        function setupAdminProdiInterface() {
+            // Show backup controls for admin prodi
+            document.getElementById('backupControls').classList.remove('hidden');
+            
+            // Update backup info text
+            document.getElementById('backupInfo').textContent = `Backup mencakup data program studi: ${currentUser.prodi}`;
+            
+            // Hide user management
+            document.getElementById('navUserManagement').style.display = 'none';
+            document.getElementById('navUserManagement').disabled = true;
+            
+            // Show prodi filter
+            document.getElementById('prodiFilter').classList.remove('hidden');
+            document.getElementById('currentProdi').textContent = currentUser.prodi;
+            
+            // Enable all other navigation buttons
+            const allowedNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navKhs', 'navTranskrip'];
+            allowedNavs.forEach(navId => {
+                const nav = document.getElementById(navId);
+                nav.disabled = false;
+                nav.style.display = 'inline-block';
+            });
+
+            // Show dashboard by default
+            showPanel('dashboard');
+            document.getElementById('navDashboard').classList.add('active');
+        }
+
+        function setupAdminSystemInterface() {
+            // Show all admin elements
+            document.getElementById('backupControls').classList.remove('hidden');
+            document.getElementById('prodiFilter').classList.add('hidden');
+            
+            // Update backup info text
+            document.getElementById('backupInfo').textContent = 'Backup mencakup semua data sistem akademik dengan auto-save aktif.';
+            
+            // Enable all navigation buttons
+            const allNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navKhs', 'navTranskrip', 'navUserManagement'];
+            allNavs.forEach(navId => {
+                const nav = document.getElementById(navId);
+                nav.disabled = false;
+                nav.style.display = 'inline-block';
+            });
+
+            // Show dashboard by default
+            showPanel('dashboard');
+            document.getElementById('navDashboard').classList.add('active');
+        }
+
+        function populateStudentDropdowns() {
+            if (currentUser.role === 'mahasiswa') {
+                // Auto-select current student in KHS and Transkrip
+                const khsSelect = document.getElementById('khsNim');
+                const transkripSelect = document.getElementById('transkripNim');
+                
+                khsSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${getMahasiswaName(currentUser.nim)}</option>`;
+                transkripSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${getMahasiswaName(currentUser.nim)}</option>`;
+                
+                // Disable the selects so students can only see their own data
+                khsSelect.disabled = true;
+                transkripSelect.disabled = true;
+
+                // Auto-generate KHS and Transkrip
+                generateKHS();
+                generateTranskrip();
+            }
+        }
+
+        function getMahasiswaName(nim) {
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            return mahasiswa ? mahasiswa.nama : 'Unknown';
+        }
+
+        function showLoginAlert(message, type) {
+            const container = document.getElementById('loginAlert');
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+            container.innerHTML = `<div class="alert ${alertClass}" style="margin-top: 15px;">${message}</div>`;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 3000);
+        }
+
+        // Navigation Functions
+        function showPanel(panelName) {
+            const panels = document.querySelectorAll('.content-panel');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            panels.forEach(panel => panel.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(panelName).classList.add('active');
+            
+            // Find and activate corresponding nav button
+            const navButton = document.querySelector(`[onclick="showPanel('${panelName}')"]`);
+            if (navButton && !navButton.disabled) {
+                navButton.classList.add('active');
+            }
+            
+            if (panelName === 'khs' || panelName === 'transkrip') {
+                populateDropdowns();
+            }
+            
+            if (panelName === 'userManagement') {
+                populateUserManagementDropdowns();
+                renderUserTable();
+            }
+        }
+
+        // Filter data based on current user's permissions
+        function getFilteredMahasiswaData() {
+            if (currentUser.role === 'admin') {
+                return mahasiswaData;
+            } else if (currentUser.role === 'admin-prodi') {
+                return mahasiswaData.filter(m => m.jurusan === currentUser.prodi);
+            } else {
+                return mahasiswaData.filter(m => m.nim === currentUser.nim);
+            }
+        }
+
+        function getFilteredMatkulData() {
+            if (currentUser.role === 'admin') {
+                return matkulData;
+            } else if (currentUser.role === 'admin-prodi') {
+                return matkulData.filter(m => m.prodi === currentUser.prodi);
+            } else {
+                return matkulData;
+            }
+        }
+
+        function getFilteredKrsData() {
+            if (currentUser.role === 'admin') {
+                return krsData;
+            } else if (currentUser.role === 'admin-prodi') {
+                return krsData.filter(k => {
+                    const mahasiswa = mahasiswaData.find(m => m.nim === k.nim);
+                    return mahasiswa && mahasiswa.jurusan === currentUser.prodi;
+                });
+            } else {
+                return krsData.filter(k => k.nim === currentUser.nim);
+            }
+        }
+
+        function getFilteredNilaiData() {
+            if (currentUser.role === 'admin') {
+                return nilaiData;
+            } else if (currentUser.role === 'admin-prodi') {
+                return nilaiData.filter(n => {
+                    const mahasiswa = mahasiswaData.find(m => m.nim === n.nim);
+                    return mahasiswa && mahasiswa.jurusan === currentUser.prodi;
+                });
+            } else {
+                return nilaiData.filter(n => n.nim === currentUser.nim);
+            }
+        }
+
+        // Mahasiswa Management with auto-save
+        document.getElementById('mahasiswaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nim = document.getElementById('nim').value;
+            const nama = document.getElementById('nama').value;
+            const jurusan = document.getElementById('jurusan').value;
+            const angkatan = document.getElementById('angkatan').value;
+
+            // Check permission for admin prodi
+            if (currentUser.role === 'admin-prodi' && jurusan !== currentUser.prodi) {
+                showAlert('mahasiswaAlert', 'Anda hanya dapat mengelola mahasiswa dari program studi Anda!', 'error');
+                return;
+            }
+
+            if (!editingMahasiswa) {
+                // Check if NIM already exists
+                if (mahasiswaData.find(m => m.nim === nim)) {
+                    showAlert('mahasiswaAlert', 'NIM sudah terdaftar!', 'error');
+                    return;
+                }
+
+                const mahasiswa = { nim, nama, jurusan, angkatan, ipk: 0 };
+                mahasiswaData.push(mahasiswa);
+                
+                // Create default user account for the new student
+                if (!userData.find(u => u.nim === nim)) {
+                    userData.push({
+                        username: nim,
+                        password: nim,
+                        role: 'mahasiswa',
+                        nim: nim,
+                        prodi: jurusan
+                    });
+                }
+                
+                showAlert('mahasiswaAlert', 'Data mahasiswa berhasil disimpan!', 'success');
+            } else {
+                // Update existing
+                mahasiswaData[editingMahasiswaIndex] = { nim, nama, jurusan, angkatan, ipk: mahasiswaData[editingMahasiswaIndex].ipk };
+                
+                // Update associated user account
+                const userIndex = userData.findIndex(u => u.nim === nim);
+                if (userIndex >= 0) {
+                    userData[userIndex].prodi = jurusan;
+                }
+                
+                exitEditModeMahasiswa();
+                showAlert('mahasiswaAlert', 'Data mahasiswa berhasil diperbarui!', 'success');
+            }
+            
+            renderMahasiswaTable();
+            clearMahasiswaForm();
+            updateDashboard();
+            populateDropdowns();
+            triggerAutoSave(); // Auto-save after changes
+        });
+
+        function editMahasiswa(index) {
+            const filteredData = getFilteredMahasiswaData();
+            const mahasiswa = filteredData[index];
+            const realIndex = mahasiswaData.findIndex(m => m.nim === mahasiswa.nim);
+            
+            document.getElementById('nim').value = mahasiswa.nim;
+            document.getElementById('nama').value = mahasiswa.nama;
+            document.getElementById('jurusan').value = mahasiswa.jurusan;
+            document.getElementById('angkatan').value = mahasiswa.angkatan;
+
+            if (currentUser.role === 'admin-prodi') {
+                const jurusanSelect = document.getElementById('jurusan');
+                jurusanSelect.innerHTML = `<option value="${currentUser.prodi}" selected>${currentUser.prodi}</option>`;
+                jurusanSelect.disabled = true;
+            }
+
+            editingMahasiswa = true;
+            editingMahasiswaIndex = realIndex;
+            
+            document.getElementById('editIndicatorMahasiswa').classList.remove('hidden');
+            document.getElementById('mahasiswaSubmitBtn').textContent = '✏️ Perbarui Mahasiswa';
+            document.getElementById('mahasiswaCancelBtn').classList.remove('hidden');
+            document.getElementById('mahasiswaForm').classList.add('edit-mode');
+            document.getElementById('nim').disabled = true;
+        }
+
+        function exitEditModeMahasiswa() {
+            editingMahasiswa = false;
+            editingMahasiswaIndex = -1;
+            
+            document.getElementById('editIndicatorMahasiswa').classList.add('hidden');
+            document.getElementById('mahasiswaSubmitBtn').textContent = '💾 Simpan Mahasiswa';
+            document.getElementById('mahasiswaCancelBtn').classList.add('hidden');
+            document.getElementById('mahasiswaForm').classList.remove('edit-mode');
+            document.getElementById('nim').disabled = false;
+            
+            if (currentUser.role === 'admin-prodi') {
+                const jurusanSelect = document.getElementById('jurusan');
+                jurusanSelect.disabled = false;
+                jurusanSelect.innerHTML = `
+                    <option value="">Pilih Jurusan</option>
+                    <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
+                    <option value="Bisnis Digital">Bisnis Digital</option>
+                    <option value="Agronomi">Agronomi</option>
+                    <option value="D3 Keperawatan">D3 Keperawatan</option>
+                    <option value="D3 Kebidanan">D3 Kebidanan</option>
+                `;
+            }
+        }
+
+        function cancelEditMahasiswa() {
+            exitEditModeMahasiswa();
+            clearMahasiswaForm();
+        }
+
+        function clearMahasiswaForm() {
+            document.getElementById('mahasiswaForm').reset();
+            if (editingMahasiswa) {
+                exitEditModeMahasiswa();
+            }
+            
+            if (currentUser.role === 'admin-prodi') {
+                const jurusanSelect = document.getElementById('jurusan');
+                jurusanSelect.innerHTML = `<option value="${currentUser.prodi}" selected>${currentUser.prodi}</option>`;
+            }
+        }
+
+        function renderMahasiswaTable() {
+            const tbody = document.getElementById('mahasiswaTableBody');
+            tbody.innerHTML = '';
+
+            const filteredData = getFilteredMahasiswaData();
+
+            filteredData.forEach((mahasiswa, index) => {
+                const row = `
+                    <tr>
+                        <td>${mahasiswa.nim}</td>
+                        <td>${mahasiswa.nama}</td>
+                        <td>${mahasiswa.jurusan}</td>
+                        <td>${mahasiswa.angkatan}</td>
+                        <td>${calculateIPK(mahasiswa.nim).toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-warning" onclick="editMahasiswa(${index})">✏️ Edit</button>
+                            <button class="btn btn-danger" onclick="deleteMahasiswa(${index})">🗑️ Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function deleteMahasiswa(index) {
+            const filteredData = getFilteredMahasiswaData();
+            const mahasiswa = filteredData[index];
+            const realIndex = mahasiswaData.findIndex(m => m.nim === mahasiswa.nim);
+            
+            if (confirm('Apakah Anda yakin ingin menghapus data mahasiswa ini?')) {
+                mahasiswaData.splice(realIndex, 1);
+                
+                const userIndex = userData.findIndex(u => u.nim === mahasiswa.nim);
+                if (userIndex >= 0) {
+                    userData.splice(userIndex, 1);
+                }
+                
+                renderMahasiswaTable();
+                updateDashboard();
+                populateDropdowns();
+                triggerAutoSave();
+            }
+        }
+
+        // Mata Kuliah Management with auto-save
+        document.getElementById('matkulForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const kodeMatkul = document.getElementById('kodeMatkul').value;
+            const namaMatkul = document.getElementById('namaMatkul').value;
+            const sks = parseInt(document.getElementById('sks').value);
+            const semester = document.getElementById('semester').value;
+            const prodi = document.getElementById('matkulProdi').value;
+
+            if (currentUser.role === 'admin-prodi' && prodi !== currentUser.prodi) {
+                showAlert('matkulAlert', 'Anda hanya dapat mengelola mata kuliah untuk program studi Anda!', 'error');
+                return;
+            }
+
+            if (!editingMatkul) {
+                if (matkulData.find(m => m.kode === kodeMatkul)) {
+                    showAlert('matkulAlert', 'Kode mata kuliah sudah ada!', 'error');
+                    return;
+                }
+
+                const matkul = { kode: kodeMatkul, nama: namaMatkul, sks, semester, prodi };
+                matkulData.push(matkul);
+                showAlert('matkulAlert', 'Data mata kuliah berhasil disimpan!', 'success');
+            } else {
+                matkulData[editingMatkulIndex] = { kode: kodeMatkul, nama: namaMatkul, sks, semester, prodi };
+                exitEditModeMatkul();
+                showAlert('matkulAlert', 'Data mata kuliah berhasil diperbarui!', 'success');
+            }
+            
+            renderMatkulTable();
+            clearMatkulForm();
+            updateDashboard();
+            populateDropdowns();
+            triggerAutoSave();
+        });
+
+        function editMatkul(index) {
+            const filteredData = getFilteredMatkulData();
+            const matkul = filteredData[index];
+            const realIndex = matkulData.findIndex(m => m.kode === matkul.kode);
+            
+            document.getElementById('kodeMatkul').value = matkul.kode;
+            document.getElementById('namaMatkul').value = matkul.nama;
+            document.getElementById('sks').value = matkul.sks;
+            document.getElementById('semester').value = matkul.semester;
+            document.getElementById('matkulProdi').value = matkul.prodi;
+
+            if (currentUser.role === 'admin-prodi') {
+                const prodiSelect = document.getElementById('matkulProdi');
+                prodiSelect.innerHTML = `<option value="${currentUser.prodi}" selected>${currentUser.prodi}</option>`;
+                prodiSelect.disabled = true;
+            }
+
+            editingMatkul = true;
+            editingMatkulIndex = realIndex;
+            
+            document.getElementById('editIndicatorMatkul').classList.remove('hidden');
+            document.getElementById('matkulSubmitBtn').textContent = '✏️ Perbarui Mata Kuliah';
+            document.getElementById('matkulCancelBtn').classList.remove('hidden');
+            document.getElementById('matkulForm').classList.add('edit-mode');
+            document.getElementById('kodeMatkul').disabled = true;
+        }
+
+        function exitEditModeMatkul() {
+            editingMatkul = false;
+            editingMatkulIndex = -1;
+            
+            document.getElementById('editIndicatorMatkul').classList.add('hidden');
+            document.getElementById('matkulSubmitBtn').textContent = '💾 Simpan Mata Kuliah';
+            document.getElementById('matkulCancelBtn').classList.add('hidden');
+            document.getElementById('matkulForm').classList.remove('edit-mode');
+            document.getElementById('kodeMatkul').disabled = false;
+            
+            if (currentUser.role === 'admin-prodi') {
+                const prodiSelect = document.getElementById('matkulProdi');
+                prodiSelect.disabled = false;
+                prodiSelect.innerHTML = `
+                    <option value="">Pilih Program Studi</option>
+                    <option value="Administrasi Rumah Sakit">Administrasi Rumah Sakit</option>
+                    <option value="Bisnis Digital">Bisnis Digital</option>
+                    <option value="Agronomi">Agronomi</option>
+                    <option value="D3 Keperawatan">D3 Keperawatan</option>
+                    <option value="D3 Kebidanan">D3 Kebidanan</option>
+                `;
+            }
+        }
+
+        function cancelEditMatkul() {
+            exitEditModeMatkul();
+            clearMatkulForm();
+        }
+
+        function clearMatkulForm() {
+            document.getElementById('matkulForm').reset();
+            if (editingMatkul) {
+                exitEditModeMatkul();
+            }
+            
+            if (currentUser.role === 'admin-prodi') {
+                const prodiSelect = document.getElementById('matkulProdi');
+                prodiSelect.innerHTML = `<option value="${currentUser.prodi}" selected>${currentUser.prodi}</option>`;
+            }
+        }
+
+        function renderMatkulTable() {
+            const tbody = document.getElementById('matkulTableBody');
+            tbody.innerHTML = '';
+
+            const filteredData = getFilteredMatkulData();
+
+            filteredData.forEach((matkul, index) => {
+                const row = `
+                    <tr>
+                        <td>${matkul.kode}</td>
+                        <td>${matkul.nama}</td>
+                        <td>${matkul.sks}</td>
+                        <td>${matkul.semester}</td>
+                        <td>${matkul.prodi}</td>
+                        <td>
+                            <button class="btn btn-warning" onclick="editMatkul(${index})">✏️ Edit</button>
+                            <button class="btn btn-danger" onclick="deleteMatkul(${index})">🗑️ Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function deleteMatkul(index) {
+            const filteredData = getFilteredMatkulData();
+            const matkul = filteredData[index];
+            const realIndex = matkulData.findIndex(m => m.kode === matkul.kode);
+            
+            if (confirm('Apakah Anda yakin ingin menghapus mata kuliah ini?')) {
+                matkulData.splice(realIndex, 1);
+                renderMatkulTable();
+                updateDashboard();
+                populateDropdowns();
+                triggerAutoSave();
+            }
+        }
+
+        // KRS Management with auto-save
+        document.getElementById('krsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nim = document.getElementById('krsNim').value;
+            const kodeMatkul = document.getElementById('krsMatkul').value;
+            const semester = document.getElementById('krsSemester').value;
+            const tahun = document.getElementById('krsTahun').value;
+
+            if (currentUser.role === 'admin-prodi') {
+                const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+                if (!mahasiswa || mahasiswa.jurusan !== currentUser.prodi) {
+                    showAlert('krsAlert', 'Anda hanya dapat mengelola KRS mahasiswa dari program studi Anda!', 'error');
+                    return;
+                }
+            }
+
+            if (!editingKrs) {
+                if (krsData.find(k => k.nim === nim && k.kodeMatkul === kodeMatkul && k.tahun === tahun)) {
+                    showAlert('krsAlert', 'Mahasiswa sudah mengambil mata kuliah ini!', 'error');
+                    return;
+                }
+
+                const krs = { nim, kodeMatkul, semester, tahun };
+                krsData.push(krs);
+                showAlert('krsAlert', 'KRS berhasil disimpan!', 'success');
+            } else {
+                krsData[editingKrsIndex] = { nim, kodeMatkul, semester, tahun };
+                exitEditModeKrs();
+                showAlert('krsAlert', 'KRS berhasil diperbarui!', 'success');
+            }
+            
+            renderKrsTable();
+            clearKrsForm();
+            updateDashboard();
+            triggerAutoSave();
+        });
+
+        function editKrs(index) {
+            const filteredData = getFilteredKrsData();
+            const krs = filteredData[index];
+            const realIndex = krsData.findIndex(k => k.nim === krs.nim && k.kodeMatkul === krs.kodeMatkul && k.tahun === krs.tahun);
+            
+            document.getElementById('krsNim').value = krs.nim;
+            document.getElementById('krsMatkul').value = krs.kodeMatkul;
+            document.getElementById('krsSemester').value = krs.semester;
+            document.getElementById('krsTahun').value = krs.tahun;
+
+            editingKrs = true;
+            editingKrsIndex = realIndex;
+            
+            document.getElementById('editIndicatorKrs').classList.remove('hidden');
+            document.getElementById('krsSubmitBtn').textContent = '✏️ Perbarui KRS';
+            document.getElementById('krsCancelBtn').classList.remove('hidden');
+            document.getElementById('krsForm').classList.add('edit-mode');
+        }
+
+        function exitEditModeKrs() {
+            editingKrs = false;
+            editingKrsIndex = -1;
+            
+            document.getElementById('editIndicatorKrs').classList.add('hidden');
+            document.getElementById('krsSubmitBtn').textContent = '💾 Tambah ke KRS';
+            document.getElementById('krsCancelBtn').classList.add('hidden');
+            document.getElementById('krsForm').classList.remove('edit-mode');
+        }
+
+        function cancelEditKrs() {
+            exitEditModeKrs();
+            clearKrsForm();
+        }
+
+        function clearKrsForm() {
+            document.getElementById('krsForm').reset();
+            if (editingKrs) {
+                exitEditModeKrs();
+            }
+        }
+
+        function renderKrsTable() {
+            const tbody = document.getElementById('krsTableBody');
+            tbody.innerHTML = '';
+
+            const filteredData = getFilteredKrsData();
+
+            filteredData.forEach((krs, index) => {
+                const mahasiswa = mahasiswaData.find(m => m.nim === krs.nim);
+                const matkul = matkulData.find(m => m.kode === krs.kodeMatkul);
+                
+                if (mahasiswa && matkul) {
+                    const row = `
+                        <tr>
+                            <td>${krs.nim}</td>
+                            <td>${mahasiswa.nama}</td>
+                            <td>${krs.kodeMatkul}</td>
+                            <td>${matkul.nama}</td>
+                            <td>${matkul.sks}</td>
+                            <td>${krs.semester}</td>
+                            <td>${krs.tahun}</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="editKrs(${index})">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="deleteKrs(${index})">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                }
+            });
+        }
+
+        function deleteKrs(index) {
+            const filteredData = getFilteredKrsData();
+            const krs = filteredData[index];
+            const realIndex = krsData.findIndex(k => k.nim === krs.nim && k.kodeMatkul === krs.kodeMatkul && k.tahun === krs.tahun);
+            
+            if (confirm('Apakah Anda yakin ingin menghapus KRS ini?')) {
+                krsData.splice(realIndex, 1);
+                renderKrsTable();
+                updateDashboard();
+                triggerAutoSave();
+            }
+        }
+
+        // Nilai Management with auto-save
+        document.getElementById('nilaiAngka').addEventListener('input', function() {
+            const nilai = parseInt(this.value);
+            const gradeInput = document.getElementById('nilaiHuruf');
+            gradeInput.value = getGrade(nilai);
+        });
+
+        document.getElementById('nilaiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nim = document.getElementById('nilaiNim').value;
+            const kodeMatkul = document.getElementById('nilaiMatkul').value;
+            const nilaiAngka = parseInt(document.getElementById('nilaiAngka').value);
+            const nilaiHuruf = document.getElementById('nilaiHuruf').value;
+
+            if (currentUser.role === 'admin-prodi') {
+                const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+                if (!mahasiswa || mahasiswa.jurusan !== currentUser.prodi) {
+                    showAlert('nilaiAlert', 'Anda hanya dapat mengelola nilai mahasiswa dari program studi Anda!', 'error');
+                    return;
+                }
+            }
+
+            if (!editingNilai) {
+                if (!krsData.find(k => k.nim === nim && k.kodeMatkul === kodeMatkul)) {
+                    showAlert('nilaiAlert', 'Mahasiswa belum mengambil mata kuliah ini di KRS!', 'error');
+                    return;
+                }
+
+                const existingIndex = nilaiData.findIndex(n => n.nim === nim && n.kodeMatkul === kodeMatkul);
+                const nilai = { nim, kodeMatkul, nilaiAngka, nilaiHuruf };
+
+                if (existingIndex >= 0) {
+                    nilaiData[existingIndex] = nilai;
+                    showAlert('nilaiAlert', 'Nilai berhasil diperbarui!', 'success');
+                } else {
+                    nilaiData.push(nilai);
+                    showAlert('nilaiAlert', 'Nilai berhasil disimpan!', 'success');
+                }
+            } else {
+                nilaiData[editingNilaiIndex] = { nim, kodeMatkul, nilaiAngka, nilaiHuruf };
+                exitEditModeNilai();
+                showAlert('nilaiAlert', 'Nilai berhasil diperbarui!', 'success');
+            }
+            
+            renderNilaiTable();
+            clearNilaiForm();
+            updateDashboard();
+            triggerAutoSave();
+        });
+
+        function editNilai(index) {
+            const filteredData = getFilteredNilaiData();
+            const nilai = filteredData[index];
+            const realIndex = nilaiData.findIndex(n => n.nim === nilai.nim && n.kodeMatkul === nilai.kodeMatkul);
+            
+            document.getElementById('nilaiNim').value = nilai.nim;
+            document.getElementById('nilaiMatkul').value = nilai.kodeMatkul;
+            document.getElementById('nilaiAngka').value = nilai.nilaiAngka;
+            document.getElementById('nilaiHuruf').value = nilai.nilaiHuruf;
+
+            editingNilai = true;
+            editingNilaiIndex = realIndex;
+            
+            document.getElementById('editIndicatorNilai').classList.remove('hidden');
+            document.getElementById('nilaiSubmitBtn').textContent = '✏️ Perbarui Nilai';
+            document.getElementById('nilaiCancelBtn').classList.remove('hidden');
+            document.getElementById('nilaiForm').classList.add('edit-mode');
+            document.getElementById('nilaiNim').disabled = true;
+            document.getElementById('nilaiMatkul').disabled = true;
+        }
+
+        function exitEditModeNilai() {
+            editingNilai = false;
+            editingNilaiIndex = -1;
+            
+            document.getElementById('editIndicatorNilai').classList.add('hidden');
+            document.getElementById('nilaiSubmitBtn').textContent = '💾 Simpan Nilai';
+            document.getElementById('nilaiCancelBtn').classList.add('hidden');
+            document.getElementById('nilaiForm').classList.remove('edit-mode');
+            document.getElementById('nilaiNim').disabled = false;
+            document.getElementById('nilaiMatkul').disabled = false;
+        }
+
+        function cancelEditNilai() {
+            exitEditModeNilai();
+            clearNilaiForm();
+        }
+
+        function clearNilaiForm() {
+            document.getElementById('nilaiForm').reset();
+            if (editingNilai) {
+                exitEditModeNilai();
+            }
+        }
+
+        function renderNilaiTable() {
+            const tbody = document.getElementById('nilaiTableBody');
+            tbody.innerHTML = '';
+
+            const filteredData = getFilteredNilaiData();
+
+            filteredData.forEach((nilai, index) => {
+                const mahasiswa = mahasiswaData.find(m => m.nim === nilai.nim);
+                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
+                
+                if (mahasiswa && matkul) {
+                    const row = `
+                        <tr>
+                            <td>${nilai.nim}</td>
+                            <td>${mahasiswa.nama}</td>
+                            <td>${matkul.nama}</td>
+                            <td>${nilai.nilaiAngka}</td>
+                            <td>${nilai.nilaiHuruf}</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="editNilai(${index})">✏️ Edit</button>
+                                <button class="btn btn-danger" onclick="deleteNilai(${index})">🗑️ Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                }
+            });
+        }
+
+        function deleteNilai(index) {
+            const filteredData = getFilteredNilaiData();
+            const nilai = filteredData[index];
+            const realIndex = nilaiData.findIndex(n => n.nim === nilai.nim && n.kodeMatkul === nilai.kodeMatkul);
+            
+            if (confirm('Apakah Anda yakin ingin menghapus nilai ini?')) {
+                nilaiData.splice(realIndex, 1);
+                renderNilaiTable();
+                updateDashboard();
+                triggerAutoSave();
+            }
+        }
+
+        // User Management Functions with auto-save
+        function handleRoleChange() {
+            const role = document.getElementById('newRole').value;
+            const prodiField = document.getElementById('userProdi');
+            const nimField = document.getElementById('linkedNim');
+            
+            if (role === 'admin-prodi') {
+                prodiField.parentElement.style.display = 'block';
+                prodiField.required = true;
+                nimField.parentElement.style.display = 'none';
+                nimField.required = false;
+            } else if (role === 'mahasiswa') {
+                prodiField.parentElement.style.display = 'none';
+                prodiField.required = false;
+                nimField.parentElement.style.display = 'block';
+                nimField.required = true;
+            } else {
+                prodiField.parentElement.style.display = 'none';
+                prodiField.required = false;
+                nimField.parentElement.style.display = 'none';
+                nimField.required = false;
+            }
+        }
+
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newPassword').value;
+            const role = document.getElementById('newRole').value;
+            const prodi = document.getElementById('userProdi').value;
+            const nim = document.getElementById('linkedNim').value;
+
+            if (userData.find(u => u.username === username)) {
+                showAlert('userAlert', 'Username sudah ada!', 'error');
+                return;
+            }
+
+            if (role === 'admin-prodi' && !prodi) {
+                showAlert('userAlert', 'Program studi harus dipilih untuk role admin prodi!', 'error');
+                return;
+            }
+
+            if (role === 'mahasiswa') {
+                if (!nim) {
+                    showAlert('userAlert', 'NIM harus dipilih untuk role mahasiswa!', 'error');
+                    return;
+                }
+                
+                if (userData.find(u => u.nim === nim && u.username !== username)) {
+                    showAlert('userAlert', 'NIM sudah terhubung dengan user lain!', 'error');
+                    return;
+                }
+            }
+
+            const newUser = {
+                username,
+                password,
+                role,
+                nim: role === 'mahasiswa' ? nim : null,
+                prodi: role === 'admin-prodi' ? prodi : (role === 'mahasiswa' ? getMahasiswaProdi(nim) : null)
+            };
+
+            userData.push(newUser);
+            showAlert('userAlert', 'User berhasil ditambahkan!', 'success');
+            renderUserTable();
+            clearUserForm();
+            populateChangePasswordDropdown();
+            triggerAutoSave();
+        });
+
+        function getMahasiswaProdi(nim) {
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            return mahasiswa ? mahasiswa.jurusan : null;
+        }
+
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('changeUser').value;
+            const newPassword = document.getElementById('newPasswordChange').value;
+
+            const userIndex = userData.findIndex(u => u.username === username);
+            if (userIndex >= 0) {
+                userData[userIndex].password = newPassword;
+                showAlert('passwordAlert', 'Password berhasil diubah!', 'success');
+                document.getElementById('changePasswordForm').reset();
+                triggerAutoSave();
+            }
+        });
+
+        function clearUserForm() {
+            document.getElementById('userForm').reset();
+            document.getElementById('userProdi').parentElement.style.display = 'none';
+            document.getElementById('linkedNim').parentElement.style.display = 'none';
+        }
+
+        function renderUserTable() {
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = '';
+
+            userData.forEach((user, index) => {
+                if (user.username === currentUser.username) return;
+                
+                const linkedNimDisplay = user.nim ? `${user.nim} - ${getMahasiswaName(user.nim)}` : '-';
+                const prodiDisplay = user.prodi || '-';
+                const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi' : 
+                                   user.role === 'admin' ? 'Admin System' : 'Mahasiswa';
+                
+                const row = `
+                    <tr>
+                        <td>${user.username}</td>
+                        <td><span class="role-badge ${user.role}">${roleDisplay}</span></td>
+                        <td>${prodiDisplay}</td>
+                        <td>${linkedNimDisplay}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteUser(${index})">🗑️ Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function deleteUser(index) {
+            const user = userData[index];
+            if (confirm(`Apakah Anda yakin ingin menghapus user '${user.username}'?`)) {
+                userData.splice(index, 1);
+                renderUserTable();
+                populateChangePasswordDropdown();
+                triggerAutoSave();
+            }
+        }
+
+        function populateUserManagementDropdowns() {
+            const linkedNimSelect = document.getElementById('linkedNim');
+            linkedNimSelect.innerHTML = '<option value="">Pilih NIM</option>';
+            
+            mahasiswaData.forEach(mahasiswa => {
+                if (!userData.find(u => u.nim === mahasiswa.nim)) {
+                    linkedNimSelect.innerHTML += `<option value="${mahasiswa.nim}">${mahasiswa.nim} - ${mahasiswa.nama}</option>`;
+                }
+            });
+
+            populateChangePasswordDropdown();
+        }
+
+        function populateChangePasswordDropdown() {
+            const changeUserSelect = document.getElementById('changeUser');
+            changeUserSelect.innerHTML = '<option value="">Pilih User</option>';
+            
+            userData.forEach(user => {
+                const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi' : 
+                                   user.role === 'admin' ? 'Admin System' : 'Mahasiswa';
+                changeUserSelect.innerHTML += `<option value="${user.username}">${user.username} (${roleDisplay})</option>`;
+            });
+        }
+
+        // Utility Functions
+        function getGrade(nilai) {
+            if (nilai >= 85) return 'A';
+            if (nilai >= 80) return 'A-';
+            if (nilai >= 75) return 'B+';
+            if (nilai >= 70) return 'B';
+            if (nilai >= 65) return 'B-';
+            if (nilai >= 60) return 'C+';
+            if (nilai >= 55) return 'C';
+            if (nilai >= 50) return 'C-';
+            if (nilai >= 45) return 'D+';
+            if (nilai >= 40) return 'D';
+            return 'E';
+        }
+
+        function getGradePoint(grade) {
+            const gradePoints = {
+                'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+                'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'E': 0.0
+            };
+            return gradePoints[grade] || 0.0;
+        }
+
+        function calculateIPK(nim) {
+            const mahasiswaNilai = nilaiData.filter(n => n.nim === nim);
+            if (mahasiswaNilai.length === 0) return 0;
+
+            let totalSKS = 0;
+            let totalBobot = 0;
+
+            mahasiswaNilai.forEach(nilai => {
+                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
+                if (matkul) {
+                    const gradePoint = getGradePoint(nilai.nilaiHuruf);
+                    totalSKS += matkul.sks;
+                    totalBobot += gradePoint * matkul.sks;
+                }
+            });
+
+            return totalSKS > 0 ? totalBobot / totalSKS : 0;
+        }
+
+        // KHS Generation
+        function generateKHS() {
+            const nim = document.getElementById('khsNim').value;
+            const semesterFilter = document.getElementById('khsSemester').value;
+            
+            if (!nim) {
+                document.getElementById('khsResult').innerHTML = '';
+                return;
+            }
+
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            if (!mahasiswa) return;
+
+            let mahasiswaNilai = nilaiData.filter(n => n.nim === nim);
+            
+            if (semesterFilter) {
+                mahasiswaNilai = mahasiswaNilai.filter(n => {
+                    const matkul = matkulData.find(m => m.kode === n.kodeMatkul);
+                    return matkul && matkul.semester === semesterFilter;
+                });
+            }
+
+            let totalSKS = 0;
+            let totalBobot = 0;
+            let tableRows = '';
+
+            mahasiswaNilai.forEach(nilai => {
+                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
+                if (matkul) {
+                    const gradePoint = getGradePoint(nilai.nilaiHuruf);
+                    totalSKS += matkul.sks;
+                    totalBobot += gradePoint * matkul.sks;
+
+                    tableRows += `
+                        <tr>
+                            <td>${matkul.kode}</td>
+                            <td>${matkul.nama}</td>
+                            <td>${matkul.sks}</td>
+                            <td>${nilai.nilaiAngka}</td>
+                            <td>${nilai.nilaiHuruf}</td>
+                            <td>${gradePoint.toFixed(2)}</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            const ips = totalSKS > 0 ? (totalBobot / totalSKS).toFixed(2) : '0.00';
+            const ipk = calculateIPK(nim).toFixed(2);
+
+            const khsHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3>📊 Kartu Hasil Studi</h3>
+                    <div style="margin-bottom: 20px;">
+                        <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
+                        <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
+                        <p><strong>Jurusan:</strong> ${mahasiswa.jurusan}</p>
+                        <p><strong>Semester:</strong> ${semesterFilter || 'Semua'}</p>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Mata Kuliah</th>
+                                <th>SKS</th>
+                                <th>Nilai</th>
+                                <th>Grade</th>
+                                <th>Bobot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                        </tbody>
+                    </table>
+                    
+                    <div style="margin-top: 20px; text-align: right;">
+                        <p><strong>Total SKS: ${totalSKS}</strong></p>
+                        <p><strong>IPS: ${ips}</strong></p>
+                        <p><strong>IPK: ${ipk}</strong></p>
+                    </div>
+                    
+                    <button class="btn" onclick="printKHS()">🖨️ Cetak KHS</button>
+                </div>
+            `;
+
+            document.getElementById('khsResult').innerHTML = khsHTML;
+        }
+
+        // Transkrip Generation
+        function generateTranskrip() {
+            const nim = document.getElementById('transkripNim').value;
+            
+            if (!nim) {
+                document.getElementById('transkripResult').innerHTML = '';
+                return;
+            }
+
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            if (!mahasiswa) return;
+
+            const mahasiswaNilai = nilaiData.filter(n => n.nim === nim);
+            
+            // Group by semester
+            const semesterData = {};
+            let totalSKS = 0;
+            let totalBobot = 0;
+
+            mahasiswaNilai.forEach(nilai => {
+                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
+                if (matkul) {
+                    const sem = matkul.semester;
+                    if (!semesterData[sem]) {
+                        semesterData[sem] = [];
+                    }
+                    
+                    const gradePoint = getGradePoint(nilai.nilaiHuruf);
+                    totalSKS += matkul.sks;
+                    totalBobot += gradePoint * matkul.sks;
+
+                    semesterData[sem].push({
+                        kode: matkul.kode,
+                        nama: matkul.nama,
+                        sks: matkul.sks,
+                        nilai: nilai.nilaiAngka,
+                        grade: nilai.nilaiHuruf,
+                        bobot: gradePoint
+                    });
+                }
+            });
+
+            let transkripHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3>🎓 Transkrip Nilai</h3>
+                    <div style="margin-bottom: 20px;">
+                        <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
+                        <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
+                        <p><strong>Jurusan:</strong> ${mahasiswa.jurusan}</p>
+                        <p><strong>Angkatan:</strong> ${mahasiswa.angkatan}</p>
+                    </div>
+            `;
+
+            // Sort semesters
+            const sortedSemesters = Object.keys(semesterData).sort((a, b) => parseInt(a) - parseInt(b));
+
+            sortedSemesters.forEach(sem => {
+                transkripHTML += `
+                    <h4>Semester ${sem}</h4>
+                    <table class="data-table" style="margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Mata Kuliah</th>
+                                <th>SKS</th>
+                                <th>Nilai</th>
+                                <th>Grade</th>
+                                <th>Bobot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                semesterData[sem].forEach(matkul => {
+                    transkripHTML += `
+                        <tr>
+                            <td>${matkul.kode}</td>
+                            <td>${matkul.nama}</td>
+                            <td>${matkul.sks}</td>
+                            <td>${matkul.nilai}</td>
+                            <td>${matkul.grade}</td>
+                            <td>${matkul.bobot.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+
+                transkripHTML += `
+                        </tbody>
+                    </table>
+                `;
+            });
+
+            const ipk = totalSKS > 0 ? (totalBobot / totalSKS).toFixed(2) : '0.00';
+
+            transkripHTML += `
+                    <div style="margin-top: 20px; text-align: right; border-top: 2px solid #ddd; padding-top: 20px;">
+                        <p><strong>Total SKS Lulus: ${totalSKS}</strong></p>
+                        <p><strong>IPK: ${ipk}</strong></p>
+                    </div>
+                    
+                    <button class="btn" onclick="printTranskrip()">🖨️ Cetak Transkrip</button>
+                </div>
+            `;
+
+            document.getElementById('transkripResult').innerHTML = transkripHTML;
+        }
+
+        // Dropdown Population
+        function populateDropdowns() {
+            // Populate mahasiswa dropdowns
+            const mahasiswaSelects = ['krsNim', 'nilaiNim', 'khsNim', 'transkripNim'];
+            mahasiswaSelects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                
+                // Skip if this is for student interface (already handled)
+                if (currentUser && currentUser.role === 'mahasiswa' && (selectId === 'khsNim' || selectId === 'transkripNim')) {
+                    return;
+                }
+                
+                select.innerHTML = '<option value="">Pilih Mahasiswa</option>';
+                const filteredMahasiswa = getFilteredMahasiswaData();
+                filteredMahasiswa.forEach(mahasiswa => {
+                    select.innerHTML += `<option value="${mahasiswa.nim}">${mahasiswa.nim} - ${mahasiswa.nama}</option>`;
+                });
+            });
+
+            // Populate mata kuliah dropdowns
+            const matkulSelects = ['krsMatkul', 'nilaiMatkul'];
+            matkulSelects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                select.innerHTML = '<option value="">Pilih Mata Kuliah</option>';
+                const filteredMatkul = getFilteredMatkulData();
+                filteredMatkul.forEach(matkul => {
+                    select.innerHTML += `<option value="${matkul.kode}">${matkul.kode} - ${matkul.nama}</option>`;
+                });
+            });
+        }
+
+        // Alert Functions
+        function showAlert(containerId, message, type) {
+            const container = document.getElementById(containerId);
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+            container.innerHTML = `<div class="alert ${alertClass}">${message}</div>`;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 3000);
+        }
+
+        // Dashboard Update
+        function updateDashboard() {
+            const filteredMahasiswa = getFilteredMahasiswaData();
+            const filteredMatkul = getFilteredMatkulData();
+            const filteredKrs = getFilteredKrsData();
+            
+            document.getElementById('totalMahasiswa').textContent = filteredMahasiswa.length;
+            document.getElementById('totalMatkul').textContent = filteredMatkul.length;
+            document.getElementById('totalKRS').textContent = filteredKrs.length;
+            
+            // Calculate average IPK for filtered data
+            let totalIPK = 0;
+            let mahasiswaWithGrades = 0;
+            
+            filteredMahasiswa.forEach(mahasiswa => {
+                const ipk = calculateIPK(mahasiswa.nim);
+                if (ipk > 0) {
+                    totalIPK += ipk;
+                    mahasiswaWithGrades++;
+                }
+            });
+            
+            const avgIPK = mahasiswaWithGrades > 0 ? (totalIPK / mahasiswaWithGrades).toFixed(2) : '0.00';
+            document.getElementById('rataIPK').textContent = avgIPK;
+        }
+
+        // Render all tables
+        function renderAllTables() {
+            renderMahasiswaTable();
+            renderMatkulTable();
+            renderKrsTable();
+            renderNilaiTable();
+        }
+
+        // Enhanced Backup Functions with auto-backup
+        function downloadManualBackup() {
+            let filteredData;
+            
+            if (currentUser.role === 'admin') {
+                filteredData = {
+                    mahasiswa: mahasiswaData,
+                    matkul: matkulData,
+                    krs: krsData,
+                    nilai: nilaiData,
+                    users: userData,
+                    timestamp: new Date().toISOString(),
+                    backupType: 'full_system_manual'
+                };
+            } else if (currentUser.role === 'admin-prodi') {
+                const prodiMahasiswa = getFilteredMahasiswaData();
+                const prodiMatkul = getFilteredMatkulData();
+                const prodiKrs = getFilteredKrsData();
+                const prodiNilai = getFilteredNilaiData();
+                const prodiUsers = userData.filter(u => u.prodi === currentUser.prodi || u.nim && prodiMahasiswa.find(m => m.nim === u.nim));
+                
+                filteredData = {
+                    mahasiswa: prodiMahasiswa,
+                    matkul: prodiMatkul,
+                    krs: prodiKrs,
+                    nilai: prodiNilai,
+                    users: prodiUsers,
+                    prodi: currentUser.prodi,
+                    timestamp: new Date().toISOString(),
+                    backupType: 'prodi_only_manual'
+                };
+            }
+            
+            const dataStr = JSON.stringify(filteredData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            const filename = currentUser.role === 'admin' ? 
+                `backup_sistem_akademik_${new Date().toISOString().split('T')[0]}.json` :
+                `backup_${currentUser.prodi.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
+            link.download = filename;
+            link.click();
+        }
+
+        function uploadBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (!data.mahasiswa || !data.matkul || !data.krs || !data.nilai) {
+                        alert('❌ Format file backup tidak valid!');
+                        return;
+                    }
+
+                    // Check backup compatibility
+                    if (currentUser.role === 'admin-prodi') {
+                        if (data.backupType && data.backupType.includes('full_system')) {
+                            alert('⚠️ File backup sistem penuh tidak dapat digunakan oleh admin prodi. Gunakan file backup khusus program studi.');
+                            return;
+                        }
+                        
+                        if (data.prodi && data.prodi !== currentUser.prodi) {
+                            if (!confirm(`File backup dari program studi "${data.prodi}". Apakah Anda yakin ingin mengimpor data ini ke program studi "${currentUser.prodi}"?`)) {
+                                return;
+                            }
+                        }
+                        
+                        restoreProdiData(data);
+                    } else if (currentUser.role === 'admin') {
+                        if (data.backupType && data.backupType.includes('prodi_only')) {
+                            if (!confirm(`File backup khusus program studi "${data.prodi || 'Unknown'}". Apakah Anda yakin ingin mengimpor data ini ke sistem?`)) {
+                                return;
+                            }
+                        }
+                        
+                        // Full restore for admin
+                        mahasiswaData = data.mahasiswa;
+                        matkulData = data.matkul;
+                        krsData = data.krs;
+                        nilaiData = data.nilai;
+                        
+                        if (data.users) {
+                            userData = data.users;
+                        }
+                    }
+                    
+                    renderAllTables();
+                    updateDashboard();
+                    populateDropdowns();
+                    triggerAutoSave(); // Auto-save the restored data
+                    
+                    alert('✅ Data backup berhasil dipulihkan!');
+                } catch (error) {
+                    alert('❌ Terjadi kesalahan saat memuat backup: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Reset file input
+            event.target.value = '';
+        }
+
+        function restoreProdiData(backupData) {
+            // Remove existing data for this prodi
+            const currentProdi = currentUser.prodi;
+            
+            // Remove mahasiswa from this prodi
+            mahasiswaData = mahasiswaData.filter(m => m.jurusan !== currentProdi);
+            
+            // Remove matkul from this prodi
+            matkulData = matkulData.filter(m => m.prodi !== currentProdi);
+            
+            // Remove KRS for mahasiswa from this prodi
+            krsData = krsData.filter(k => {
+                const mahasiswa = mahasiswaData.find(m => m.nim === k.nim);
+                return !mahasiswa || mahasiswa.jurusan !== currentProdi;
+            });
+            
+            // Remove nilai for mahasiswa from this prodi
+            nilaiData = nilaiData.filter(n => {
+                const mahasiswa = mahasiswaData.find(m => m.nim === n.nim);
+                return !mahasiswa || mahasiswa.jurusan !== currentProdi;
+            });
+            
+            // Remove users from this prodi
+            userData = userData.filter(u => {
+                if (u.role === 'admin-prodi' && u.prodi === currentProdi) return false;
+                if (u.role === 'mahasiswa') {
+                    const mahasiswa = mahasiswaData.find(m => m.nim === u.nim);
+                    return !mahasiswa || mahasiswa.jurusan !== currentProdi;
+                }
+                return true;
+            });
+            
+            // Add backup data
+            mahasiswaData.push(...backupData.mahasiswa);
+            matkulData.push(...backupData.matkul);
+            krsData.push(...backupData.krs);
+            nilaiData.push(...backupData.nilai);
+            
+            if (backupData.users) {
+                backupData.users.forEach(user => {
+                    if (!userData.find(u => u.username === user.username)) {
+                        userData.push(user);
+                    }
+                });
+            }
+        }
+
+        function resetAllData() {
+            if (!confirm('⚠️ PERINGATAN: Tindakan ini akan menghapus SEMUA data dan mengembalikan ke data sample awal. Data yang ada akan hilang permanen!\n\nApakah Anda benar-benar yakin?')) {
+                return;
+            }
+            
+            if (!confirm('🚨 KONFIRMASI TERAKHIR: Semua data mahasiswa, mata kuliah, KRS, nilai, dan user akan dihapus!\n\nKlik OK untuk melanjutkan atau Cancel untuk membatalkan.')) {
+                return;
+            }
+
+            // Clear all auto-backup data
+            Object.values(BACKUP_KEYS).forEach(key => {
+                try {
+                    delete window[key];
+                } catch (error) {
+                    console.log('Error clearing backup key:', key);
+                }
+            });
+
+            // Reset to initial sample data
+            initializeSampleData();
+            
+            // Save the reset data as new backup
+            autoSaveData();
+            
+            // Update interface
+            renderAllTables();
+            updateDashboard();
+            populateDropdowns();
+            
+            if (currentUser.role === 'admin') {
+                populateUserManagementDropdowns();
+                renderUserTable();
+            }
+            
+            alert('✅ Semua data berhasil direset ke kondisi awal!');
+        }
+
+        // Print Functions
+        function printKHS() {
+            const printContent = document.getElementById('khsResult').innerHTML;
+            const originalContent = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+
+        function printTranskrip() {
+            const printContent = document.getElementById('transkripResult').innerHTML;
+            const originalContent = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+
+        // Initialize form constraints based on user role
+        function initializeFormConstraints() {
+            if (currentUser.role === 'admin-prodi') {
+                // Set jurusan dropdown for mahasiswa form
+                const jurusanSelect = document.getElementById('jurusan');
+                jurusanSelect.innerHTML = `<option value="${currentUser.prodi}" selected>${currentUser.prodi}</option>`;
+                
+                // Set program studi dropdown for matkul form
+                const prodiSelect = document.getElementById('matkulProdi');
+                prodiSelect.innerHTML = `<option value="${currentUser.prodi}" selected>${currentUser.prodi}</option>`;
+            }
+        }
+
+        // Call this when showing panels to ensure proper constraints
+        function updateFormConstraints() {
+            if (currentUser.role === 'admin-prodi') {
+                initializeFormConstraints();
+            }
+        }
+
+        // Override showPanel to include form constraints update
+        const originalShowPanel = showPanel;
+        showPanel = function(panelName) {
+            originalShowPanel(panelName);
+            updateFormConstraints();
+        };
+
+        // Auto-save on page unload (backup mechanism)
+        window.addEventListener('beforeunload', function() {
+            autoSaveData();
+        });
+
+        // Periodic auto-save every 30 seconds
+        setInterval(() => {
+            if (autoBackupEnabled && currentUser) {
+                autoSaveData();
+            }
+        }, 30000);
+
+        console.log('🎓 Sistem Akademik v6.0 dengan Auto-backup dimuat successfully!');
+    </script>
+</body>
+</html>
