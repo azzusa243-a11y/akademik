@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Akademik Bisnis Digital - Enhanced V8</title>
+    <title>Sistem Akademik - Prodi Bisnis Digital</title>
     <style>
         * {
             margin: 0;
@@ -17,246 +17,344 @@
             min-height: 100vh;
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Styles */
         .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
         }
 
-        .login-form {
+        .login-box {
             background: white;
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
+            width: 400px;
         }
 
-        .login-form h1 {
-            color: #333;
+        .login-header {
+            text-align: center;
             margin-bottom: 30px;
-            font-size: 2em;
+        }
+
+        .login-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
         }
 
         .form-group {
             margin-bottom: 20px;
-            text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            margin-bottom: 5px;
             color: #333;
+            font-weight: 500;
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid #e1e5e9;
             border-radius: 8px;
             font-size: 14px;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            border-color: #667eea;
         }
 
         .btn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            padding: 12px 24px;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 5px;
+            transition: transform 0.2s;
             width: 100%;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            margin-left: 10px;
+            width: auto;
         }
 
         .btn-danger {
-            background: linear-gradient(45deg, #F44336, #D32F2F);
+            background: #dc3545;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-info {
+            background: #17a2b8;
         }
 
         .btn-warning {
-            background: linear-gradient(45deg, #FF9800, #F57C00);
+            background: #ffc107;
+            color: #333;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Dashboard Styles */
+        .dashboard {
             display: none;
-            position: relative;
-        }
-
-        .container.active {
-            display: block;
         }
 
         .header {
             background: white;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .header-left h1 {
+        .header h1 {
             color: #333;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .header-left p {
-            color: #666;
-            font-size: 1.1em;
-        }
-
-        .header-right {
-            text-align: right;
         }
 
         .user-info {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .logout-btn {
-            background: linear-gradient(45deg, #dc3545, #c82333);
+            background: #dc3545;
+            color: white;
             padding: 8px 16px;
-            font-size: 12px;
-        }
-
-        .nav-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .nav-btn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
 
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
-
-        .nav-btn.active {
-            background: linear-gradient(45deg, #FF6B6B, #FF5252);
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-        }
-
-        .nav-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .backup-controls {
+        .sidebar {
             background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .auto-backup-status {
-            background: #e8f5e8;
-            border: 2px solid #4caf50;
-            padding: 10px;
             border-radius: 10px;
-            margin-bottom: 15px;
-            color: #2e7d32;
-            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
-        .backup-btn {
-            background: linear-gradient(45deg, #2196F3, #1976D2);
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin: 0 10px;
-            font-weight: bold;
-            transition: all 0.3s ease;
         }
 
-        .backup-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .content-panel {
+        .content-area {
             background: white;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: none;
-            animation: slideIn 0.5s ease;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 500px;
         }
 
-        .content-panel.active {
+        .section {
+            display: none;
+        }
+
+        .section.active {
             display: block;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .form-row {
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            width: auto;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        /* Print Styles */
+        .print-area {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .kop-surat {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .signature-area {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 20px 0;
+        }
+
+        .signature-box {
+            text-align: center;
+            width: 200px;
+        }
+
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-top: 80px;
+            padding-top: 10px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-area, .print-area * {
+                visibility: visible;
+            }
+            .print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+
+        .hidden {
+            display: none;
         }
 
         .alert {
             padding: 15px;
-            border-radius: 8px;
             margin-bottom: 20px;
-            font-weight: bold;
+            border-radius: 5px;
         }
 
         .alert-success {
@@ -271,1201 +369,813 @@
             border: 1px solid #f5c6cb;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .stat-card h3 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .data-table th, .data-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .data-table th {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            font-weight: bold;
-        }
-
-        .data-table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .file-input {
-            margin: 10px;
-        }
-
-        #fileInput {
-            display: none;
-        }
-
-        .file-label {
-            background: linear-gradient(45deg, #FF9800, #F57C00);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .file-label:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
-        }
-
-        .edit-mode {
-            background-color: #fff3cd;
-            border: 2px solid #ffc107;
-        }
-
-        .edit-indicator {
-            background: #ffc107;
-            color: #856404;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-
-        .role-badge {
-            background: #007bff;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .role-badge.admin-prodi {
-            background: #6f42c1;
-        }
-
-        .role-badge.mahasiswa {
-            background: #28a745;
-        }
-
-        .credit-text {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #666;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        .prodi-filter {
-            background: #e3f2fd;
-            border: 2px solid #2196f3;
-            border-radius: 10px;
-            padding: 15px;
+        .data-controls {
             margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .prodi-filter h4 {
-            color: #1976d2;
-            margin-bottom: 5px;
-        }
-
-        .prodi-filter p {
-            color: #666;
-            margin: 0;
-        }
-
-        .auto-save-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4caf50;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .auto-save-indicator.show {
-            opacity: 1;
-        }
-
-        .auto-save-indicator.error {
-            background: #f44336;
-        }
-
-        .data-sync-info {
-            background: #e3f2fd;
-            border: 1px solid #2196f3;
-            padding: 10px;
+            padding: 15px;
+            background: #f8f9fa;
             border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 12px;
-            color: #1976d2;
-            text-align: center;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .student-notice {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #856404;
-        }
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .content-area {
+                order: 1;
+            }
+            
+            .login-box {
+                width: 90%;
+            }
 
-        .student-notice h4 {
-            margin-bottom: 5px;
-            color: #d39e00;
+            .data-controls {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Credit Text -->
-    <div class="credit-text">
-        by Firman Arby Mokoagow - Bisnis Digital System V8
-    </div>
-
-    <!-- Auto Save Indicator -->
-    <div id="autoSaveIndicator" class="auto-save-indicator">
-        Data tersimpan otomatis
-    </div>
-
     <!-- Login Form -->
-    <div id="loginContainer" class="login-container">
-        <div class="login-form">
-            <h1>📚 Sistem Akademik Bisnis Digital</h1>
-            <div class="data-sync-info">
-                ✅ Sistem khusus Program Studi Bisnis Digital dengan auto-backup
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>SISTEM AKADEMIK</h1>
+                <p>Program Studi Bisnis Digital</p>
             </div>
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="loginUser">Username:</label>
-                    <input type="text" id="loginUser" required>
+                    <label>Username</label>
+                    <input type="text" id="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword">Password:</label>
-                    <input type="password" id="loginPassword" required>
+                    <label>Password</label>
+                    <input type="password" id="password" required>
                 </div>
                 <div class="form-group">
-                    <label for="loginRole">Login Sebagai:</label>
-                    <select id="loginRole" required>
+                    <label>Login Sebagai</label>
+                    <select id="userRole" required>
                         <option value="">Pilih Role</option>
-                        <option value="admin-prodi">Admin Prodi Bisnis Digital</option>
-                        <option value="mahasiswa">Mahasiswa Bisnis Digital</option>
+                        <option value="admin">Administrator</option>
+                        <option value="mahasiswa">Mahasiswa</option>
                     </select>
                 </div>
-                <button type="submit" class="btn">🔐 Login</button>
+                <button type="submit" class="btn">LOGIN</button>
             </form>
-            <div id="loginAlert"></div>
         </div>
     </div>
 
-    <!-- Main Application -->
-    <div id="mainContainer" class="container">
-        <div class="header">
-            <div class="header-left">
-                <h1>📚 Sistem Akademik Bisnis Digital</h1>
-                <p>Program Studi Bisnis Digital - Auto Backup System</p>
-            </div>
-            <div class="header-right">
+    <!-- Dashboard -->
+    <div id="dashboardPage" class="dashboard">
+        <div class="container">
+            <div class="header">
+                <h1>Sistem Akademik - Prodi Bisnis Digital</h1>
                 <div class="user-info">
-                    <div id="currentUser"></div>
-                </div>
-                <button class="btn logout-btn" onclick="logout()">🚪 Logout</button>
-            </div>
-        </div>
-
-        <!-- Student Notice -->
-        <div id="studentNotice" class="student-notice hidden">
-            <h4>📋 Area Mahasiswa</h4>
-            <p>Anda dapat melihat KHS dan Transkrip Nilai Anda di menu di bawah ini.</p>
-        </div>
-
-        <!-- Prodi Filter - Admin Prodi Only -->
-        <div id="prodiFilter" class="prodi-filter hidden">
-            <h4>📚 Program Studi Bisnis Digital</h4>
-            <p>Sistem manajemen akademik khusus untuk Program Studi <strong>Bisnis Digital</strong></p>
-        </div>
-
-        <!-- Backup Controls - Admin Prodi Only -->
-        <div id="backupControls" class="backup-controls hidden">
-            <h3>💾 Manajemen Data Backup</h3>
-            <div class="auto-backup-status" id="autoBackupStatus">
-                ✅ Auto-backup aktif - Data Program Studi Bisnis Digital tersimpan otomatis
-            </div>
-            <p id="backupInfo" style="margin-bottom: 15px; color: #666; font-size: 14px;">Backup mencakup data lengkap Program Studi Bisnis Digital</p>
-            <button class="backup-btn" onclick="downloadManualBackup()">📥 Download Backup Manual</button>
-            <label for="fileInput" class="file-label">📤 Upload Backup</label>
-            <input type="file" id="fileInput" accept=".json" onchange="uploadBackup(event)">
-            <button class="backup-btn" onclick="resetAllData()" style="background: linear-gradient(45deg, #f44336, #d32f2f);">🗑️ Reset Semua Data</button>
-        </div>
-
-        <div class="nav-buttons">
-            <button class="nav-btn active" onclick="showPanel('dashboard')" id="navDashboard">📊 Dashboard</button>
-            <button class="nav-btn" onclick="showPanel('mahasiswa')" id="navMahasiswa">👥 Data Mahasiswa</button>
-            <button class="nav-btn" onclick="showPanel('matakuliah')" id="navMatakuliah">📚 Mata Kuliah</button>
-            <button class="nav-btn" onclick="showPanel('krs')" id="navKrs">📝 KRS</button>
-            <button class="nav-btn" onclick="showPanel('nilai')" id="navNilai">📋 Input Nilai</button>
-            <button class="nav-btn" onclick="showPanel('khs')" id="navKhs">📊 KHS</button>
-            <button class="nav-btn" onclick="showPanel('transkrip')" id="navTranskrip">🎓 Transkrip</button>
-            <button class="nav-btn" onclick="showPanel('userManagement')" id="navUserManagement">👤 Kelola User</button>
-        </div>
-
-        <!-- Dashboard Panel -->
-        <div id="dashboard" class="content-panel active">
-            <h2>📊 Dashboard Akademik Bisnis Digital</h2>
-            <div class="data-sync-info">
-                <strong>Status Backup:</strong> <span id="dashboardBackupStatus">Data tersinkronisasi</span> | 
-                <strong>Terakhir disimpan:</strong> <span id="lastSaveTime">-</span>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3 id="totalMahasiswa">0</h3>
-                    <p>Total Mahasiswa BD</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="totalMatkul">0</h3>
-                    <p>Mata Kuliah BD</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="totalKRS">0</h3>
-                    <p>KRS Aktif</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="rataIPK">0.00</h3>
-                    <p>Rata-rata IPK BD</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Data Mahasiswa Panel -->
-        <div id="mahasiswa" class="content-panel">
-            <h2>👥 Manajemen Data Mahasiswa Bisnis Digital</h2>
-            
-            <div id="editIndicatorMahasiswa" class="edit-indicator hidden">
-                ✏️ Mode Edit - Sedang mengedit data mahasiswa
-            </div>
-
-            <form id="mahasiswaForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nim">NIM:</label>
-                        <input type="text" id="nim" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama">Nama Lengkap:</label>
-                        <input type="text" id="nama" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="jurusan">Jurusan:</label>
-                        <select id="jurusan" required>
-                            <option value="Bisnis Digital">Bisnis Digital</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="angkatan">Angkatan:</label>
-                        <input type="number" id="angkatan" min="2020" max="2025" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn" id="mahasiswaSubmitBtn">💾 Simpan Mahasiswa</button>
-                <button type="button" class="btn btn-danger" onclick="clearMahasiswaForm()">🗑️ Bersihkan</button>
-            </form>
-
-            <div id="mahasiswaAlert"></div>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>NIM</th>
-                        <th>Nama</th>
-                        <th>Jurusan</th>
-                        <th>Angkatan</th>
-                        <th>IPK</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="mahasiswaTableBody">
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Mata Kuliah Panel -->
-        <div id="matakuliah" class="content-panel">
-            <h2>📚 Manajemen Mata Kuliah Bisnis Digital</h2>
-            
-            <form id="matkulForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="kodeMatkul">Kode Mata Kuliah:</label>
-                        <input type="text" id="kodeMatkul" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="namaMatkul">Nama Mata Kuliah:</label>
-                        <input type="text" id="namaMatkul" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="sks">SKS:</label>
-                        <input type="number" id="sks" min="1" max="6" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="semester">Semester:</label>
-                        <select id="semester" required>
-                            <option value="">Pilih Semester</option>
-                            <option value="1">Semester 1</option>
-                            <option value="2">Semester 2</option>
-                            <option value="3">Semester 3</option>
-                            <option value="4">Semester 4</option>
-                            <option value="5">Semester 5</option>
-                            <option value="6">Semester 6</option>
-                        </select>
-                    </div>
-                </div>
-                <button type="submit" class="btn" id="matkulSubmitBtn">💾 Simpan Mata Kuliah</button>
-                <button type="button" class="btn btn-danger" onclick="clearMatkulForm()">🗑️ Bersihkan</button>
-            </form>
-
-            <div id="matkulAlert"></div>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Kode</th>
-                        <th>Nama Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th>Semester</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="matkulTableBody">
-                </tbody>
-            </table>
-        </div>
-
-        <!-- KRS Panel -->
-        <div id="krs" class="content-panel">
-            <h2>📝 Kartu Rencana Studi (KRS)</h2>
-            
-            <form id="krsForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="krsNim">Pilih Mahasiswa:</label>
-                        <select id="krsNim" required>
-                            <option value="">Pilih Mahasiswa</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="krsMatkul">Pilih Mata Kuliah:</label>
-                        <select id="krsMatkul" required>
-                            <option value="">Pilih Mata Kuliah</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="krsSemester">Semester:</label>
-                        <select id="krsSemester" required>
-                            <option value="">Pilih Semester</option>
-                            <option value="Ganjil">Ganjil</option>
-                            <option value="Genap">Genap</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="krsTahun">Tahun Akademik:</label>
-                        <input type="text" id="krsTahun" placeholder="2024/2025" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn" id="krsSubmitBtn">💾 Tambah ke KRS</button>
-                <button type="button" class="btn btn-danger" onclick="clearKrsForm()">🗑️ Bersihkan</button>
-            </form>
-
-            <div id="krsAlert"></div>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>NIM</th>
-                        <th>Nama Mahasiswa</th>
-                        <th>Kode Matkul</th>
-                        <th>Nama Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th>Semester</th>
-                        <th>Tahun</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="krsTableBody">
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Input Nilai Panel -->
-        <div id="nilai" class="content-panel">
-            <h2>📋 Input Nilai</h2>
-            
-            <form id="nilaiForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nilaiNim">Pilih Mahasiswa:</label>
-                        <select id="nilaiNim" required>
-                            <option value="">Pilih Mahasiswa</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nilaiMatkul">Pilih Mata Kuliah:</label>
-                        <select id="nilaiMatkul" required>
-                            <option value="">Pilih Mata Kuliah</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nilaiAngka">Nilai (0-100):</label>
-                        <input type="number" id="nilaiAngka" min="0" max="100" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nilaiHuruf">Grade:</label>
-                        <input type="text" id="nilaiHuruf" readonly>
-                    </div>
-                </div>
-                <button type="submit" class="btn" id="nilaiSubmitBtn">💾 Simpan Nilai</button>
-                <button type="button" class="btn btn-danger" onclick="clearNilaiForm()">🗑️ Bersihkan</button>
-            </form>
-
-            <div id="nilaiAlert"></div>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>NIM</th>
-                        <th>Nama Mahasiswa</th>
-                        <th>Mata Kuliah</th>
-                        <th>Nilai</th>
-                        <th>Grade</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="nilaiTableBody">
-                </tbody>
-            </table>
-        </div>
-
-        <!-- KHS Panel -->
-        <div id="khs" class="content-panel">
-            <h2>📊 Kartu Hasil Studi (KHS)</h2>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="khsNim">Pilih Mahasiswa:</label>
-                    <select id="khsNim" onchange="generateKHS()">
-                        <option value="">Pilih Mahasiswa</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="khsSemester">Semester:</label>
-                    <select id="khsSemester" onchange="generateKHS()">
-                        <option value="">Semua Semester</option>
-                        <option value="1">Semester 1</option>
-                        <option value="2">Semester 2</option>
-                        <option value="3">Semester 3</option>
-                        <option value="4">Semester 4</option>
-                        <option value="5">Semester 5</option>
-                        <option value="6">Semester 6</option>
-                    </select>
+                    <span id="currentUser">Welcome, User</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
                 </div>
             </div>
 
-            <div id="khsResult"></div>
-        </div>
-
-        <!-- Transkrip Panel -->
-        <div id="transkrip" class="content-panel">
-            <h2>🎓 Transkrip Nilai</h2>
-            
-            <div class="form-group">
-                <label for="transkripNim">Pilih Mahasiswa:</label>
-                <select id="transkripNim" onchange="generateTranskrip()">
-                    <option value="">Pilih Mahasiswa</option>
-                </select>
-            </div>
-
-            <div id="transkripResult"></div>
-        </div>
-
-        <!-- User Management Panel - Admin Prodi Only -->
-        <div id="userManagement" class="content-panel">
-            <h2>👤 Kelola User Bisnis Digital</h2>
-            
-            <form id="userForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="newUsername">Username:</label>
-                        <input type="text" id="newUsername" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">Password:</label>
-                        <input type="password" id="newPassword" required>
-                    </div>
+            <div class="main-content">
+                <div class="sidebar">
+                    <ul id="menuList">
+                        <li><a href="#" onclick="showSection('dashboard')" class="active">Dashboard</a></li>
+                        <li class="admin-only"><a href="#" onclick="showSection('dataMahasiswa')">Data Mahasiswa</a></li>
+                        <li class="admin-only"><a href="#" onclick="showSection('kurikulum')">Kurikulum</a></li>
+                        <li><a href="#" onclick="showSection('krs')">KRS</a></li>
+                        <li class="admin-only"><a href="#" onclick="showSection('pengisianNilai')">Pengisian Nilai</a></li>
+                        <li><a href="#" onclick="showSection('khs')">KHS</a></li>
+                        <li><a href="#" onclick="showSection('transkrip')">Transkrip Nilai</a></li>
+                        <li class="admin-only"><a href="#" onclick="showSection('cetak')">Cetak Dokumen</a></li>
+                        <li class="admin-only"><a href="#" onclick="showSection('pengaturan')">Pengaturan</a></li>
+                    </ul>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="newRole">Role:</label>
-                        <select id="newRole" onchange="handleRoleChange()" required>
-                            <option value="">Pilih Role</option>
-                            <option value="admin-prodi">Admin Prodi Bisnis Digital</option>
-                            <option value="mahasiswa">Mahasiswa Bisnis Digital</option>
-                        </select>
+
+                <div class="content-area">
+                    <!-- Dashboard Section -->
+                    <div id="dashboard" class="section active">
+                        <h2>Dashboard</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3 id="totalMahasiswa">0</h3>
+                                <p>Total Mahasiswa</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="totalMataKuliah">0</h3>
+                                <p>Mata Kuliah</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="semesterAktif">2024/2025-1</h3>
+                                <p>Semester Aktif</p>
+                            </div>
+                        </div>
+                        <div id="studentDashboard" class="hidden">
+                            <h3>Informasi Mahasiswa</h3>
+                            <p><strong>NIM:</strong> <span id="studentNim">-</span></p>
+                            <p><strong>Nama:</strong> <span id="studentName">-</span></p>
+                            <p><strong>Angkatan:</strong> <span id="studentAngkatan">-</span></p>
+                            <p><strong>Semester:</strong> <span id="studentSemester">-</span></p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="linkedNim">NIM (untuk mahasiswa):</label>
-                        <select id="linkedNim">
-                            <option value="">Pilih NIM</option>
-                        </select>
+
+                    <!-- Data Mahasiswa Section -->
+                    <div id="dataMahasiswa" class="section">
+                        <h2>Data Mahasiswa</h2>
+                        <div class="data-controls">
+                            <button class="btn" onclick="openModal('addMahasiswaModal')">Tambah Mahasiswa</button>
+                            <button class="btn btn-warning" onclick="resetMahasiswaData()">Reset Data</button>
+                            <button class="btn btn-info" onclick="exportMahasiswaData()">Export Data</button>
+                        </div>
+                        <table id="mahasiswaTable">
+                            <thead>
+                                <tr>
+                                    <th>NIM</th>
+                                    <th>Nama</th>
+                                    <th>Angkatan</th>
+                                    <th>Semester</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mahasiswaTableBody">
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <button type="submit" class="btn" id="userSubmitBtn">💾 Tambah User</button>
-                <button type="button" class="btn btn-danger" onclick="clearUserForm()">🗑️ Bersihkan</button>
-            </form>
 
-            <div id="userAlert"></div>
+                    <!-- Kurikulum Section -->
+                    <div id="kurikulum" class="section">
+                        <h2>Kurikulum</h2>
+                        <div class="data-controls">
+                            <button class="btn" onclick="openModal('addMataKuliahModal')">Tambah Mata Kuliah</button>
+                            <button class="btn btn-warning" onclick="resetKurikulumData()">Reset Data</button>
+                            <button class="btn btn-info" onclick="exportKurikulumData()">Export Data</button>
+                        </div>
+                        <table id="kurikulumTable">
+                            <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Nama Mata Kuliah</th>
+                                    <th>SKS</th>
+                                    <th>Semester</th>
+                                    <th>Prasyarat</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kurikulumTableBody">
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Role</th>
-                        <th>NIM Terkait</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="userTableBody">
-                </tbody>
-            </table>
+                    <!-- KRS Section -->
+                    <div id="krs" class="section">
+                        <h2>Kartu Rencana Studi (KRS)</h2>
+                        <div id="krsAdmin">
+                            <div class="form-group">
+                                <label>Pilih Mahasiswa</label>
+                                <select id="krsMahasiswa" onchange="loadKRSForStudent()">
+                                    <option value="">Pilih Mahasiswa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="krsContent">
+                            <h3>Mata Kuliah Tersedia</h3>
+                            <table id="availableMataKuliah">
+                                <thead>
+                                    <tr>
+                                        <th>Pilih</th>
+                                        <th>Kode</th>
+                                        <th>Nama Mata Kuliah</th>
+                                        <th>SKS</th>
+                                        <th>Semester</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="availableMataKuliahBody">
+                                </tbody>
+                            </table>
+                            <button class="btn" onclick="saveKRS()" style="margin-top: 20px;">Simpan KRS</button>
+                        </div>
+                    </div>
 
-            <div style="margin-top: 30px;">
-                <h3>🔐 Ubah Password</h3>
-                <form id="changePasswordForm">
-                    <div class="form-row">
+                    <!-- Pengisian Nilai Section -->
+                    <div id="pengisianNilai" class="section">
+                        <h2>Pengisian Nilai</h2>
                         <div class="form-group">
-                            <label for="changeUser">Pilih User:</label>
-                            <select id="changeUser" required>
-                                <option value="">Pilih User</option>
+                            <label>Angkatan</label>
+                            <select id="nilaiAngkatan" onchange="loadNilaiData()">
+                                <option value="">Pilih Angkatan</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="newPasswordChange">Password Baru:</label>
-                            <input type="password" id="newPasswordChange" required>
+                            <label>Semester</label>
+                            <select id="nilaiSemester" onchange="loadNilaiData()">
+                                <option value="">Pilih Semester</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mata Kuliah</label>
+                            <select id="nilaiMataKuliah" onchange="loadNilaiData()">
+                                <option value="">Pilih Mata Kuliah</option>
+                            </select>
+                        </div>
+                        <div id="nilaiContent" style="display: none;">
+                            <table id="nilaiTable">
+                                <thead>
+                                    <tr>
+                                        <th>NIM</th>
+                                        <th>Nama</th>
+                                        <th>Nilai</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="nilaiTableBody">
+                                </tbody>
+                            </table>
+                            <button class="btn" onclick="saveNilai()" style="margin-top: 20px;">Simpan Nilai</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn">🔑 Ubah Password</button>
-                </form>
 
-                <div id="passwordAlert"></div>
+                    <!-- KHS Section -->
+                    <div id="khs" class="section">
+                        <h2>Kartu Hasil Studi (KHS)</h2>
+                        <div id="khsAdmin">
+                            <div class="form-group">
+                                <label>Pilih Mahasiswa</label>
+                                <select id="khsMahasiswa" onchange="loadKHS()">
+                                    <option value="">Pilih Mahasiswa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Semester</label>
+                                <select id="khsSemester" onchange="loadKHS()">
+                                    <option value="">Pilih Semester</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="khsContent" style="display: none;">
+                            <table id="khsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Mata Kuliah</th>
+                                        <th>SKS</th>
+                                        <th>Nilai</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="khsTableBody">
+                                </tbody>
+                            </table>
+                            <div id="khsSummary" style="margin-top: 20px;">
+                                <p><strong>Total SKS:</strong> <span id="totalSKS">0</span></p>
+                                <p><strong>IPK Semester:</strong> <span id="ipkSemester">0.00</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transkrip Section -->
+                    <div id="transkrip" class="section">
+                        <h2>Transkrip Nilai</h2>
+                        <div id="transkripAdmin">
+                            <div class="form-group">
+                                <label>Pilih Mahasiswa</label>
+                                <select id="transkripMahasiswa" onchange="loadTranskrip()">
+                                    <option value="">Pilih Mahasiswa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="transkripContent" style="display: none;">
+                            <table id="transkripTable">
+                                <thead>
+                                    <tr>
+                                        <th>Semester</th>
+                                        <th>Kode</th>
+                                        <th>Mata Kuliah</th>
+                                        <th>SKS</th>
+                                        <th>Nilai</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transkripTableBody">
+                                </tbody>
+                            </table>
+                            <div id="transkripSummary" style="margin-top: 20px;">
+                                <p><strong>Total SKS:</strong> <span id="totalSKSTranskrip">0</span></p>
+                                <p><strong>IPK Kumulatif:</strong> <span id="ipkKumulatif">0.00</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cetak Section -->
+                    <div id="cetak" class="section">
+                        <h2>Cetak Dokumen</h2>
+                        <div class="form-group">
+                            <label>Jenis Dokumen</label>
+                            <select id="jenisCetak">
+                                <option value="">Pilih Dokumen</option>
+                                <option value="dataMahasiswa">Data Mahasiswa</option>
+                                <option value="krs">KRS</option>
+                                <option value="khs">KHS</option>
+                                <option value="transkrip">Transkrip</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mahasiswa</label>
+                            <select id="cetakMahasiswa">
+                                <option value="">Pilih Mahasiswa</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="generatePDF()">Generate PDF</button>
+                        <div id="printPreview" class="print-area" style="display: none;">
+                            <!-- Preview akan muncul di sini -->
+                        </div>
+                    </div>
+
+                    <!-- Pengaturan Section -->
+                    <div id="pengaturan" class="section">
+                        <h2>Pengaturan Sistem</h2>
+                        
+                        <h3>Kelola User</h3>
+                        <div class="data-controls">
+                            <button class="btn" onclick="openModal('addUserModal')">Tambah User</button>
+                            <button class="btn btn-warning" onclick="resetUserData()">Reset User</button>
+                        </div>
+                        <table id="userTable">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                            </tbody>
+                        </table>
+
+                        <h3 style="margin-top: 30px;">Pengaturan Kop Surat</h3>
+                        <button class="btn" onclick="openModal('editKopModal')">Edit Kop Surat</button>
+                        
+                        <h3 style="margin-top: 30px;">Backup & Restore</h3>
+                        <div class="data-controls">
+                            <button class="btn btn-success" onclick="downloadBackup()">Download Backup</button>
+                            <input type="file" id="backupFile" accept=".json" style="display: none;" onchange="uploadBackup()">
+                            <button class="btn btn-info" onclick="document.getElementById('backupFile').click()">Upload Backup</button>
+                            <button class="btn btn-danger" onclick="resetAllData()">Reset Semua Data</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Mahasiswa Modal -->
+    <div id="addMahasiswaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addMahasiswaModal')">&times;</span>
+            <h3>Tambah Mahasiswa</h3>
+            <form id="addMahasiswaForm">
+                <div class="form-group">
+                    <label>NIM</label>
+                    <input type="text" id="newNim" required>
+                </div>
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" id="newNama" required>
+                </div>
+                <div class="form-group">
+                    <label>Angkatan</label>
+                    <input type="number" id="newAngkatan" required>
+                </div>
+                <div class="form-group">
+                    <label>Semester</label>
+                    <input type="number" id="newSemester" min="1" max="8" required>
+                </div>
+                <button type="submit" class="btn">Simpan</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('addMahasiswaModal')">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Mata Kuliah Modal -->
+    <div id="addMataKuliahModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addMataKuliahModal')">&times;</span>
+            <h3>Tambah Mata Kuliah</h3>
+            <form id="addMataKuliahForm">
+                <div class="form-group">
+                    <label>Kode</label>
+                    <input type="text" id="newKodeMK" required>
+                </div>
+                <div class="form-group">
+                    <label>Nama Mata Kuliah</label>
+                    <input type="text" id="newNamaMK" required>
+                </div>
+                <div class="form-group">
+                    <label>SKS</label>
+                    <input type="number" id="newSKS" min="1" max="6" required>
+                </div>
+                <div class="form-group">
+                    <label>Semester</label>
+                    <input type="number" id="newSemesterMK" min="1" max="8" required>
+                </div>
+                <div class="form-group">
+                    <label>Prasyarat</label>
+                    <input type="text" id="newPrasyarat" placeholder="Kosongkan jika tidak ada">
+                </div>
+                <button type="submit" class="btn">Simpan</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('addMataKuliahModal')">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addUserModal')">&times;</span>
+            <h3>Tambah User</h3>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="newUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="newRole" required>
+                        <option value="">Pilih Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="mahasiswa">Mahasiswa</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Simpan</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('addUserModal')">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Kop Modal -->
+    <div id="editKopModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editKopModal')">&times;</span>
+            <h3>Edit Kop Surat</h3>
+            <form id="editKopForm">
+                <div class="form-group">
+                    <label>Nama Institusi</label>
+                    <input type="text" id="namaInstitusi" value="UNIVERSITAS DIGITAL INDONESIA">
+                </div>
+                <div class="form-group">
+                    <label>Program Studi</label>
+                    <input type="text" id="namaProdi" value="PROGRAM STUDI BISNIS DIGITAL">
+                </div>
+                <div class="form-group">
+                    <label>Alamat</label>
+                    <textarea id="alamatInstitusi" rows="3">Jl. Digital No. 123, Jakarta 12345</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Nama Kaprodi</label>
+                    <input type="text" id="namaKaprodi" value="Dr. John Doe, M.Kom">
+                </div>
+                <button type="submit" class="btn">Simpan</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('editKopModal')">Batal</button>
+            </form>
         </div>
     </div>
 
     <script>
-        // Auto-backup system variables
-        let autoBackupEnabled = true;
-        let lastSaveTime = null;
-        const BACKUP_KEY_PREFIX = 'bd_system_';
-        const BACKUP_KEYS = {
-            mahasiswa: BACKUP_KEY_PREFIX + 'mahasiswa',
-            matkul: BACKUP_KEY_PREFIX + 'matkul',
-            krs: BACKUP_KEY_PREFIX + 'krs',
-            nilai: BACKUP_KEY_PREFIX + 'nilai',
-            users: BACKUP_KEY_PREFIX + 'users',
-            metadata: BACKUP_KEY_PREFIX + 'metadata'
+        // Data Storage Keys
+        const STORAGE_KEYS = {
+            mahasiswa: 'akademik_mahasiswa_data',
+            mataKuliah: 'akademik_mata_kuliah_data',
+            users: 'akademik_users_data',
+            krs: 'akademik_krs_data',
+            nilai: 'akademik_nilai_data',
+            kopSurat: 'akademik_kop_surat_data',
+            initialized: 'akademik_system_initialized'
         };
 
-        // Data Storage - Only Bisnis Digital data
-        let mahasiswaData = [
-            { nim: '23010901', nama: 'ADITYA ANUGRAH MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-            { nim: '23010902', nama: 'DIVA WOANG PAPUTUNGAN', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-            { nim: '23010903', nama: 'ERDI ERLANGGA PUTRA SUSILO', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-            { nim: '23010904', nama: 'FITRIAH DARWIS', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-            { nim: '23010905', nama: 'MUH. AKBAR ANUGRAH GAIB', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-            { nim: '23010907', nama: 'MUH. FADHIL C. MOKOAGOW', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-            { nim: '23010908', nama: 'RIZKY MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 }
-        ];
-
-        let matkulData = [
-            { kode: 'IJSU 1101', nama: 'Pancasila', sks: 2, semester: '1' },
-            { kode: 'IJSU 1102', nama: 'Agama', sks: 2, semester: '1' },
-            { kode: 'IJSU 1103', nama: 'Kewarganegaraan', sks: 2, semester: '1' },
-            { kode: 'IJSU 1104', nama: 'Bahasa Indonesia', sks: 2, semester: '1' },
-            { kode: 'IJSU 1105', nama: 'Bahasa Inggris 1 (16 Tenses)', sks: 2, semester: '1' },
-            { kode: 'IJSM 1406', nama: 'Pengantar Manajemen', sks: 2, semester: '1' },
-            { kode: 'IJSS 1207', nama: 'Pengantar Ekonomi', sks: 2, semester: '1' },
-            { kode: 'IJSS 1208', nama: 'Matematika Bisnis', sks: 2, semester: '1' },
-            { kode: 'IJBD 1709', nama: 'Aplikasi Komputer', sks: 2, semester: '1' },
-            { kode: 'IJSA 2310', nama: 'Pengantar Akuntansi', sks: 2, semester: '1' },
-            { kode: 'IJSU 2111', nama: 'Bahasa Inggris 2 (Karya tulis)', sks: 2, semester: '2' },
-            { kode: 'IJSM 2412', nama: 'Sistem Informasi Manajemen', sks: 3, semester: '2' },
-            { kode: 'IJSS 2213', nama: 'Statistik Bisnis', sks: 3, semester: '2' },
-            { kode: 'IJSS 2214', nama: 'Teori Ekonomi', sks: 3, semester: '2' },
-            { kode: 'IJBD 2715', nama: 'Dasar Pemrograman', sks: 3, semester: '2' },
-            { kode: 'IJBD 2716', nama: 'Dasar Infrastruktur Teknologi', sks: 3, semester: '2' },
-            { kode: 'IJBD 2717', nama: 'Digital Marketing', sks: 3, semester: '2' },
-            { kode: 'IJSM 3418', nama: 'Manajemen Pemasaran', sks: 3, semester: '2' },
-            { kode: 'IJSU 3119', nama: 'Riset Operasi', sks: 3, semester: '3' },
-            { kode: 'IJSM 3420', nama: 'Desain dan Manajemen Proses Bisnis', sks: 3, semester: '3' },
-            { kode: 'IJBD 3721', nama: 'Database', sks: 3, semester: '3' },
-            { kode: 'IJBD 3722', nama: 'Jaringan Komputer', sks: 3, semester: '3' },
-            { kode: 'IJBD 4723', nama: 'Perancangan Sistem', sks: 3, semester: '3' },
-            { kode: 'IJSM 4425', nama: 'Manajemen Keuangan', sks: 3, semester: '3' },
-            { kode: 'IJBD 4726', nama: 'Technopreneur', sks: 3, semester: '3' },
-            { kode: 'IJBD 4724', nama: 'Web Technology Dasar', sks: 3, semester: '3' }
-        ];
-
-        let krsData = [];
-        let nilaiData = [];
-
-        let userData = [
-            // Admin Prodi Bisnis Digital
-            { username: 'admin-bd', password: 'adminbd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
-            // Student users (using NIM as username/password)
-            { username: '23010901', password: '23010901', role: 'mahasiswa', nim: '23010901', prodi: 'Bisnis Digital' },
-            { username: '23010902', password: '23010902', role: 'mahasiswa', nim: '23010902', prodi: 'Bisnis Digital' },
-            { username: '23010903', password: '23010903', role: 'mahasiswa', nim: '23010903', prodi: 'Bisnis Digital' },
-            { username: '23010904', password: '23010904', role: 'mahasiswa', nim: '23010904', prodi: 'Bisnis Digital' },
-            { username: '23010905', password: '23010905', role: 'mahasiswa', nim: '23010905', prodi: 'Bisnis Digital' },
-            { username: '23010907', password: '23010907', role: 'mahasiswa', nim: '23010907', prodi: 'Bisnis Digital' },
-            { username: '23010908', password: '23010908', role: 'mahasiswa', nim: '23010908', prodi: 'Bisnis Digital' }
-        ];
-
-        // Current user session
+        // Global Variables
         let currentUser = null;
+        let currentRole = null;
+        
+        // Data Arrays
+        let mahasiswaData = [];
+        let mataKuliahData = [];
+        let userData = [];
+        let krsData = {};
+        let nilaiData = {};
+        let kopSurat = {};
 
-        // Initialize complete KRS data for all students
-        function initializeCompleteKrsData() {
-            krsData = [];
-            
-            // All students take the same courses per semester
-            const allStudents = ['23010901', '23010902', '23010903', '23010904', '23010905', '23010907', '23010908'];
-            
-            // Semester 1 courses (2023/2024 Ganjil)
-            const sem1Courses = ['IJSU 1101', 'IJSU 1102', 'IJSU 1103', 'IJSU 1104', 'IJSU 1105', 'IJSM 1406', 'IJSS 1207', 'IJSS 1208', 'IJBD 1709', 'IJSA 2310'];
-            
-            // Semester 2 courses (2023/2024 Genap)
-            const sem2Courses = ['IJSU 2111', 'IJSM 2412', 'IJSS 2213', 'IJSS 2214', 'IJBD 2715', 'IJBD 2716', 'IJBD 2717', 'IJSM 3418'];
-            
-            // Semester 3 courses (2024/2025 Ganjil)
-            const sem3Courses = ['IJSU 3119', 'IJSM 3420', 'IJBD 3721', 'IJBD 3722', 'IJBD 4723', 'IJSM 4425', 'IJBD 4726', 'IJBD 4724'];
-            
-            allStudents.forEach(nim => {
-                // Add semester 1 KRS
-                sem1Courses.forEach(kode => {
-                    krsData.push({ nim, kodeMatkul: kode, semester: 'Ganjil', tahun: '2023/2024' });
-                });
-                
-                // Add semester 2 KRS
-                sem2Courses.forEach(kode => {
-                    krsData.push({ nim, kodeMatkul: kode, semester: 'Genap', tahun: '2023/2024' });
-                });
-                
-                // Add semester 3 KRS
-                sem3Courses.forEach(kode => {
-                    krsData.push({ nim, kodeMatkul: kode, semester: 'Ganjil', tahun: '2024/2025' });
-                });
-            });
-        }
-
-        // Auto-backup functions using in-memory storage
-        function saveToMemory(key, data) {
+        // Data Management Functions
+        function saveToStorage(key, data) {
             try {
-                const dataStr = JSON.stringify(data);
-                window[key] = dataStr;
+                localStorage.setItem(key, JSON.stringify(data));
                 return true;
             } catch (error) {
-                console.error('Error saving to memory:', error);
+                console.error('Error saving to localStorage:', error);
+                alert('Error menyimpan data: ' + error.message);
                 return false;
             }
         }
 
-        function loadFromMemory(key, defaultValue = null) {
+        function loadFromStorage(key) {
             try {
-                const dataStr = window[key];
-                if (dataStr) {
-                    return JSON.parse(dataStr);
-                }
-                return defaultValue;
+                const data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : null;
             } catch (error) {
-                console.error('Error loading from memory:', error);
-                return defaultValue;
+                console.error('Error loading from localStorage:', error);
+                return null;
             }
         }
 
-        function autoSaveData() {
-            if (!autoBackupEnabled) return;
+        function saveAllData() {
+            saveToStorage(STORAGE_KEYS.mahasiswa, mahasiswaData);
+            saveToStorage(STORAGE_KEYS.mataKuliah, mataKuliahData);
+            saveToStorage(STORAGE_KEYS.users, userData);
+            saveToStorage(STORAGE_KEYS.krs, krsData);
+            saveToStorage(STORAGE_KEYS.nilai, nilaiData);
+            saveToStorage(STORAGE_KEYS.kopSurat, kopSurat);
+        }
 
-            try {
-                saveToMemory(BACKUP_KEYS.mahasiswa, mahasiswaData);
-                saveToMemory(BACKUP_KEYS.matkul, matkulData);
-                saveToMemory(BACKUP_KEYS.krs, krsData);
-                saveToMemory(BACKUP_KEYS.nilai, nilaiData);
-                saveToMemory(BACKUP_KEYS.users, userData);
-                
-                const metadata = {
-                    lastSave: new Date().toISOString(),
-                    version: '8.0',
-                    prodi: 'Bisnis Digital',
-                    totalRecords: {
-                        mahasiswa: mahasiswaData.length,
-                        matkul: matkulData.length,
-                        krs: krsData.length,
-                        nilai: nilaiData.length,
-                        users: userData.length
+        function loadAllData() {
+            const savedMahasiswa = loadFromStorage(STORAGE_KEYS.mahasiswa);
+            const savedMataKuliah = loadFromStorage(STORAGE_KEYS.mataKuliah);
+            const savedUsers = loadFromStorage(STORAGE_KEYS.users);
+            const savedKrs = loadFromStorage(STORAGE_KEYS.krs);
+            const savedNilai = loadFromStorage(STORAGE_KEYS.nilai);
+            const savedKopSurat = loadFromStorage(STORAGE_KEYS.kopSurat);
+
+            if (savedMahasiswa) mahasiswaData = savedMahasiswa;
+            if (savedMataKuliah) mataKuliahData = savedMataKuliah;
+            if (savedUsers) userData = savedUsers;
+            if (savedKrs) krsData = savedKrs;
+            if (savedNilai) nilaiData = savedNilai;
+            if (savedKopSurat) kopSurat = savedKopSurat;
+        }
+
+        function initializeDefaultData() {
+            const isInitialized = localStorage.getItem(STORAGE_KEYS.initialized);
+            
+            if (!isInitialized) {
+                // Initialize default data only on first run
+                mahasiswaData = [
+                    {nim: '2024001', nama: 'Ahmad Rizki', angkatan: 2024, semester: 1, status: 'Aktif', password: 'mahasiswa123'},
+                    {nim: '2024002', nama: 'Siti Nurhaliza', angkatan: 2024, semester: 1, status: 'Aktif', password: 'mahasiswa123'},
+                    {nim: '2023001', nama: 'Budi Santoso', angkatan: 2023, semester: 3, status: 'Aktif', password: 'mahasiswa123'},
+                    {nim: '2023002', nama: 'Dewi Kartika', angkatan: 2023, semester: 3, status: 'Aktif', password: 'mahasiswa123'},
+                    {nim: '2022001', nama: 'Eko Prasetyo', angkatan: 2022, semester: 5, status: 'Aktif', password: 'mahasiswa123'}
+                ];
+
+                mataKuliahData = [
+                    {kode: 'BD101', nama: 'Pengantar Bisnis Digital', sks: 3, semester: 1, prasyarat: '-'},
+                    {kode: 'BD102', nama: 'Matematika Bisnis', sks: 3, semester: 1, prasyarat: '-'},
+                    {kode: 'BD103', nama: 'Pengantar Teknologi Informasi', sks: 3, semester: 1, prasyarat: '-'},
+                    {kode: 'BD201', nama: 'E-Commerce', sks: 3, semester: 2, prasyarat: 'BD101'},
+                    {kode: 'BD202', nama: 'Digital Marketing', sks: 3, semester: 2, prasyarat: 'BD101'},
+                    {kode: 'BD301', nama: 'Data Analytics', sks: 3, semester: 3, prasyarat: 'BD102'},
+                    {kode: 'BD302', nama: 'Business Intelligence', sks: 3, semester: 3, prasyarat: 'BD301'}
+                ];
+
+                userData = [
+                    {username: 'admin', password: 'admin123', role: 'admin', status: 'Aktif'},
+                    {username: '2024001', password: 'mahasiswa123', role: 'mahasiswa', status: 'Aktif'},
+                    {username: '2024002', password: 'mahasiswa123', role: 'mahasiswa', status: 'Aktif'},
+                    {username: '2023001', password: 'mahasiswa123', role: 'mahasiswa', status: 'Aktif'},
+                    {username: '2023002', password: 'mahasiswa123', role: 'mahasiswa', status: 'Aktif'},
+                    {username: '2022001', password: 'mahasiswa123', role: 'mahasiswa', status: 'Aktif'}
+                ];
+
+                kopSurat = {
+                    namaInstitusi: 'UNIVERSITAS DIGITAL INDONESIA',
+                    namaProdi: 'PROGRAM STUDI BISNIS DIGITAL',
+                    alamat: 'Jl. Digital No. 123, Jakarta 12345',
+                    kaprodi: 'Dr. John Doe, M.Kom'
+                };
+
+                // Initialize sample KRS and grades
+                krsData = {
+                    '2024001': {
+                        '1': ['BD101', 'BD102', 'BD103']
+                    },
+                    '2024002': {
+                        '1': ['BD101', 'BD102']
+                    },
+                    '2023001': {
+                        '1': ['BD101', 'BD102', 'BD103'],
+                        '2': ['BD201', 'BD202'],
+                        '3': ['BD301']
                     }
                 };
-                saveToMemory(BACKUP_KEYS.metadata, metadata);
-                
-                lastSaveTime = new Date();
-                updateBackupStatus();
-                showAutoSaveIndicator();
-                
-                console.log('Auto-backup completed successfully');
-                
-            } catch (error) {
-                console.error('Auto-backup failed:', error);
-                showAutoSaveIndicator('Error menyimpan data', true);
-            }
-        }
 
-        function loadAutoBackupData() {
-            try {
-                const metadata = loadFromMemory(BACKUP_KEYS.metadata);
-                
-                if (metadata) {
-                    console.log('Loading auto-backup data from:', metadata.lastSave);
-                    
-                    const loadedMahasiswa = loadFromMemory(BACKUP_KEYS.mahasiswa, []);
-                    const loadedMatkul = loadFromMemory(BACKUP_KEYS.matkul, []);
-                    const loadedKrs = loadFromMemory(BACKUP_KEYS.krs, []);
-                    const loadedNilai = loadFromMemory(BACKUP_KEYS.nilai, []);
-                    const loadedUsers = loadFromMemory(BACKUP_KEYS.users, []);
-                    
-                    if (loadedMahasiswa.length > 0 || loadedMatkul.length > 0 || 
-                        loadedKrs.length > 0 || loadedNilai.length > 0 || loadedUsers.length > 1) {
-                        
-                        mahasiswaData = loadedMahasiswa;
-                        matkulData = loadedMatkul;
-                        krsData = loadedKrs;
-                        nilaiData = loadedNilai;
-                        
-                        if (loadedUsers.length > 0) {
-                            userData = loadedUsers;
-                        }
-                        
-                        lastSaveTime = new Date(metadata.lastSave);
-                        
-                        console.log('Auto-backup data loaded successfully');
-                        return true;
+                nilaiData = {
+                    '2024001': {
+                        'BD101': 85,
+                        'BD102': 78,
+                        'BD103': 92
+                    },
+                    '2023001': {
+                        'BD101': 88,
+                        'BD102': 82,
+                        'BD103': 90,
+                        'BD201': 85,
+                        'BD202': 80,
+                        'BD301': 87
                     }
-                }
-                
-                console.log('No auto-backup data found, using default data');
-                return false;
-                
-            } catch (error) {
-                console.error('Error loading auto-backup:', error);
-                return false;
-            }
-        }
+                };
 
-        function showAutoSaveIndicator(message = 'Data tersimpan otomatis', isError = false) {
-            const indicator = document.getElementById('autoSaveIndicator');
-            indicator.textContent = message;
-            indicator.classList.toggle('error', isError);
-            indicator.classList.add('show');
-            
-            setTimeout(() => {
-                indicator.classList.remove('show');
-            }, 2000);
-        }
-
-        function updateBackupStatus() {
-            const statusElement = document.getElementById('dashboardBackupStatus');
-            const lastSaveElement = document.getElementById('lastSaveTime');
-            
-            if (statusElement) {
-                statusElement.textContent = autoBackupEnabled ? 'Aktif' : 'Tidak Aktif';
-            }
-            
-            if (lastSaveElement && lastSaveTime) {
-                lastSaveElement.textContent = lastSaveTime.toLocaleString('id-ID');
-            }
-        }
-
-        function triggerAutoSave() {
-            setTimeout(autoSaveData, 100);
-        }
-
-        // Initialize Application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-        });
-
-        function initializeApp() {
-            const backupLoaded = loadAutoBackupData();
-            
-            if (!backupLoaded) {
-                initializeCompleteKrsData();
-                autoSaveData();
-            }
-            
-            const savedUser = getCurrentUser();
-            if (savedUser) {
-                currentUser = savedUser;
-                showMainApp();
+                // Save all initial data
+                saveAllData();
+                localStorage.setItem(STORAGE_KEYS.initialized, 'true');
             } else {
-                showLogin();
+                // Load existing data
+                loadAllData();
             }
         }
 
-        function getCurrentUser() {
-            return currentUser;
-        }
-
-        // Authentication Functions
+        // Login Function
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('loginUser').value;
-            const password = document.getElementById('loginPassword').value;
-            const role = document.getElementById('loginRole').value;
-
-            const user = userData.find(u => 
-                u.username === username && 
-                u.password === password && 
-                u.role === role
-            );
-
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('userRole').value;
+            
+            // Find user in userData
+            const user = userData.find(u => u.username === username && u.password === password && u.role === role);
+            
             if (user) {
-                currentUser = user;
-                showMainApp();
+                if (role === 'admin') {
+                    currentUser = 'Administrator';
+                } else {
+                    const mahasiswa = mahasiswaData.find(m => m.nim === username);
+                    currentUser = mahasiswa ? mahasiswa.nama : username;
+                }
+                currentRole = role;
+                showDashboard();
             } else {
-                showLoginAlert('Username, password, atau role tidak valid!', 'error');
+                alert('Username, password, atau role salah!');
             }
         });
 
-        function showLogin() {
-            document.getElementById('loginContainer').style.display = 'flex';
-            document.getElementById('mainContainer').classList.remove('active');
-        }
-
-        function showMainApp() {
-            document.getElementById('loginContainer').style.display = 'none';
-            document.getElementById('mainContainer').classList.add('active');
+        // Show Dashboard
+        function showDashboard() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'block';
+            document.getElementById('currentUser').textContent = `Welcome, ${currentUser}`;
             
-            updateUserInterface();
-            updateDashboard();
-            populateDropdowns();
-            renderAllTables();
-            updateBackupStatus();
+            // Hide admin-only menus for mahasiswa
+            if (currentRole === 'mahasiswa') {
+                const adminMenus = document.querySelectorAll('.admin-only');
+                adminMenus.forEach(menu => menu.style.display = 'none');
+                
+                document.getElementById('studentDashboard').classList.remove('hidden');
+                const mahasiswa = mahasiswaData.find(m => m.nama === currentUser);
+                if (mahasiswa) {
+                    document.getElementById('studentNim').textContent = mahasiswa.nim;
+                    document.getElementById('studentName').textContent = mahasiswa.nama;
+                    document.getElementById('studentAngkatan').textContent = mahasiswa.angkatan;
+                    document.getElementById('studentSemester').textContent = mahasiswa.semester;
+                }
+            } else {
+                document.getElementById('studentDashboard').classList.add('hidden');
+            }
+            
+            loadDashboardData();
+            refreshAllTables();
+            populateSelectors();
         }
 
+        // Logout Function
         function logout() {
-            currentUser = null;
-            document.getElementById('loginForm').reset();
-            showLogin();
-        }
-
-        function updateUserInterface() {
-            const userInfo = document.getElementById('currentUser');
-            
-            if (currentUser.role === 'mahasiswa') {
-                const mahasiswa = mahasiswaData.find(m => m.nim === currentUser.nim);
-                userInfo.innerHTML = `
-                    <div><strong>${mahasiswa ? mahasiswa.nama : currentUser.username}</strong></div>
-                    <div>NIM: ${currentUser.nim}</div>
-                    <div><span class="role-badge mahasiswa">MAHASISWA BD</span></div>
-                `;
-                setupMahasiswaInterface();
-            } else if (currentUser.role === 'admin-prodi') {
-                userInfo.innerHTML = `
-                    <div><strong>${currentUser.username}</strong></div>
-                    <div>Admin Prodi: Bisnis Digital</div>
-                    <div><span class="role-badge admin-prodi">ADMIN PRODI BD</span></div>
-                `;
-                setupAdminProdiInterface();
-            }
-        }
-
-        function setupMahasiswaInterface() {
-            // Hide admin controls
-            document.getElementById('backupControls').classList.add('hidden');
-            document.getElementById('prodiFilter').classList.add('hidden');
-            document.getElementById('studentNotice').classList.remove('hidden');
-            
-            // Hide all admin navigation buttons
-            const adminNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navUserManagement'];
-            adminNavs.forEach(navId => {
-                const nav = document.getElementById(navId);
-                nav.style.display = 'none';
-                nav.disabled = true;
-            });
-
-            // Show only student accessible menus
-            const studentNavs = ['navKhs', 'navTranskrip'];
-            studentNavs.forEach(navId => {
-                const nav = document.getElementById(navId);
-                nav.disabled = false;
-                nav.style.display = 'inline-block';
-            });
-
-            // Set student-specific dropdowns
-            populateStudentDropdowns();
-            
-            // Default to KHS panel
-            showPanel('khs');
-            document.getElementById('navKhs').classList.add('active');
-        }
-
-        function setupAdminProdiInterface() {
-            // Show admin controls
-            document.getElementById('backupControls').classList.remove('hidden');
-            document.getElementById('prodiFilter').classList.remove('hidden');
-            document.getElementById('studentNotice').classList.add('hidden');
-            
-            // Show all navigation menus
-            const allNavs = ['navDashboard', 'navMahasiswa', 'navMatakuliah', 'navKrs', 'navNilai', 'navKhs', 'navTranskrip', 'navUserManagement'];
-            allNavs.forEach(navId => {
-                const nav = document.getElementById(navId);
-                nav.disabled = false;
-                nav.style.display = 'inline-block';
-            });
-
-            // Default to dashboard
-            showPanel('dashboard');
-            document.getElementById('navDashboard').classList.add('active');
-        }
-
-        function populateStudentDropdowns() {
-            if (currentUser.role === 'mahasiswa') {
-                const khsSelect = document.getElementById('khsNim');
-                const transkripSelect = document.getElementById('transkripNim');
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                currentUser = null;
+                currentRole = null;
+                document.getElementById('loginPage').style.display = 'block';
+                document.getElementById('dashboardPage').style.display = 'none';
+                document.getElementById('loginForm').reset();
                 
-                const mahasiswa = mahasiswaData.find(m => m.nim === currentUser.nim);
-                const displayName = mahasiswa ? mahasiswa.nama : 'Unknown';
+                // Reset form visibility
+                const adminMenus = document.querySelectorAll('.admin-only');
+                adminMenus.forEach(menu => menu.style.display = 'block');
+                document.getElementById('studentDashboard').classList.add('hidden');
                 
-                khsSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${displayName}</option>`;
-                transkripSelect.innerHTML = `<option value="${currentUser.nim}" selected>${currentUser.nim} - ${displayName}</option>`;
-                
-                khsSelect.disabled = true;
-                transkripSelect.disabled = true;
-
-                generateKHS();
-                generateTranskrip();
+                // Reset active section
+                showSection('dashboard');
             }
         }
 
-        function showLoginAlert(message, type) {
-            const container = document.getElementById('loginAlert');
-            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
-            container.innerHTML = `<div class="alert ${alertClass}" style="margin-top: 15px;">${message}</div>`;
+        // Show Section
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
             
-            setTimeout(() => {
-                container.innerHTML = '';
-            }, 3000);
-        }
-
-        // Navigation Functions
-        function showPanel(panelName) {
-            const panels = document.querySelectorAll('.content-panel');
-            const buttons = document.querySelectorAll('.nav-btn');
+            // Remove active class from all menu items
+            const menuItems = document.querySelectorAll('.sidebar a');
+            menuItems.forEach(item => item.classList.remove('active'));
             
-            panels.forEach(panel => panel.classList.remove('active'));
-            buttons.forEach(btn => btn.classList.remove('active'));
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
             
-            document.getElementById(panelName).classList.add('active');
-            
-            const navButton = document.querySelector(`[onclick="showPanel('${panelName}')"]`);
-            if (navButton && !navButton.disabled) {
-                navButton.classList.add('active');
+            // Add active class to clicked menu item
+            const targetMenu = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (targetMenu) {
+                targetMenu.classList.add('active');
             }
             
-            if (panelName === 'khs' || panelName === 'transkrip') {
-                populateDropdowns();
+            // Load section-specific data
+            switch(sectionId) {
+                case 'dataMahasiswa':
+                    loadMahasiswaTable();
+                    break;
+                case 'kurikulum':
+                    loadKurikulumTable();
+                    break;
+                case 'krs':
+                    loadKRSData();
+                    break;
+                case 'pengisianNilai':
+                    loadPengisianNilaiData();
+                    break;
+                case 'khs':
+                    loadKHSData();
+                    break;
+                case 'transkrip':
+                    loadTranskripData();
+                    break;
+                case 'cetak':
+                    loadCetakData();
+                    break;
+                case 'pengaturan':
+                    loadPengaturanData();
+                    break;
             }
-            
-            if (panelName === 'userManagement') {
-                populateUserManagementDropdowns();
-                renderUserTable();
-            }
         }
 
-        // Utility Functions
-        function getGrade(nilai) {
-            if (nilai >= 85) return 'A';
-            if (nilai >= 80) return 'A-';
-            if (nilai >= 75) return 'B+';
-            if (nilai >= 70) return 'B';
-            if (nilai >= 65) return 'B-';
-            if (nilai >= 60) return 'C+';
-            if (nilai >= 55) return 'C';
-            if (nilai >= 50) return 'C-';
-            if (nilai >= 45) return 'D+';
-            if (nilai >= 40) return 'D';
-            return 'E';
-        }
-
-        function getGradePoint(grade) {
-            const gradePoints = {
-                'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
-                'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'E': 0.0
-            };
-            return gradePoints[grade] || 0.0;
-        }
-
-        function calculateIPK(nim) {
-            const mahasiswaNilai = nilaiData.filter(n => n.nim === nim);
-            if (mahasiswaNilai.length === 0) return 0;
-
-            let totalSKS = 0;
-            let totalBobot = 0;
-
-            mahasiswaNilai.forEach(nilai => {
-                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
-                if (matkul) {
-                    const gradePoint = getGradePoint(nilai.nilaiHuruf);
-                    totalSKS += matkul.sks;
-                    totalBobot += gradePoint * matkul.sks;
-                }
-            });
-
-            return totalSKS > 0 ? totalBobot / totalSKS : 0;
-        }
-
-        // Dashboard Update
-        function updateDashboard() {
+        // Load Dashboard Data
+        function loadDashboardData() {
             document.getElementById('totalMahasiswa').textContent = mahasiswaData.length;
-            document.getElementById('totalMatkul').textContent = matkulData.length;
-            document.getElementById('totalKRS').textContent = krsData.length;
-            
-            let totalIPK = 0;
-            let mahasiswaWithGrades = 0;
-            
-            mahasiswaData.forEach(mahasiswa => {
-                const ipk = calculateIPK(mahasiswa.nim);
-                if (ipk > 0) {
-                    totalIPK += ipk;
-                    mahasiswaWithGrades++;
-                }
-            });
-            
-            const avgIPK = mahasiswaWithGrades > 0 ? (totalIPK / mahasiswaWithGrades).toFixed(2) : '0.00';
-            document.getElementById('rataIPK').textContent = avgIPK;
+            document.getElementById('totalMataKuliah').textContent = mataKuliahData.length;
         }
 
-        // Dropdown Population
-        function populateDropdowns() {
-            if (currentUser && currentUser.role === 'mahasiswa') {
-                return; // Student dropdowns are handled separately
-            }
-
-            const mahasiswaSelects = ['krsNim', 'nilaiNim', 'khsNim', 'transkripNim'];
-            mahasiswaSelects.forEach(selectId => {
-                const select = document.getElementById(selectId);
-                select.innerHTML = '<option value="">Pilih Mahasiswa</option>';
-                
-                mahasiswaData.forEach(mahasiswa => {
-                    select.innerHTML += `<option value="${mahasiswa.nim}">${mahasiswa.nim} - ${mahasiswa.nama}</option>`;
-                });
-            });
-
-            const matkulSelects = ['krsMatkul', 'nilaiMatkul'];
-            matkulSelects.forEach(selectId => {
-                const select = document.getElementById(selectId);
-                select.innerHTML = '<option value="">Pilih Mata Kuliah</option>';
-                
-                matkulData.forEach(matkul => {
-                    select.innerHTML += `<option value="${matkul.kode}">${matkul.kode} - ${matkul.nama}</option>`;
-                });
-            });
+        // Refresh All Tables
+        function refreshAllTables() {
+            loadMahasiswaTable();
+            loadKurikulumTable();
+            loadUserTable();
+            populateSelectors();
         }
 
-        // Alert Functions
-        function showAlert(containerId, message, type) {
-            const container = document.getElementById(containerId);
-            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
-            container.innerHTML = `<div class="alert ${alertClass}">${message}</div>`;
-            
-            setTimeout(() => {
-                container.innerHTML = '';
-            }, 3000);
-        }
-
-        // Render all tables
-        function renderAllTables() {
-            if (currentUser.role === 'admin-prodi') {
-                renderMahasiswaTable();
-                renderMatkulTable();
-                renderKrsTable();
-                renderNilaiTable();
-            }
-        }
-
-        // Table rendering functions
-        function renderMahasiswaTable() {
+        // Load Mahasiswa Table
+        function loadMahasiswaTable() {
             const tbody = document.getElementById('mahasiswaTableBody');
+            if (!tbody) return;
+            
             tbody.innerHTML = '';
-
+            
             mahasiswaData.forEach((mahasiswa, index) => {
                 const row = `
                     <tr>
                         <td>${mahasiswa.nim}</td>
                         <td>${mahasiswa.nama}</td>
-                        <td>${mahasiswa.jurusan}</td>
                         <td>${mahasiswa.angkatan}</td>
-                        <td>${calculateIPK(mahasiswa.nim).toFixed(2)}</td>
-                        <td>
-                            <button class="btn btn-warning" onclick="editMahasiswa(${index})">Edit</button>
-                            <button class="btn btn-danger" onclick="deleteMahasiswa(${index})">Hapus</button>
+                        <td>${mahasiswa.semester}</td>
+                        <td>${mahasiswa.status}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-sm btn-info" onclick="editMahasiswa(${index})">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteMahasiswa(${index})">Hapus</button>
                         </td>
                     </tr>
                 `;
@@ -1473,20 +1183,24 @@
             });
         }
 
-        function renderMatkulTable() {
-            const tbody = document.getElementById('matkulTableBody');
+        // Load Kurikulum Table
+        function loadKurikulumTable() {
+            const tbody = document.getElementById('kurikulumTableBody');
+            if (!tbody) return;
+            
             tbody.innerHTML = '';
-
-            matkulData.forEach((matkul, index) => {
+            
+            mataKuliahData.forEach((mk, index) => {
                 const row = `
                     <tr>
-                        <td>${matkul.kode}</td>
-                        <td>${matkul.nama}</td>
-                        <td>${matkul.sks}</td>
-                        <td>${matkul.semester}</td>
-                        <td>
-                            <button class="btn btn-warning" onclick="editMatkul(${index})">Edit</button>
-                            <button class="btn btn-danger" onclick="deleteMatkul(${index})">Hapus</button>
+                        <td>${mk.kode}</td>
+                        <td>${mk.nama}</td>
+                        <td>${mk.sks}</td>
+                        <td>${mk.semester}</td>
+                        <td>${mk.prasyarat}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-sm btn-info" onclick="editMataKuliah(${index})">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteMataKuliah(${index})">Hapus</button>
                         </td>
                     </tr>
                 `;
@@ -1494,750 +1208,1128 @@
             });
         }
 
-        function renderKrsTable() {
-            const tbody = document.getElementById('krsTableBody');
+        // Load User Table
+        function loadUserTable() {
+            const tbody = document.getElementById('userTableBody');
+            if (!tbody) return;
+            
             tbody.innerHTML = '';
-
-            krsData.forEach((krs, index) => {
-                const mahasiswa = mahasiswaData.find(m => m.nim === krs.nim);
-                const matkul = matkulData.find(m => m.kode === krs.kodeMatkul);
-                
-                if (mahasiswa && matkul) {
-                    const row = `
-                        <tr>
-                            <td>${krs.nim}</td>
-                            <td>${mahasiswa.nama}</td>
-                            <td>${krs.kodeMatkul}</td>
-                            <td>${matkul.nama}</td>
-                            <td>${matkul.sks}</td>
-                            <td>${krs.semester}</td>
-                            <td>${krs.tahun}</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editKrs(${index})">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteKrs(${index})">Hapus</button>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                }
+            
+            userData.forEach((user, index) => {
+                const row = `
+                    <tr>
+                        <td>${user.username}</td>
+                        <td>${user.role}</td>
+                        <td>${user.status}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-sm btn-info" onclick="editUser(${index})">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteUser(${index})">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
             });
         }
 
-        function renderNilaiTable() {
-            const tbody = document.getElementById('nilaiTableBody');
-            tbody.innerHTML = '';
-
-            nilaiData.forEach((nilai, index) => {
-                const mahasiswa = mahasiswaData.find(m => m.nim === nilai.nim);
-                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
-                
-                if (mahasiswa && matkul) {
-                    const row = `
-                        <tr>
-                            <td>${nilai.nim}</td>
-                            <td>${mahasiswa.nama}</td>
-                            <td>${matkul.nama}</td>
-                            <td>${nilai.nilaiAngka}</td>
-                            <td>${nilai.nilaiHuruf}</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editNilai(${index})">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteNilai(${index})">Hapus</button>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                }
-            });
-        }
-
-        // KHS Generation
-        function generateKHS() {
-            const nim = document.getElementById('khsNim').value;
-            const semesterFilter = document.getElementById('khsSemester').value;
-            
-            if (!nim) {
-                document.getElementById('khsResult').innerHTML = '';
-                return;
-            }
-
-            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
-            if (!mahasiswa) return;
-
-            let mahasiswaNilai = nilaiData.filter(n => n.nim === nim);
-            
-            if (semesterFilter) {
-                mahasiswaNilai = mahasiswaNilai.filter(n => {
-                    const matkul = matkulData.find(m => m.kode === n.kodeMatkul);
-                    return matkul && matkul.semester === semesterFilter;
-                });
-            }
-
-            let totalSKS = 0;
-            let totalBobot = 0;
-            let tableRows = '';
-
-            mahasiswaNilai.forEach(nilai => {
-                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
-                if (matkul) {
-                    const gradePoint = getGradePoint(nilai.nilaiHuruf);
-                    totalSKS += matkul.sks;
-                    totalBobot += gradePoint * matkul.sks;
-
-                    tableRows += `
-                        <tr>
-                            <td>${matkul.kode}</td>
-                            <td>${matkul.nama}</td>
-                            <td>${matkul.sks}</td>
-                            <td>${nilai.nilaiAngka}</td>
-                            <td>${nilai.nilaiHuruf}</td>
-                            <td>${gradePoint.toFixed(2)}</td>
-                        </tr>
-                    `;
-                }
-            });
-
-            const ips = totalSKS > 0 ? (totalBobot / totalSKS).toFixed(2) : '0.00';
-            const ipk = calculateIPK(nim).toFixed(2);
-
-            const khsHTML = `
-                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <h3>Kartu Hasil Studi - Bisnis Digital</h3>
-                    <div style="margin-bottom: 20px;">
-                        <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
-                        <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
-                        <p><strong>Program Studi:</strong> ${mahasiswa.jurusan}</p>
-                        <p><strong>Semester:</strong> ${semesterFilter || 'Semua'}</p>
-                    </div>
-                    
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Mata Kuliah</th>
-                                <th>SKS</th>
-                                <th>Nilai</th>
-                                <th>Grade</th>
-                                <th>Bobot</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${tableRows}
-                        </tbody>
-                    </table>
-                    
-                    <div style="margin-top: 20px; text-align: right;">
-                        <p><strong>Total SKS: ${totalSKS}</strong></p>
-                        <p><strong>IPS: ${ips}</strong></p>
-                        <p><strong>IPK: ${ipk}</strong></p>
-                    </div>
-                    
-                    <button class="btn" onclick="printKHS()">Cetak KHS</button>
-                </div>
-            `;
-
-            document.getElementById('khsResult').innerHTML = khsHTML;
-        }
-
-        // Transkrip Generation
-        function generateTranskrip() {
-            const nim = document.getElementById('transkripNim').value;
-            
-            if (!nim) {
-                document.getElementById('transkripResult').innerHTML = '';
-                return;
-            }
-
-            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
-            if (!mahasiswa) return;
-
-            const mahasiswaNilai = nilaiData.filter(n => n.nim === nim);
-            
-            const semesterData = {};
-            let totalSKS = 0;
-            let totalBobot = 0;
-
-            mahasiswaNilai.forEach(nilai => {
-                const matkul = matkulData.find(m => m.kode === nilai.kodeMatkul);
-                if (matkul) {
-                    const sem = matkul.semester;
-                    if (!semesterData[sem]) {
-                        semesterData[sem] = [];
-                    }
-                    
-                    const gradePoint = getGradePoint(nilai.nilaiHuruf);
-                    totalSKS += matkul.sks;
-                    totalBobot += gradePoint * matkul.sks;
-
-                    semesterData[sem].push({
-                        kode: matkul.kode,
-                        nama: matkul.nama,
-                        sks: matkul.sks,
-                        nilai: nilai.nilaiAngka,
-                        grade: nilai.nilaiHuruf,
-                        bobot: gradePoint
+        // Populate Selectors
+        function populateSelectors() {
+            // Populate mahasiswa selectors
+            const mahasiswaSelectors = ['krsMahasiswa', 'khsMahasiswa', 'transkripMahasiswa', 'cetakMahasiswa'];
+            mahasiswaSelectors.forEach(selectorId => {
+                const selector = document.getElementById(selectorId);
+                if (selector) {
+                    selector.innerHTML = '<option value="">Pilih Mahasiswa</option>';
+                    mahasiswaData.forEach(mahasiswa => {
+                        selector.innerHTML += `<option value="${mahasiswa.nim}">${mahasiswa.nim} - ${mahasiswa.nama}</option>`;
                     });
                 }
             });
 
-            let transkripHTML = `
-                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <h3>Transkrip Nilai - Program Studi Bisnis Digital</h3>
-                    <div style="margin-bottom: 20px;">
-                        <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
-                        <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
-                        <p><strong>Program Studi:</strong> ${mahasiswa.jurusan}</p>
-                        <p><strong>Angkatan:</strong> ${mahasiswa.angkatan}</p>
-                    </div>
-            `;
-
-            const sortedSemesters = Object.keys(semesterData).sort((a, b) => parseInt(a) - parseInt(b));
-
-            sortedSemesters.forEach(sem => {
-                transkripHTML += `
-                    <h4>Semester ${sem}</h4>
-                    <table class="data-table" style="margin-bottom: 20px;">
-                        <thead>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Mata Kuliah</th>
-                                <th>SKS</th>
-                                <th>Nilai</th>
-                                <th>Grade</th>
-                                <th>Bobot</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
-
-                semesterData[sem].forEach(matkul => {
-                    transkripHTML += `
-                        <tr>
-                            <td>${matkul.kode}</td>
-                            <td>${matkul.nama}</td>
-                            <td>${matkul.sks}</td>
-                            <td>${matkul.nilai}</td>
-                            <td>${matkul.grade}</td>
-                            <td>${matkul.bobot.toFixed(2)}</td>
-                        </tr>
-                    `;
+            // Populate mata kuliah selector for nilai
+            const mkSelector = document.getElementById('nilaiMataKuliah');
+            if (mkSelector) {
+                mkSelector.innerHTML = '<option value="">Pilih Mata Kuliah</option>';
+                mataKuliahData.forEach(mk => {
+                    mkSelector.innerHTML += `<option value="${mk.kode}">${mk.kode} - ${mk.nama}</option>`;
                 });
-
-                transkripHTML += `
-                        </tbody>
-                    </table>
-                `;
-            });
-
-            const ipk = totalSKS > 0 ? (totalBobot / totalSKS).toFixed(2) : '0.00';
-
-            transkripHTML += `
-                    <div style="margin-top: 20px; text-align: right; border-top: 2px solid #ddd; padding-top: 20px;">
-                        <p><strong>Total SKS Lulus: ${totalSKS}</strong></p>
-                        <p><strong>IPK: ${ipk}</strong></p>
-                    </div>
-                    
-                    <button class="btn" onclick="printTranskrip()">Cetak Transkrip</button>
-                </div>
-            `;
-
-            document.getElementById('transkripResult').innerHTML = transkripHTML;
+            }
         }
 
-        // Form Management Functions
-        document.getElementById('mahasiswaForm').addEventListener('submit', function(e) {
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                
+                // Reset form title and edit index if opening add modals
+                if (modalId === 'addMahasiswaModal') {
+                    document.getElementById('addMahasiswaModal').querySelector('h3').textContent = 'Tambah Mahasiswa';
+                    delete document.getElementById('addMahasiswaForm').dataset.editIndex;
+                } else if (modalId === 'addMataKuliahModal') {
+                    document.getElementById('addMataKuliahModal').querySelector('h3').textContent = 'Tambah Mata Kuliah';
+                    delete document.getElementById('addMataKuliahForm').dataset.editIndex;
+                } else if (modalId === 'addUserModal') {
+                    document.getElementById('addUserModal').querySelector('h3').textContent = 'Tambah User';
+                    delete document.getElementById('addUserForm').dataset.editIndex;
+                }
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                
+                // Reset form if it exists
+                const form = modal.querySelector('form');
+                if (form) {
+                    form.reset();
+                    delete form.dataset.editIndex;
+                }
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Form Submissions
+        document.getElementById('addMahasiswaForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const nim = document.getElementById('nim').value;
-            const nama = document.getElementById('nama').value;
-            const jurusan = 'Bisnis Digital'; // Fixed to Bisnis Digital
-            const angkatan = parseInt(document.getElementById('angkatan').value);
-
-            if (mahasiswaData.find(m => m.nim === nim)) {
-                showAlert('mahasiswaAlert', 'NIM sudah terdaftar!', 'error');
-                return;
-            }
-
-            const mahasiswa = { nim, nama, jurusan, angkatan, ipk: 0 };
-            mahasiswaData.push(mahasiswa);
-            
-            // Create user account for new student
-            if (!userData.find(u => u.nim === nim)) {
-                userData.push({
-                    username: nim,
-                    password: nim,
-                    role: 'mahasiswa',
-                    nim: nim,
-                    prodi: jurusan
-                });
-            }
-            
-            showAlert('mahasiswaAlert', 'Data mahasiswa berhasil disimpan!', 'success');
-            renderMahasiswaTable();
-            clearMahasiswaForm();
-            updateDashboard();
-            populateDropdowns();
-            triggerAutoSave();
-        });
-
-        document.getElementById('matkulForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const kode = document.getElementById('kodeMatkul').value;
-            const nama = document.getElementById('namaMatkul').value;
-            const sks = parseInt(document.getElementById('sks').value);
-            const semester = document.getElementById('semester').value;
-
-            if (matkulData.find(m => m.kode === kode)) {
-                showAlert('matkulAlert', 'Kode mata kuliah sudah terdaftar!', 'error');
-                return;
-            }
-
-            const matkul = { kode, nama, sks, semester };
-            matkulData.push(matkul);
-            
-            showAlert('matkulAlert', 'Mata kuliah berhasil disimpan!', 'success');
-            renderMatkulTable();
-            clearMatkulForm();
-            updateDashboard();
-            populateDropdowns();
-            triggerAutoSave();
-        });
-
-        document.getElementById('krsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nim = document.getElementById('krsNim').value;
-            const kodeMatkul = document.getElementById('krsMatkul').value;
-            const semester = document.getElementById('krsSemester').value;
-            const tahun = document.getElementById('krsTahun').value;
-
-            if (krsData.find(k => k.nim === nim && k.kodeMatkul === kodeMatkul && k.semester === semester && k.tahun === tahun)) {
-                showAlert('krsAlert', 'KRS untuk mata kuliah ini sudah ada!', 'error');
-                return;
-            }
-
-            const krs = { nim, kodeMatkul, semester, tahun };
-            krsData.push(krs);
-            
-            showAlert('krsAlert', 'KRS berhasil ditambahkan!', 'success');
-            renderKrsTable();
-            clearKrsForm();
-            updateDashboard();
-            triggerAutoSave();
-        });
-
-        document.getElementById('nilaiAngka').addEventListener('input', function() {
-            const nilai = parseInt(this.value);
-            const gradeInput = document.getElementById('nilaiHuruf');
-            gradeInput.value = getGrade(nilai);
-        });
-
-        document.getElementById('nilaiForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nim = document.getElementById('nilaiNim').value;
-            const kodeMatkul = document.getElementById('nilaiMatkul').value;
-            const nilaiAngka = parseInt(document.getElementById('nilaiAngka').value);
-            const nilaiHuruf = document.getElementById('nilaiHuruf').value;
-
-            if (!krsData.find(k => k.nim === nim && k.kodeMatkul === kodeMatkul)) {
-                showAlert('nilaiAlert', 'Mahasiswa belum mengambil mata kuliah ini di KRS!', 'error');
-                return;
-            }
-
-            const existingIndex = nilaiData.findIndex(n => n.nim === nim && n.kodeMatkul === kodeMatkul);
-            const nilai = { nim, kodeMatkul, nilaiAngka, nilaiHuruf };
-
-            if (existingIndex >= 0) {
-                nilaiData[existingIndex] = nilai;
-                showAlert('nilaiAlert', 'Nilai berhasil diperbarui!', 'success');
-            } else {
-                nilaiData.push(nilai);
-                showAlert('nilaiAlert', 'Nilai berhasil disimpan!', 'success');
-            }
-            
-            renderNilaiTable();
-            clearNilaiForm();
-            updateDashboard();
-            triggerAutoSave();
-        });
-
-        // User Management Functions
-        document.getElementById('userForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('newUsername').value;
-            const password = document.getElementById('newPassword').value;
-            const role = document.getElementById('newRole').value;
-            const linkedNim = document.getElementById('linkedNim').value;
-
-            if (userData.find(u => u.username === username)) {
-                showAlert('userAlert', 'Username sudah terdaftar!', 'error');
-                return;
-            }
-
-            let user = {
-                username,
-                password,
-                role,
-                nim: null,
-                prodi: 'Bisnis Digital'
+            const editIndex = this.dataset.editIndex;
+            const newMahasiswa = {
+                nim: document.getElementById('newNim').value,
+                nama: document.getElementById('newNama').value,
+                angkatan: parseInt(document.getElementById('newAngkatan').value),
+                semester: parseInt(document.getElementById('newSemester').value),
+                status: 'Aktif',
+                password: 'mahasiswa123'
             };
-
-            if (role === 'mahasiswa' && linkedNim) {
-                user.nim = linkedNim;
-            }
-
-            userData.push(user);
             
-            showAlert('userAlert', 'User berhasil ditambahkan!', 'success');
-            renderUserTable();
-            populateUserManagementDropdowns();
-            clearUserForm();
-            triggerAutoSave();
+            if (editIndex !== undefined) {
+                // Update existing mahasiswa
+                const oldNim = mahasiswaData[editIndex].nim;
+                mahasiswaData[editIndex] = newMahasiswa;
+                
+                // Update userData if NIM changed
+                if (oldNim !== newMahasiswa.nim) {
+                    const userIndex = userData.findIndex(u => u.username === oldNim);
+                    if (userIndex !== -1) {
+                        userData[userIndex].username = newMahasiswa.nim;
+                    }
+                    
+                    // Update KRS and Nilai data keys
+                    if (krsData[oldNim]) {
+                        krsData[newMahasiswa.nim] = krsData[oldNim];
+                        delete krsData[oldNim];
+                    }
+                    if (nilaiData[oldNim]) {
+                        nilaiData[newMahasiswa.nim] = nilaiData[oldNim];
+                        delete nilaiData[oldNim];
+                    }
+                }
+                
+                alert('Mahasiswa berhasil diupdate!');
+            } else {
+                // Add new mahasiswa
+                if (mahasiswaData.find(m => m.nim === newMahasiswa.nim)) {
+                    alert('NIM sudah ada!');
+                    return;
+                }
+                
+                mahasiswaData.push(newMahasiswa);
+                userData.push({
+                    username: newMahasiswa.nim,
+                    password: 'mahasiswa123',
+                    role: 'mahasiswa',
+                    status: 'Aktif'
+                });
+                alert('Mahasiswa berhasil ditambahkan!');
+            }
+            
+            saveAllData();
+            loadMahasiswaTable();
+            loadUserTable();
+            populateSelectors();
+            closeModal('addMahasiswaModal');
         });
 
-        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+        document.getElementById('addMataKuliahForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('changeUser').value;
-            const newPassword = document.getElementById('newPasswordChange').value;
-
-            const userIndex = userData.findIndex(u => u.username === username);
-            if (userIndex >= 0) {
-                userData[userIndex].password = newPassword;
-                showAlert('passwordAlert', 'Password berhasil diubah!', 'success');
-                document.getElementById('changePasswordForm').reset();
-                triggerAutoSave();
+            const editIndex = this.dataset.editIndex;
+            const newMataKuliah = {
+                kode: document.getElementById('newKodeMK').value,
+                nama: document.getElementById('newNamaMK').value,
+                sks: parseInt(document.getElementById('newSKS').value),
+                semester: parseInt(document.getElementById('newSemesterMK').value),
+                prasyarat: document.getElementById('newPrasyarat').value || '-'
+            };
+            
+            if (editIndex !== undefined) {
+                // Update existing mata kuliah
+                mataKuliahData[editIndex] = newMataKuliah;
+                alert('Mata kuliah berhasil diupdate!');
             } else {
-                showAlert('passwordAlert', 'User tidak ditemukan!', 'error');
+                // Add new mata kuliah
+                if (mataKuliahData.find(mk => mk.kode === newMataKuliah.kode)) {
+                    alert('Kode mata kuliah sudah ada!');
+                    return;
+                }
+                
+                mataKuliahData.push(newMataKuliah);
+                alert('Mata kuliah berhasil ditambahkan!');
             }
+            
+            saveAllData();
+            loadKurikulumTable();
+            populateSelectors();
+            closeModal('addMataKuliahModal');
         });
 
-        function populateUserManagementDropdowns() {
-            const linkedNimSelect = document.getElementById('linkedNim');
-            linkedNimSelect.innerHTML = '<option value="">Pilih NIM</option>';
+        document.getElementById('addUserForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            mahasiswaData.forEach(mahasiswa => {
-                if (!userData.find(u => u.nim === mahasiswa.nim)) {
-                    linkedNimSelect.innerHTML += `<option value="${mahasiswa.nim}">${mahasiswa.nim} - ${mahasiswa.nama}</option>`;
+            const editIndex = this.dataset.editIndex;
+            const newUser = {
+                username: document.getElementById('newUsername').value,
+                password: document.getElementById('newPassword').value,
+                role: document.getElementById('newRole').value,
+                status: 'Aktif'
+            };
+            
+            if (editIndex !== undefined) {
+                // Update existing user
+                userData[editIndex] = newUser;
+                alert('User berhasil diupdate!');
+            } else {
+                // Add new user
+                if (userData.find(u => u.username === newUser.username)) {
+                    alert('Username sudah ada!');
+                    return;
                 }
-            });
+                
+                userData.push(newUser);
+                alert('User berhasil ditambahkan!');
+            }
+            
+            saveAllData();
+            loadUserTable();
+            closeModal('addUserModal');
+        });
 
-            populateChangePasswordDropdown();
+        document.getElementById('editKopForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            kopSurat = {
+                namaInstitusi: document.getElementById('namaInstitusi').value,
+                namaProdi: document.getElementById('namaProdi').value,
+                alamat: document.getElementById('alamatInstitusi').value,
+                kaprodi: document.getElementById('namaKaprodi').value
+            };
+            
+            saveAllData();
+            closeModal('editKopModal');
+            alert('Kop surat berhasil diperbarui!');
+        });
+
+        // CRUD Functions
+        function editMahasiswa(index) {
+            const mahasiswa = mahasiswaData[index];
+            document.getElementById('newNim').value = mahasiswa.nim;
+            document.getElementById('newNama').value = mahasiswa.nama;
+            document.getElementById('newAngkatan').value = mahasiswa.angkatan;
+            document.getElementById('newSemester').value = mahasiswa.semester;
+            
+            document.getElementById('addMahasiswaForm').dataset.editIndex = index;
+            document.getElementById('addMahasiswaModal').querySelector('h3').textContent = 'Edit Mahasiswa';
+            
+            openModal('addMahasiswaModal');
         }
 
-        function populateChangePasswordDropdown() {
-            const changeUserSelect = document.getElementById('changeUser');
-            changeUserSelect.innerHTML = '<option value="">Pilih User</option>';
-            
-            userData.forEach(user => {
-                if (user.username !== currentUser.username) {
-                    const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi' : 'Mahasiswa';
-                    changeUserSelect.innerHTML += `<option value="${user.username}">${user.username} (${roleDisplay})</option>`;
+        function deleteMahasiswa(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?')) {
+                const mahasiswa = mahasiswaData[index];
+                
+                // Remove from mahasiswaData
+                mahasiswaData.splice(index, 1);
+                
+                // Remove from userData
+                const userIndex = userData.findIndex(u => u.username === mahasiswa.nim);
+                if (userIndex !== -1) {
+                    userData.splice(userIndex, 1);
                 }
-            });
+                
+                // Remove from krsData and nilaiData
+                delete krsData[mahasiswa.nim];
+                delete nilaiData[mahasiswa.nim];
+                
+                saveAllData();
+                loadMahasiswaTable();
+                loadUserTable();
+                populateSelectors();
+                alert('Mahasiswa berhasil dihapus!');
+            }
         }
 
-        function renderUserTable() {
-            const tbody = document.getElementById('userTableBody');
+        function editMataKuliah(index) {
+            const mk = mataKuliahData[index];
+            document.getElementById('newKodeMK').value = mk.kode;
+            document.getElementById('newNamaMK').value = mk.nama;
+            document.getElementById('newSKS').value = mk.sks;
+            document.getElementById('newSemesterMK').value = mk.semester;
+            document.getElementById('newPrasyarat').value = mk.prasyarat;
+            
+            document.getElementById('addMataKuliahForm').dataset.editIndex = index;
+            document.getElementById('addMataKuliahModal').querySelector('h3').textContent = 'Edit Mata Kuliah';
+            
+            openModal('addMataKuliahModal');
+        }
+
+        function deleteMataKuliah(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus mata kuliah ini?')) {
+                mataKuliahData.splice(index, 1);
+                saveAllData();
+                loadKurikulumTable();
+                populateSelectors();
+                alert('Mata kuliah berhasil dihapus!');
+            }
+        }
+
+        function editUser(index) {
+            const user = userData[index];
+            document.getElementById('newUsername').value = user.username;
+            document.getElementById('newPassword').value = user.password;
+            document.getElementById('newRole').value = user.role;
+            
+            document.getElementById('addUserForm').dataset.editIndex = index;
+            document.getElementById('addUserModal').querySelector('h3').textContent = 'Edit User';
+            
+            openModal('addUserModal');
+        }
+
+        function deleteUser(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus user ini?')) {
+                userData.splice(index, 1);
+                saveAllData();
+                loadUserTable();
+                alert('User berhasil dihapus!');
+            }
+        }
+
+        // KRS Functions
+        function loadKRSData() {
+            if (currentRole === 'mahasiswa') {
+                document.getElementById('krsAdmin').style.display = 'none';
+                const mahasiswa = mahasiswaData.find(m => m.nama === currentUser);
+                if (mahasiswa) {
+                    loadAvailableMataKuliah(mahasiswa.nim, mahasiswa.semester);
+                }
+            } else {
+                document.getElementById('krsAdmin').style.display = 'block';
+                document.getElementById('krsContent').style.display = 'block';
+            }
+        }
+
+        function loadKRSForStudent() {
+            const nim = document.getElementById('krsMahasiswa').value;
+            if (!nim) {
+                return;
+            }
+            
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            if (mahasiswa) {
+                loadAvailableMataKuliah(nim, mahasiswa.semester);
+            }
+        }
+
+        function loadAvailableMataKuliah(nim, semester) {
+            const tbody = document.getElementById('availableMataKuliahBody');
+            if (!tbody) return;
+            
             tbody.innerHTML = '';
-
-            userData.forEach((user, index) => {
-                if (user.username === currentUser.username) return;
-                
-                const linkedNimDisplay = user.nim ? `${user.nim} - ${getMahasiswaName(user.nim)}` : '-';
-                const roleDisplay = user.role === 'admin-prodi' ? 'Admin Prodi BD' : 'Mahasiswa BD';
-                
+            
+            const availableMK = mataKuliahData.filter(mk => mk.semester <= semester);
+            const currentKRS = krsData[nim] && krsData[nim][semester] ? krsData[nim][semester] : [];
+            
+            availableMK.forEach(mk => {
+                const isSelected = currentKRS.includes(mk.kode);
                 const row = `
                     <tr>
-                        <td>${user.username}</td>
-                        <td><span class="role-badge ${user.role}">${roleDisplay}</span></td>
-                        <td>${linkedNimDisplay}</td>
-                        <td>
-                            <button class="btn btn-danger" onclick="deleteUser(${index})">Hapus</button>
-                        </td>
+                        <td><input type="checkbox" name="selectedMK" value="${mk.kode}" ${isSelected ? 'checked' : ''}></td>
+                        <td>${mk.kode}</td>
+                        <td>${mk.nama}</td>
+                        <td>${mk.sks}</td>
+                        <td>${mk.semester}</td>
                     </tr>
                 `;
                 tbody.innerHTML += row;
             });
         }
 
-        function getMahasiswaName(nim) {
-            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
-            return mahasiswa ? mahasiswa.nama : 'Unknown';
+        function saveKRS() {
+            const selectedMK = Array.from(document.querySelectorAll('input[name="selectedMK"]:checked')).map(cb => cb.value);
+            
+            let targetNim;
+            if (currentRole === 'admin') {
+                targetNim = document.getElementById('krsMahasiswa').value;
+                if (!targetNim) {
+                    alert('Pilih mahasiswa terlebih dahulu!');
+                    return;
+                }
+            } else {
+                const mahasiswa = mahasiswaData.find(m => m.nama === currentUser);
+                targetNim = mahasiswa.nim;
+            }
+            
+            if (selectedMK.length === 0) {
+                alert('Pilih minimal satu mata kuliah!');
+                return;
+            }
+            
+            if (!krsData[targetNim]) {
+                krsData[targetNim] = {};
+            }
+            
+            const mahasiswa = mahasiswaData.find(m => m.nim === targetNim);
+            krsData[targetNim][mahasiswa.semester] = selectedMK;
+            
+            saveAllData();
+            alert('KRS berhasil disimpan!');
         }
 
-        function handleRoleChange() {
-            const role = document.getElementById('newRole').value;
-            const nimField = document.getElementById('linkedNim');
+        // Pengisian Nilai Functions
+        function loadPengisianNilaiData() {
+            document.getElementById('nilaiContent').style.display = 'none';
+        }
+
+        function loadNilaiData() {
+            const angkatan = document.getElementById('nilaiAngkatan').value;
+            const semester = document.getElementById('nilaiSemester').value;
+            const mataKuliah = document.getElementById('nilaiMataKuliah').value;
             
-            if (role === 'mahasiswa') {
-                nimField.parentElement.style.display = 'block';
-                nimField.required = true;
+            if (!angkatan || !semester || !mataKuliah) {
+                document.getElementById('nilaiContent').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('nilaiContent').style.display = 'block';
+            
+            const mahasiswaFiltered = mahasiswaData.filter(m => 
+                m.angkatan.toString() === angkatan && m.semester >= parseInt(semester)
+            );
+            
+            const tbody = document.getElementById('nilaiTableBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            mahasiswaFiltered.forEach(mahasiswa => {
+                const currentNilai = nilaiData[mahasiswa.nim] && nilaiData[mahasiswa.nim][mataKuliah] 
+                    ? nilaiData[mahasiswa.nim][mataKuliah] : '';
+                const currentGrade = convertToGrade(currentNilai);
+                
+                const row = `
+                    <tr>
+                        <td>${mahasiswa.nim}</td>
+                        <td>${mahasiswa.nama}</td>
+                        <td><input type="number" min="0" max="100" value="${currentNilai}" id="nilai_${mahasiswa.nim}"></td>
+                        <td><span id="grade_${mahasiswa.nim}">${currentGrade}</span></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+            
+            // Add event listeners for grade calculation
+            mahasiswaFiltered.forEach(mahasiswa => {
+                const input = document.getElementById(`nilai_${mahasiswa.nim}`);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        const nilai = this.value;
+                        const gradeSpan = document.getElementById(`grade_${mahasiswa.nim}`);
+                        if (gradeSpan) {
+                            gradeSpan.textContent = convertToGrade(nilai);
+                        }
+                    });
+                }
+            });
+        }
+
+        function convertToGrade(nilai) {
+            if (!nilai || nilai === '') return '';
+            const n = parseInt(nilai);
+            if (n >= 85) return 'A';
+            if (n >= 70) return 'B';
+            if (n >= 55) return 'C';
+            if (n >= 40) return 'D';
+            return 'E';
+        }
+
+        function saveNilai() {
+            const angkatan = document.getElementById('nilaiAngkatan').value;
+            const mataKuliah = document.getElementById('nilaiMataKuliah').value;
+            
+            const mahasiswaFiltered = mahasiswaData.filter(m => m.angkatan.toString() === angkatan);
+            
+            mahasiswaFiltered.forEach(mahasiswa => {
+                const nilaiInput = document.getElementById(`nilai_${mahasiswa.nim}`);
+                if (nilaiInput && nilaiInput.value) {
+                    if (!nilaiData[mahasiswa.nim]) {
+                        nilaiData[mahasiswa.nim] = {};
+                    }
+                    nilaiData[mahasiswa.nim][mataKuliah] = parseInt(nilaiInput.value);
+                }
+            });
+            
+            saveAllData();
+            alert('Nilai berhasil disimpan!');
+        }
+
+        // KHS Functions
+        function loadKHSData() {
+            if (currentRole === 'mahasiswa') {
+                document.getElementById('khsAdmin').style.display = 'none';
+                const mahasiswa = mahasiswaData.find(m => m.nama === currentUser);
+                if (mahasiswa) {
+                    loadKHSForMahasiswa(mahasiswa.nim, mahasiswa.semester);
+                }
             } else {
-                nimField.parentElement.style.display = 'none';
-                nimField.required = false;
+                document.getElementById('khsAdmin').style.display = 'block';
+                document.getElementById('khsContent').style.display = 'none';
             }
         }
 
-        // Backup Functions
-        function downloadManualBackup() {
-            const filteredData = {
-                mahasiswa: mahasiswaData,
-                matkul: matkulData,
-                krs: krsData,
-                nilai: nilaiData,
-                users: userData,
-                prodi: 'Bisnis Digital',
-                timestamp: new Date().toISOString(),
-                backupType: 'bisnis_digital_manual'
-            };
+        function loadKHS() {
+            const nim = document.getElementById('khsMahasiswa').value;
+            const semester = document.getElementById('khsSemester').value;
             
-            const dataStr = JSON.stringify(filteredData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            if (!nim || !semester) {
+                document.getElementById('khsContent').style.display = 'none';
+                return;
+            }
             
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            const filename = `backup_Bisnis_Digital_${new Date().toISOString().split('T')[0]}.json`;
-            link.download = filename;
-            link.click();
+            loadKHSForMahasiswa(nim, semester);
         }
 
-        function uploadBackup(event) {
-            const file = event.target.files[0];
+        function loadKHSForMahasiswa(nim, semester) {
+            document.getElementById('khsContent').style.display = 'block';
+            
+            const tbody = document.getElementById('khsTableBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            const mahasiswaMK = krsData[nim] && krsData[nim][semester] ? krsData[nim][semester] : [];
+            let totalSKS = 0;
+            let totalNilai = 0;
+            
+            mahasiswaMK.forEach(kodeMK => {
+                const mk = mataKuliahData.find(m => m.kode === kodeMK);
+                const nilai = nilaiData[nim] && nilaiData[nim][kodeMK] ? nilaiData[nim][kodeMK] : 0;
+                const grade = convertToGrade(nilai);
+                
+                if (mk) {
+                    totalSKS += mk.sks;
+                    totalNilai += nilai * mk.sks;
+                    
+                    const row = `
+                        <tr>
+                            <td>${mk.kode}</td>
+                            <td>${mk.nama}</td>
+                            <td>${mk.sks}</td>
+                            <td>${nilai}</td>
+                            <td>${grade}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                }
+            });
+            
+            const ipk = totalSKS > 0 ? (totalNilai / totalSKS / 25).toFixed(2) : '0.00';
+            const totalSKSElement = document.getElementById('totalSKS');
+            const ipkSemesterElement = document.getElementById('ipkSemester');
+            
+            if (totalSKSElement) totalSKSElement.textContent = totalSKS;
+            if (ipkSemesterElement) ipkSemesterElement.textContent = ipk;
+        }
+
+        // Transkrip Functions
+        function loadTranskripData() {
+            if (currentRole === 'mahasiswa') {
+                document.getElementById('transkripAdmin').style.display = 'none';
+                const mahasiswa = mahasiswaData.find(m => m.nama === currentUser);
+                if (mahasiswa) {
+                    loadTranskripForMahasiswa(mahasiswa.nim);
+                }
+            } else {
+                document.getElementById('transkripAdmin').style.display = 'block';
+                document.getElementById('transkripContent').style.display = 'none';
+            }
+        }
+
+        function loadTranskrip() {
+            const nim = document.getElementById('transkripMahasiswa').value;
+            if (!nim) {
+                document.getElementById('transkripContent').style.display = 'none';
+                return;
+            }
+            loadTranskripForMahasiswa(nim);
+        }
+
+        function loadTranskripForMahasiswa(nim) {
+            document.getElementById('transkripContent').style.display = 'block';
+            
+            const tbody = document.getElementById('transkripTableBody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            let totalSKS = 0;
+            let totalNilai = 0;
+            
+            // Get all semesters for this mahasiswa
+            if (krsData[nim]) {
+                Object.keys(krsData[nim]).forEach(semester => {
+                    const mahasiswaMK = krsData[nim][semester];
+                    
+                    mahasiswaMK.forEach(kodeMK => {
+                        const mk = mataKuliahData.find(m => m.kode === kodeMK);
+                        const nilai = nilaiData[nim] && nilaiData[nim][kodeMK] ? nilaiData[nim][kodeMK] : 0;
+                        const grade = convertToGrade(nilai);
+                        
+                        if (mk) {
+                            totalSKS += mk.sks;
+                            totalNilai += nilai * mk.sks;
+                            
+                            const row = `
+                                <tr>
+                                    <td>${semester}</td>
+                                    <td>${mk.kode}</td>
+                                    <td>${mk.nama}</td>
+                                    <td>${mk.sks}</td>
+                                    <td>${nilai}</td>
+                                    <td>${grade}</td>
+                                </tr>
+                            `;
+                            tbody.innerHTML += row;
+                        }
+                    });
+                });
+            }
+            
+            const ipk = totalSKS > 0 ? (totalNilai / totalSKS / 25).toFixed(2) : '0.00';
+            const totalSKSElement = document.getElementById('totalSKSTranskrip');
+            const ipkElement = document.getElementById('ipkKumulatif');
+            
+            if (totalSKSElement) totalSKSElement.textContent = totalSKS;
+            if (ipkElement) ipkElement.textContent = ipk;
+        }
+
+        // Cetak Functions
+        function loadCetakData() {
+            populateSelectors();
+        }
+
+        function generatePDF() {
+            const jenis = document.getElementById('jenisCetak').value;
+            const nim = document.getElementById('cetakMahasiswa').value;
+            
+            if (!jenis || !nim) {
+                alert('Pilih jenis dokumen dan mahasiswa!');
+                return;
+            }
+            
+            const mahasiswa = mahasiswaData.find(m => m.nim === nim);
+            if (!mahasiswa) {
+                alert('Mahasiswa tidak ditemukan!');
+                return;
+            }
+            
+            generatePrintPreview(jenis, mahasiswa);
+        }
+
+        function generatePrintPreview(jenis, mahasiswa) {
+            const printPreview = document.getElementById('printPreview');
+            let content = generateKopSurat();
+            
+            switch(jenis) {
+                case 'dataMahasiswa':
+                    content += generateDataMahasiswaContent(mahasiswa);
+                    break;
+                case 'krs':
+                    content += generateKRSContent(mahasiswa);
+                    break;
+                case 'khs':
+                    content += generateKHSContent(mahasiswa);
+                    break;
+                case 'transkrip':
+                    content += generateTranskripContent(mahasiswa);
+                    break;
+            }
+            
+            content += generateSignatureArea();
+            
+            printPreview.innerHTML = content;
+            printPreview.style.display = 'block';
+            
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+
+        function generateKopSurat() {
+            return `
+                <div class="kop-surat">
+                    <h2>${kopSurat.namaInstitusi}</h2>
+                    <h3>${kopSurat.namaProdi}</h3>
+                    <p>${kopSurat.alamat}</p>
+                </div>
+            `;
+        }
+
+        function generateDataMahasiswaContent(mahasiswa) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 30px;">DATA MAHASISWA</h3>
+                <table style="width: 100%; border: none;">
+                    <tr>
+                        <td style="border: none; padding: 10px 0; width: 30%;"><strong>NIM</strong></td>
+                        <td style="border: none; padding: 10px 0;">: ${mahasiswa.nim}</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none; padding: 10px 0;"><strong>Nama</strong></td>
+                        <td style="border: none; padding: 10px 0;">: ${mahasiswa.nama}</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none; padding: 10px 0;"><strong>Angkatan</strong></td>
+                        <td style="border: none; padding: 10px 0;">: ${mahasiswa.angkatan}</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none; padding: 10px 0;"><strong>Semester</strong></td>
+                        <td style="border: none; padding: 10px 0;">: ${mahasiswa.semester}</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none; padding: 10px 0;"><strong>Status</strong></td>
+                        <td style="border: none; padding: 10px 0;">: ${mahasiswa.status}</td>
+                    </tr>
+                </table>
+            `;
+        }
+
+        function generateKRSContent(mahasiswa) {
+            let content = `
+                <h3 style="text-align: center; margin-bottom: 30px;">KARTU RENCANA STUDI (KRS)</h3>
+                <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
+                <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
+                <p><strong>Semester:</strong> ${mahasiswa.semester}</p>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Mata Kuliah</th>
+                            <th>SKS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            const mahasiswaMK = krsData[mahasiswa.nim] && krsData[mahasiswa.nim][mahasiswa.semester] 
+                ? krsData[mahasiswa.nim][mahasiswa.semester] : [];
+            let totalSKS = 0;
+            
+            mahasiswaMK.forEach((kodeMK, index) => {
+                const mk = mataKuliahData.find(m => m.kode === kodeMK);
+                if (mk) {
+                    totalSKS += mk.sks;
+                    content += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${mk.kode}</td>
+                            <td>${mk.nama}</td>
+                            <td>${mk.sks}</td>
+                        </tr>
+                    `;
+                }
+            });
+            
+            content += `
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px;"><strong>Total SKS: ${totalSKS}</strong></p>
+            `;
+            
+            return content;
+        }
+
+        function generateKHSContent(mahasiswa) {
+            let content = `
+                <h3 style="text-align: center; margin-bottom: 30px;">KARTU HASIL STUDI (KHS)</h3>
+                <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
+                <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
+                <p><strong>Semester:</strong> ${mahasiswa.semester}</p>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Mata Kuliah</th>
+                            <th>SKS</th>
+                            <th>Nilai</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            const mahasiswaMK = krsData[mahasiswa.nim] && krsData[mahasiswa.nim][mahasiswa.semester] 
+                ? krsData[mahasiswa.nim][mahasiswa.semester] : [];
+            let totalSKS = 0;
+            let totalNilai = 0;
+            
+            mahasiswaMK.forEach((kodeMK, index) => {
+                const mk = mataKuliahData.find(m => m.kode === kodeMK);
+                const nilai = nilaiData[mahasiswa.nim] && nilaiData[mahasiswa.nim][kodeMK] 
+                    ? nilaiData[mahasiswa.nim][kodeMK] : 0;
+                const grade = convertToGrade(nilai);
+                
+                if (mk) {
+                    totalSKS += mk.sks;
+                    totalNilai += nilai * mk.sks;
+                    content += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${mk.kode}</td>
+                            <td>${mk.nama}</td>
+                            <td>${mk.sks}</td>
+                            <td>${nilai}</td>
+                            <td>${grade}</td>
+                        </tr>
+                    `;
+                }
+            });
+            
+            const ipk = totalSKS > 0 ? (totalNilai / totalSKS / 25).toFixed(2) : '0.00';
+            
+            content += `
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px;"><strong>Total SKS: ${totalSKS}</strong></p>
+                <p><strong>IPK Semester: ${ipk}</strong></p>
+            `;
+            
+            return content;
+        }
+
+        function generateTranskripContent(mahasiswa) {
+            let content = `
+                <h3 style="text-align: center; margin-bottom: 30px;">TRANSKRIP NILAI</h3>
+                <p><strong>NIM:</strong> ${mahasiswa.nim}</p>
+                <p><strong>Nama:</strong> ${mahasiswa.nama}</p>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Semester</th>
+                            <th>Kode</th>
+                            <th>Mata Kuliah</th>
+                            <th>SKS</th>
+                            <th>Nilai</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            let totalSKS = 0;
+            let totalNilai = 0;
+            let rowIndex = 0;
+            
+            if (krsData[mahasiswa.nim]) {
+                Object.keys(krsData[mahasiswa.nim]).forEach(semester => {
+                    const mahasiswaMK = krsData[mahasiswa.nim][semester];
+                    
+                    mahasiswaMK.forEach(kodeMK => {
+                        const mk = mataKuliahData.find(m => m.kode === kodeMK);
+                        const nilai = nilaiData[mahasiswa.nim] && nilaiData[mahasiswa.nim][kodeMK] 
+                            ? nilaiData[mahasiswa.nim][kodeMK] : 0;
+                        const grade = convertToGrade(nilai);
+                        
+                        if (mk) {
+                            totalSKS += mk.sks;
+                            totalNilai += nilai * mk.sks;
+                            rowIndex++;
+                            content += `
+                                <tr>
+                                    <td>${rowIndex}</td>
+                                    <td>${semester}</td>
+                                    <td>${mk.kode}</td>
+                                    <td>${mk.nama}</td>
+                                    <td>${mk.sks}</td>
+                                    <td>${nilai}</td>
+                                    <td>${grade}</td>
+                                </tr>
+                            `;
+                        }
+                    });
+                });
+            }
+            
+            const ipk = totalSKS > 0 ? (totalNilai / totalSKS / 25).toFixed(2) : '0.00';
+            
+            content += `
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px;"><strong>Total SKS: ${totalSKS}</strong></p>
+                <p><strong>IPK Kumulatif: ${ipk}</strong></p>
+            `;
+            
+            return content;
+        }
+
+        function generateSignatureArea() {
+            const today = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                locale: 'id-ID'
+            };
+            const dateStr = today.toLocaleDateString('id-ID', options);
+            
+            return `
+                <div class="signature-area">
+                    <div class="signature-box">
+                        <p>Mahasiswa,</p>
+                        <div class="signature-line">
+                            <p>(Nama Mahasiswa)</p>
+                        </div>
+                    </div>
+                    <div class="signature-box">
+                        <p>Jakarta, ${dateStr}</p>
+                        <p>Ketua Program Studi</p>
+                        <div class="signature-line">
+                            <p>${kopSurat.kaprodi}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Pengaturan Functions
+        function loadPengaturanData() {
+            loadUserTable();
+            
+            // Load current kop surat values
+            document.getElementById('namaInstitusi').value = kopSurat.namaInstitusi;
+            document.getElementById('namaProdi').value = kopSurat.namaProdi;
+            document.getElementById('alamatInstitusi').value = kopSurat.alamat;
+            document.getElementById('namaKaprodi').value = kopSurat.kaprodi;
+        }
+
+        // Reset and Export Functions
+        function resetMahasiswaData() {
+            if (confirm('Apakah Anda yakin ingin mereset semua data mahasiswa? Data ini tidak dapat dikembalikan!')) {
+                // Remove all mahasiswa except admin
+                const adminUsers = userData.filter(u => u.role === 'admin');
+                mahasiswaData = [];
+                userData = adminUsers;
+                krsData = {};
+                nilaiData = {};
+                
+                saveAllData();
+                loadMahasiswaTable();
+                loadUserTable();
+                populateSelectors();
+                loadDashboardData();
+                alert('Data mahasiswa berhasil direset!');
+            }
+        }
+
+        function resetKurikulumData() {
+            if (confirm('Apakah Anda yakin ingin mereset semua data kurikulum? Data ini tidak dapat dikembalikan!')) {
+                mataKuliahData = [];
+                krsData = {};
+                nilaiData = {};
+                
+                saveAllData();
+                loadKurikulumTable();
+                populateSelectors();
+                loadDashboardData();
+                alert('Data kurikulum berhasil direset!');
+            }
+        }
+
+        function resetUserData() {
+            if (confirm('Apakah Anda yakin ingin mereset data user? Hanya admin yang akan tersisa!')) {
+                userData = userData.filter(u => u.role === 'admin');
+                
+                saveAllData();
+                loadUserTable();
+                alert('Data user berhasil direset!');
+            }
+        }
+
+        function resetAllData() {
+            if (confirm('Apakah Anda yakin ingin mereset SEMUA data sistem? Data ini tidak dapat dikembalikan!')) {
+                if (confirm('Konfirmasi sekali lagi: SEMUA data akan dihapus termasuk mahasiswa, mata kuliah, KRS, dan nilai!')) {
+                    // Clear all localStorage
+                    Object.values(STORAGE_KEYS).forEach(key => {
+                        localStorage.removeItem(key);
+                    });
+                    
+                    // Reinitialize with default data
+                    initializeDefaultData();
+                    
+                    // Refresh all displays
+                    refreshAllTables();
+                    loadDashboardData();
+                    
+                    alert('Semua data berhasil direset ke data default!');
+                }
+            }
+        }
+
+        function exportMahasiswaData() {
+            const data = {
+                mahasiswa: mahasiswaData,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], {
+                type: 'application/json'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `data_mahasiswa_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function exportKurikulumData() {
+            const data = {
+                mataKuliah: mataKuliahData,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], {
+                type: 'application/json'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `data_kurikulum_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Backup Functions
+        function downloadBackup() {
+            const backupData = {
+                mahasiswaData: mahasiswaData,
+                mataKuliahData: mataKuliahData,
+                userData: userData,
+                krsData: krsData,
+                nilaiData: nilaiData,
+                kopSurat: kopSurat,
+                timestamp: new Date().toISOString(),
+                version: '1.0'
+            };
+            
+            const blob = new Blob([JSON.stringify(backupData, null, 2)], {
+                type: 'application/json'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup_akademik_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Backup berhasil didownload!');
+        }
+
+        function uploadBackup() {
+            const file = document.getElementById('backupFile').files[0];
             if (!file) return;
             
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
-                    const data = JSON.parse(e.target.result);
+                    const backupData = JSON.parse(e.target.result);
                     
-                    if (!data.mahasiswa || !data.matkul || !data.krs || !data.nilai) {
-                        alert('Format file backup tidak valid!');
-                        return;
-                    }
-
-                    if (data.prodi && data.prodi !== 'Bisnis Digital') {
-                        if (!confirm(`File backup dari program studi "${data.prodi}". Apakah Anda yakin ingin mengimpor data ini?`)) {
-                            return;
-                        }
-                    }
-
-                    mahasiswaData = data.mahasiswa;
-                    matkulData = data.matkul;
-                    krsData = data.krs;
-                    nilaiData = data.nilai;
-                    
-                    if (data.users) {
-                        userData = data.users;
+                    // Validate backup structure
+                    if (!backupData.mahasiswaData || !backupData.mataKuliahData || !backupData.userData) {
+                        throw new Error('Invalid backup format');
                     }
                     
-                    renderAllTables();
-                    updateDashboard();
-                    populateDropdowns();
-                    populateUserManagementDropdowns();
-                    renderUserTable();
-                    triggerAutoSave();
+                    // Restore data
+                    mahasiswaData = backupData.mahasiswaData;
+                    mataKuliahData = backupData.mataKuliahData;
+                    userData = backupData.userData;
+                    krsData = backupData.krsData || {};
+                    nilaiData = backupData.nilaiData || {};
+                    kopSurat = backupData.kopSurat || kopSurat;
                     
-                    alert('Data backup berhasil dipulihkan!');
+                    // Save to localStorage
+                    saveAllData();
+                    
+                    // Reload all data
+                    refreshAllTables();
+                    loadDashboardData();
+                    
+                    alert('Backup berhasil dipulihkan!');
                 } catch (error) {
-                    alert('Terjadi kesalahan saat memuat backup: ' + error.message);
+                    alert('Error: File backup tidak valid! ' + error.message);
                 }
+                
+                // Clear file input
+                document.getElementById('backupFile').value = '';
             };
             reader.readAsText(file);
-            
-            event.target.value = '';
         }
 
-        function resetAllData() {
-            if (!confirm('PERINGATAN: Tindakan ini akan menghapus SEMUA data dan mengembalikan ke data awal. Data yang ada akan hilang permanen!\n\nApakah Anda benar-benar yakin?')) {
-                return;
-            }
+        // Initialize the system when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize data from localStorage or defaults
+            initializeDefaultData();
             
-            if (!confirm('KONFIRMASI TERAKHIR: Semua data mahasiswa, mata kuliah, KRS, nilai, dan user akan dihapus!\n\nKlik OK untuk melanjutkan atau Cancel untuk membatalkan.')) {
-                return;
-            }
-
-            Object.values(BACKUP_KEYS).forEach(key => {
-                try {
-                    delete window[key];
-                } catch (error) {
-                    console.log('Error clearing backup key:', key);
+            // Set initial focus on username field
+            document.getElementById('username').focus();
+            
+            // Add enter key handling for login
+            document.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && document.getElementById('loginPage').style.display !== 'none') {
+                    document.getElementById('loginForm').dispatchEvent(new Event('submit'));
                 }
             });
-
-            // Reset to default data
-            mahasiswaData = [
-                { nim: '23010901', nama: 'ADITYA ANUGRAH MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010902', nama: 'DIVA WOANG PAPUTUNGAN', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010903', nama: 'ERDI ERLANGGA PUTRA SUSILO', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010904', nama: 'FITRIAH DARWIS', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010905', nama: 'MUH. AKBAR ANUGRAH GAIB', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010907', nama: 'MUH. FADHIL C. MOKOAGOW', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 },
-                { nim: '23010908', nama: 'RIZKY MOKOGINTA', jurusan: 'Bisnis Digital', angkatan: 2023, ipk: 0 }
-            ];
-
-            nilaiData = [];
             
-            userData = [
-                { username: 'admin-bd', password: 'adminbd123', role: 'admin-prodi', nim: null, prodi: 'Bisnis Digital' },
-                { username: '23010901', password: '23010901', role: 'mahasiswa', nim: '23010901', prodi: 'Bisnis Digital' },
-                { username: '23010902', password: '23010902', role: 'mahasiswa', nim: '23010902', prodi: 'Bisnis Digital' },
-                { username: '23010903', password: '23010903', role: 'mahasiswa', nim: '23010903', prodi: 'Bisnis Digital' },
-                { username: '23010904', password: '23010904', role: 'mahasiswa', nim: '23010904', prodi: 'Bisnis Digital' },
-                { username: '23010905', password: '23010905', role: 'mahasiswa', nim: '23010905', prodi: 'Bisnis Digital' },
-                { username: '23010907', password: '23010907', role: 'mahasiswa', nim: '23010907', prodi: 'Bisnis Digital' },
-                { username: '23010908', password: '23010908', role: 'mahasiswa', nim: '23010908', prodi: 'Bisnis Digital' }
-            ];
-
-            initializeCompleteKrsData();
-            autoSaveData();
+            // Auto-save data every 30 seconds
+            setInterval(saveAllData, 30000);
             
-            renderAllTables();
-            updateDashboard();
-            populateDropdowns();
-            populateUserManagementDropdowns();
-            renderUserTable();
-            
-            alert('Semua data berhasil direset ke kondisi awal!');
-        }
-
-        // Utility functions for form clearing
-        function clearMahasiswaForm() {
-            document.getElementById('mahasiswaForm').reset();
-        }
-
-        function clearMatkulForm() {
-            document.getElementById('matkulForm').reset();
-        }
-
-        function clearKrsForm() {
-            document.getElementById('krsForm').reset();
-        }
-
-        function clearNilaiForm() {
-            document.getElementById('nilaiForm').reset();
-        }
-
-        function clearUserForm() {
-            document.getElementById('userForm').reset();
-            document.getElementById('linkedNim').parentElement.style.display = 'none';
-        }
-
-        // Edit and Delete Functions (simplified implementations)
-        function editMahasiswa(index) {
-            alert('Fitur edit akan dikembangkan lebih lanjut');
-        }
-
-        function deleteMahasiswa(index) {
-            const mahasiswa = mahasiswaData[index];
-            
-            if (confirm(`Apakah Anda yakin ingin menghapus data mahasiswa ${mahasiswa.nama}?`)) {
-                mahasiswaData.splice(index, 1);
-                
-                const userIndex = userData.findIndex(u => u.nim === mahasiswa.nim);
-                if (userIndex >= 0) {
-                    userData.splice(userIndex, 1);
-                }
-                
-                renderMahasiswaTable();
-                updateDashboard();
-                populateDropdowns();
-                populateUserManagementDropdowns();
-                renderUserTable();
-                triggerAutoSave();
-            }
-        }
-
-        function editMatkul(index) {
-            alert('Fitur edit akan dikembangkan lebih lanjut');
-        }
-
-        function deleteMatkul(index) {
-            const matkul = matkulData[index];
-            
-            if (confirm(`Apakah Anda yakin ingin menghapus mata kuliah ${matkul.nama}?`)) {
-                matkulData.splice(index, 1);
-                
-                renderMatkulTable();
-                updateDashboard();
-                populateDropdowns();
-                triggerAutoSave();
-            }
-        }
-
-        function editKrs(index) {
-            alert('Fitur edit akan dikembangkan lebih lanjut');
-        }
-
-        function deleteKrs(index) {
-            if (confirm('Apakah Anda yakin ingin menghapus data KRS ini?')) {
-                krsData.splice(index, 1);
-                
-                renderKrsTable();
-                updateDashboard();
-                triggerAutoSave();
-            }
-        }
-
-        function editNilai(index) {
-            alert('Fitur edit akan dikembangkan lebih lanjut');
-        }
-
-        function deleteNilai(index) {
-            if (confirm('Apakah Anda yakin ingin menghapus data nilai ini?')) {
-                nilaiData.splice(index, 1);
-                
-                renderNilaiTable();
-                updateDashboard();
-                triggerAutoSave();
-            }
-        }
-
-        function deleteUser(index) {
-            const user = userData[index];
-            if (confirm(`Apakah Anda yakin ingin menghapus user '${user.username}'?`)) {
-                userData.splice(index, 1);
-                renderUserTable();
-                populateChangePasswordDropdown();
-                triggerAutoSave();
-            }
-        }
-
-        // Print Functions
-        function printKHS() {
-            const printContent = document.getElementById('khsResult').innerHTML;
-            const originalContent = document.body.innerHTML;
-            document.body.innerHTML = printContent;
-            window.print();
-            document.body.innerHTML = originalContent;
-            location.reload();
-        }
-
-        function printTranskrip() {
-            const printContent = document.getElementById('transkripResult').innerHTML;
-            const originalContent = document.body.innerHTML;
-            document.body.innerHTML = printContent;
-            window.print();
-            document.body.innerHTML = originalContent;
-            location.reload();
-        }
-
-        // Auto-save on page unload
-        window.addEventListener('beforeunload', function() {
-            autoSaveData();
+            console.log('Sistem Akademik loaded successfully with persistent storage');
         });
 
-        // Periodic auto-save every 30 seconds
-        setInterval(() => {
-            if (autoBackupEnabled && currentUser) {
-                autoSaveData();
-            }
-        }, 30000);
-
-        console.log('Sistem Akademik Bisnis Digital v8.0 loaded successfully!');
+        // Save data before page unload
+        window.addEventListener('beforeunload', function() {
+            saveAllData();
+        });
     </script>
 </body>
 </html>
-        
